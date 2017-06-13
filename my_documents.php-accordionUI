@@ -1,0 +1,209 @@
+<?php
+//Include OpenEMR globals.php file 
+include_once("globals.php");
+?>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css" />
+		<link rel="stylesheet" href="themes/style_oemr.css" />
+		<style>
+			#email-result {display: none; background-color: #D0D0D0; width: 800px; border-radius: 4px;}			
+			#email-result .success{ float: left; color: green;  margin:5px; padding: 5px;}
+			#email-result .error{ float: left; color: red;  margin:5px; padding: 5px;}
+			.clearfix {clear: both;}
+			#patient-list {width: 800px; font-size: 14px;}
+			/*#patient-filter {width: 30%;float: right; clear: both;}*/
+			.document-list form {margin: 0px; padding: 0px;}
+			fieldset{border: none;}
+			.ui-widget { font-size: 1em;}
+			.submit_mail {background-image: url("resources/email.png"); background-repeat: no-repeat; width: 24px; height: 24px;}
+			.document-list { width: inherit; height: auto;}			
+			.document-list li {  text-align: left; padding: 5px 6px; margin: 0 0px -1px 0px; line-height: 32px; color: #555;list-style: none; position: relative; border: 1px solid #edf1f5; border-width: 1px 0; font-size: 13px; zoom: 1;}
+			.document-list li .doc-name {color: grey; float: left;}
+			.document-list li .doc-ops {float: right; width: 242px;}
+			.docs:hover +.doc-ops{display: block; background-color: orange;}
+			.docs .doc-ops{ display: none; }
+			.docs:hover .doc-ops{ display : block; }
+			.docs:hover{ background-color: #EDEAFF; } 
+			div .docs {display: block; cursor: default; text-align: left; line-height: 32px; color: #555;}
+			.doc-name{float: left; width: 150px;}
+			.doc-ops{float: left; width: 23%;display: block; cursor: default; text-align: left; line-height: 32px; color: #555; list-style: none; font-size: 13px; zoom: 1;}
+			table.document-list { width: 100%; padding: 2px; margin: px; }			
+			/*table.document-list tr odd {background-color: #def;}	
+			table.document-list tr even {background-color: #fff;}*/
+			tr:nth-child(odd) {
+			  background-color: #def;
+			}
+			tr:nth-child(even) {
+			  background-color: #fff;
+			}			
+			.document-list .name { width: 500px;}
+			.document-list .view { width: 30px;}
+			.document-list .edit { width: 30px;}
+			.document-list .email { width: 200px;}
+			.document-list .email input[type="text"] { width: 100px;}
+		  /* IE has layout issues when sorting (see #5413) */
+		  .group { zoom: 1 }
+		</style>
+		<script>
+			$(document).ready(function(){		
+				$(function() {
+				    $( "#accordion" ).accordion({
+				      collapsible: true
+				    });
+				  });		  
+				    $("#filter").keyup(function(){			 
+				        // Retrieve the input field text and reset the count to zero
+				        var filter = $(this).val(), count = 0;			 
+				        // Loop through the comment list
+				        $("#accordion li").each(function(){			 
+				            // If the list item does not contain the text phrase fade it out
+				            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+				                $(this).fadeOut();			 
+				            // Show the list item if the phrase matches and increase the count by 1
+				            } else {
+								$(this).css("display", "block");
+				                $(this).show();
+				                count++;
+				            }
+				        });			 
+				        // Update the count
+				        //var numberItems = count;
+				        //$("#filter-count").text("Found = "+count);
+				    });
+				    //Send Email
+				    $(".submit_mail").click(function(e){
+						e.preventDefault();
+						//alert('You Clicked Email button');
+						var docId = $(this).attr("rel");						
+						var sendTo=$("#mailto-"+docId).val();
+						var patientId = $("#patientid-"+docId).val();
+						if(validateForm(sendTo)) {
+							//alert("recipient: "+sendTo);
+							$.post("email_doc.php", { docid: $(this).attr("rel"), recipient: sendTo, pid: patientId })						
+								.done(function(data) {
+									//$("#email-result").css("display","block");
+									//$("#email-result").html(data);
+									$("#mailto-"+docId).val('');
+									alert(data);						  		
+								});
+						}
+					});
+					$("#close").click(function() {						
+						$("#email-result").hide(700);
+						});	
+				});
+		</script>
+		<script language="javascript">
+			function validateForm(sendTo)
+			{
+			var x=sendTo;
+			var atpos=x.indexOf("@");
+			var dotpos=x.lastIndexOf(".");
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+			  {
+			  alert("Not a valid e-mail address");
+			  return false;
+			  }
+			else
+				return true;
+			}
+			//Open Editor in a popup window by providing the patient id and document id as input parameters
+			function open_editor(pid, docid) {
+				window.open('http://'+window.location.host+'/interface/patient_file/DocEditor.php?pid='+pid+'&document='+docid,'Edit Document','width=700,height=500');
+				return false;
+				}
+			//Open Viewer in a popup window by providing the patient id and document id as input parameters
+			function open_viewer(pid, docid) {
+				window.open('http://'+window.location.host+'/interface/patient_file/DocViewer.php?pid='+pid+'&document='+docid,'View Document','width=700,height=500');
+				return false;
+			}
+		</script>
+	</head>
+	<body class="body_top">
+		<span class="title">My Documents</span><br><br>
+		<div id="email-result">
+			<div class="success">Email Sent</div>
+			<div style="float: right; margin: 5px"><img src="resources/close.png" alt="Close" height="24" width="24" id="close" /></div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="patient-filter" class="dataTables_filter">
+		<form id="live-search" action="" class="styled" method="post">
+		    <fieldset>
+		        <label>Search: <input type="text" class="text-input" id="filter" value="" /></label><br>
+		        <span id="filter-count"></span>
+		    </fieldset>
+		</form>
+		</div>
+		<?php 
+			  $patientRes = null;
+			  //Get all the Patients associated to the Provider based on the logged in user's role
+			  if(acl_check('admin', 'super')) {
+			  	//echo 'Admin has logged in';
+				$patientRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.pid FROM patient_data AS pdata LEFT JOIN users ON pdata.providerID = users.ID order by pdata.pid");				
+			  	}
+			  else if(acl_check('patients', 'docs')) {			  	
+			  	//echo 'Not an admin but has access to patient documents';
+				$patientRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.pid FROM patient_data AS pdata LEFT JOIN users ON pdata.providerID = users.ID where pdata.providerID = ".$_SESSION['authUserID']." order by pdata.pid");				
+				}
+			//echo '<p>Number of records: '.sqlNumRows($patientRes).'</p>';
+		?>
+		<div id="patient-list">			
+			<ul id="accordion">
+			  <?php 
+				//Get all the Patients associated to the Provider			  
+			  //$patientRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.pid FROM patient_data AS pdata LEFT JOIN users ON pdata.providerID = users.ID where pdata.providerID = ".$_SESSION['authUserID']." order by pdata.pid");
+				if(sqlNumRows($patientRes) > 0) {	
+					while ($row = sqlFetchArray($patientRes))
+					{
+						echo '<li class="group">
+							    <h3>'.$row['fname'].' '.$row['lname'].' '.$row['email'].'</h3>
+							 ';
+						//echo '<tr><td>'.$row['pid'].' - '.$row['fname'].' '.$row['lname'].'</td><td>'.$row['email'].'</td><td>&nbsp;</td><td></td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+						//Get all documents associated to the current patient
+						$documentRes = array();					
+						$documentRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.providerID, docs.id, docs.url, docs.mimetype, docs.status FROM patient_data as pdata INNER JOIN documents AS docs ON pdata.pid = docs.foreign_id INNER JOIN users ON
+					pdata.providerID = users.ID AND pdata.id = ".$row['id']." order by docs.id");
+						if(sqlNumRows($documentRes) > 0) {
+							echo '<table class="document-list">';
+							$iterator = 0;
+							while ($docRec = sqlFetchArray($documentRes))
+							{								
+								if($iterator % 2 == 0)
+									$class = 'even';
+								else
+									$class = 'odd';
+								echo '<tr class="'.$class.'">										
+										<td valign="top" class="name">'.basename($docRec['url']).' - '.$docRec['status'].'</td>										
+										<td valign="middle" align="center" class="view"><a class="view_css_button" alt="View Document" href="#" onclick="return open_viewer('.$row['pid'].','. $docRec["id"].')"><img src="resources/view.png" alt="View" /></a></td>
+										<td valign="middle" align="center" class="edit"><a class="edit_css_button" alt="Edit Document" href="#" onclick="return open_editor('.$row['pid'].','. $docRec["id"].')"><img src="resources/edit.png" alt="Edit" /></a></td>
+										<td valign="middle" align="center" class="email">
+											<form class="email-doc" action="" method=post>
+												<input type="hidden" name="emaildetails" value ="'.$docRec["id"].'" >
+												<input type="hidden" name="pid" id="patientid-'.$docRec["id"].'" value="'.$row['id'].'" >
+												<input type="text" class="recipient" name="recipient" id="mailto-'.$docRec["id"].'" value="" placeholder="email address">
+												<input type="submit" value="Email" id="Email" name="Email" rel="'. $docRec["id"].'" class="submit_mail">
+											</form>
+										</td>
+								  </tr>';
+								$iterator++;
+							}
+							echo '</table>';
+						}			
+						else {
+							echo '<p style="height: auto !important;">There are no Documents associated with this Patient</p>';
+						}
+						echo '</li>';	//End of <div class=group>						
+					}		
+				}
+				else {
+					echo 'There are no records';
+				}
+				?>
+				</ul>
+			</div>
+	</body>
+</html>

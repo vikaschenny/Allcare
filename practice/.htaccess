@@ -1,0 +1,4 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin http://qaallcare.smartmbbs.com  
+    Header set Access-Control-Allow-Credentials true
+</IfModule>

@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140320*0421*^*00501*023255121*0*T*:~GS*HC**zz*20140320*0421*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140320*0421*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P********16~NM1*IL*1******MI~NM1*PR*2*TESTINSURANCE1*****PI~N3*GANGAPUR LAYOUT~N4~HL*3*2*23*0~PAT~NM1*QC*1*AARON*LINDA~N3*2413 MORNINGSIDE DR~N4*GARLAND*TX*75041~DMG*D8*19250314*F~CLM*3696-38*0.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:90141*BF:90140*BF:90142~NM1*DN*1*TEST*PROVIDER1****XX~SBR*S********16~OI***Y***Y~NM1*IL*1******MI~N3~N4~NM1*PR*2*TESTINSURANCE1*****PI~N3*GANGAPUR LAYOUT~N4~LX*1~SV1*HC:99202*0.00*UN*2***1~DTP*472*D8*20140320~LX*2~SV1*HC:99211*0.00*UN*1***2~DTP*472*D8*20140320~SE*41*0001~GE*1*1~IEA*1*023255121~
+                                        TESTINSURANCE1
+                                        
+                                        GANGAPUR LAYOUT
+                                         
+
+
+                                      X          
+
+AARON, LINDA                  03 14 1925      X  , 
+
+2413 MORNINGSIDE DR                           X  
+
+GARLAND                  TX                   X                          
+
+75041         972 8980963         X                                 
+
+,                                                
+
+                                        X           00 00 0000
+
+ 00 00 0000            X                X        
+
+                                        X        SAMPLE
+
+XYZ                                                X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+TEST, PROVIDER1
+
+                                                        X
+
+  901 41                     901 42                          
+
+  901 40                                         
+
+
+                        
+03 20 14 03 20 14 12    99202               1        0 00 2        
+                        
+03 20 14 03 20 14 12    99211               2        0 00 1        
+
+
+
+
+
+
+
+
+
+                  X   3696-38        X                 0 00      0 00     0 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

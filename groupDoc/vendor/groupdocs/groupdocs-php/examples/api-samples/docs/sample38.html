@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>sample38.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>sample38.php</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="preprocessor">&lt;?php</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h3>This sample will show how to create new user and add him as collaborator to doc with annotations</h3>
+<p>Set variables and get POST data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>F3::set(<span class="string">'userId'</span>, <span class="string">''</span>);
+F3::set(<span class="string">'privateKey'</span>, <span class="string">''</span>);
+F3::set(<span class="string">'fileId'</span>, <span class="string">''</span>);
+F3::set(<span class="string">'collaborations'</span>, <span class="string">''</span>);
+<span class="variable">$clientId</span> = F3::get(<span class="string">'POST["clientId"]'</span>);
+<span class="variable">$privateKey</span> = F3::get(<span class="string">'POST["privateKey"]'</span>);
+<span class="variable">$email</span> = F3::get(<span class="string">'POST["email"]'</span>);
+<span class="variable">$firstName</span> = F3::get(<span class="string">'POST["firstName"]'</span>);
+<span class="variable">$lastName</span> = F3::get(<span class="string">'POST["lastName"]'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Check is all required data is entered</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$clientId</span>) || <span class="keyword">empty</span>(<span class="variable">$privateKey</span>) || <span class="keyword">empty</span>(<span class="variable">$email</span>) || <span class="keyword">empty</span>(<span class="variable">$firstName</span>) || <span class="keyword">empty</span>(<span class="variable">$lastName</span>)) {
+    <span class="variable">$error</span> = <span class="string">'Please enter all required parameters'</span>;
+    F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+} <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Get base path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$basePath</span> = F3::get(<span class="string">'POST["basePath"]'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Get entered by user data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$fileGuId</span> = F3::get(<span class="string">'POST["fileId"]'</span>);
+    <span class="variable">$url</span> = F3::get(<span class="string">'POST["url"]'</span>);
+    <span class="variable">$file</span> = <span class="variable">$_FILES</span>[<span class="string">'file'</span>];
+    F3::set(<span class="string">'userId'</span>, <span class="variable">$clientId</span>);
+    F3::set(<span class="string">'privateKey'</span>, <span class="variable">$privateKey</span>);
+    F3::set(<span class="string">'email'</span>, <span class="variable">$email</span>);
+    F3::set(<span class="string">'firstName'</span>, <span class="variable">$firstName</span>);
+    F3::set(<span class="string">'lastName'</span>, <span class="variable">$lastName</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Create signer object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$signer</span> = <span class="keyword">new</span> GroupDocsRequestSigner(<span class="variable">$privateKey</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Create apiClient object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$apiClient</span> = <span class="keyword">new</span> ApiClient(<span class="variable">$signer</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Create Annotation object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$antApi</span> = <span class="keyword">new</span> AntApi(<span class="variable">$apiClient</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Create Storage Api object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$storageApi</span> = <span class="keyword">new</span> StorageApi(<span class="variable">$apiClient</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Create MgmtApi object (this class allow manipulations with User account)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$mgmtApi</span> = <span class="keyword">new</span> MgmtApi(<span class="variable">$apiClient</span>);
+    <span class="keyword">if</span> (<span class="variable">$basePath</span> == <span class="string">""</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>If base base is empty seting base path to prod server</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$basePath</span> = <span class="string">'https://api.groupdocs.com/v2.0'</span>;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Build propper basePath</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (substr(<span class="variable">$basePath</span>, -<span class="number">3</span>) != <span class="string">"2.0"</span>) {
+        <span class="keyword">if</span> (substr(<span class="variable">$basePath</span>, -<span class="number">1</span>) != <span class="string">"/"</span>) {
+            <span class="variable">$basePath</span> = <span class="variable">$basePath</span> . <span class="string">"/v2.0"</span>;
+        } <span class="keyword">else</span> {
+            <span class="variable">$basePath</span> = <span class="variable">$basePath</span> . <span class="string">"v2.0"</span>;
+        }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Set base path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$antApi</span>-&gt;setBasePath(<span class="variable">$basePath</span>);
+    <span class="variable">$storageApi</span>-&gt;setBasePath(<span class="variable">$basePath</span>);
+    <span class="variable">$mgmtApi</span>-&gt;setBasePath(<span class="variable">$basePath</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Check if user choose upload file from URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="variable">$url</span> != <span class="string">""</span>) {
+        <span class="variable">$fileGuId</span> = <span class="string">""</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Upload file from URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$uploadResult</span> = <span class="variable">$storageApi</span>-&gt;UploadWeb(<span class="variable">$clientId</span>, <span class="variable">$url</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Check is file uploaded</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">try</span> {
+            <span class="keyword">if</span> (<span class="variable">$uploadResult</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Get file GUID</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$fileId</span> = <span class="variable">$uploadResult</span>-&gt;result-&gt;guid;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>If it isn&#39;t uploaded throw exception to template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$uploadResult</span>-&gt;error_message);
+            }
+        } <span class="keyword">catch</span> (<span class="keyword">Exception</span> <span class="variable">$e</span>) {
+            <span class="variable">$error</span> = <span class="string">'ERROR: '</span> . <span class="variable">$e</span>-&gt;getMessage() . <span class="string">"\n"</span>;
+            F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+        }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Check is user choose upload local file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">'file'</span>][<span class="string">"name"</span>] != <span class="string">""</span>) {
+        <span class="variable">$fileGuId</span> = <span class="string">""</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Temp name of the file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$tmpName</span> = <span class="variable">$file</span>[<span class="string">'tmp_name'</span>];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Original name of the file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$name</span> = <span class="variable">$file</span>[<span class="string">'name'</span>];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Creat file stream</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$fs</span> = FileStream::fromFile(<span class="variable">$tmpName</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h3>Make a request to Storage API using clientId</h3>
+<p>Upload file to current user storage</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">try</span> {
+            <span class="variable">$uploadResult</span> = <span class="variable">$storageApi</span>-&gt;Upload(<span class="variable">$clientId</span>, <span class="variable">$name</span>, <span class="string">'uploaded'</span>, <span class="string">""</span>, <span class="variable">$fs</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <h3>Check if file uploaded successfully</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (<span class="variable">$uploadResult</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Get file GUID</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$fileId</span> = <span class="variable">$uploadResult</span>-&gt;result-&gt;guid;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>If it isn&#39;t uploaded throw exception to template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$uploadResult</span>-&gt;error_message);
+            }
+        } <span class="keyword">catch</span> (<span class="keyword">Exception</span> <span class="variable">$e</span>) {
+            <span class="variable">$error</span> = <span class="string">'ERROR: '</span> . <span class="variable">$e</span>-&gt;getMessage() . <span class="string">"\n"</span>;
+            F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+        }
+    }
+    <span class="keyword">if</span> (<span class="variable">$fileGuId</span> != <span class="string">""</span>) {
+        <span class="variable">$fileId</span> = <span class="variable">$fileGuId</span>;
+    }
+    F3::set(<span class="string">'fileId'</span>, <span class="variable">$fileId</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Generating iframe for template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="variable">$basePath</span> == <span class="string">"https://api.groupdocs.com/v2.0"</span>) {
+        <span class="variable">$url</span> = <span class="string">'https://apps.groupdocs.com/document-annotation2/embed/'</span> . <span class="variable">$fileId</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>iframe to dev server</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    } <span class="keyword">elseif</span> (<span class="variable">$basePath</span> == <span class="string">"https://dev-api-groupdocs.dynabic.com/v2.0"</span>) {
+        <span class="variable">$url</span> = <span class="string">'https://dev-apps-groupdocs.dynabic.com/document-annotation2/embed/'</span> . <span class="variable">$fileId</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>iframe to test server</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    } <span class="keyword">elseif</span> (<span class="variable">$basePath</span> == <span class="string">"https://stage-api-groupdocs.dynabic.com/v2.0"</span>) {
+        <span class="variable">$url</span> = <span class="string">'https://stage-apps-groupdocs.dynabic.com/document-annotation2/embed/'</span> . <span class="variable">$fileId</span>;
+    } <span class="keyword">elseif</span> (<span class="variable">$basePath</span> == <span class="string">"http://realtime-api.groupdocs.com"</span>) {
+        <span class="variable">$url</span> = <span class="string">'http://realtime-apps-groupdocs.dynabic.com/document-annotation2/embed/'</span> . <span class="variable">$fileId</span>;
+    }
+
+    <span class="keyword">try</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Get all users from accaunt</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$allUsers</span> = <span class="variable">$mgmtApi</span>-&gt;GetAccountUsers(<span class="variable">$clientId</span>);
+        <span class="keyword">if</span> (<span class="variable">$allUsers</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Loop for all users</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; count(<span class="variable">$allUsers</span>-&gt;result-&gt;users); <span class="variable">$i</span>++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Check whether there is a user with entered email</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="keyword">if</span> (<span class="variable">$email</span> == <span class="variable">$allUsers</span>-&gt;result-&gt;users[<span class="variable">$i</span>]-&gt;primary_email) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Get user GUID</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="variable">$userGuid</span> = <span class="variable">$allUsers</span>-&gt;result-&gt;users[<span class="variable">$i</span>]-&gt;guid;
+                    <span class="keyword">break</span>;
+                }
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Check is user with entered email was founded in GroupDocs account, if not user will be created</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$userGuid</span>)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h3>Create User info object</h3>
+<p>Create User info object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$user</span> = <span class="keyword">new</span> UserInfo ();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Create Role info object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$role</span> = <span class="keyword">new</span> RoleInfo ();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Set user role Id. Can be: 1 -  SysAdmin, 2 - Admin, 3 - User, 4 - Guest</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$role</span>-&gt;id = <span class="string">"3"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Set user role name. Can be: SysAdmin, Admin, User, Guest</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$role</span>-&gt;name = <span class="string">"User"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>Create array of roles.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$roles</span> = <span class="keyword">array</span>(<span class="variable">$role</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>Set nick name as entered first name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$user</span>-&gt;nickname = <span class="variable">$firstName</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Set first name as entered first name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$user</span>-&gt;firstname = <span class="variable">$firstName</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Set last name as entered last name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$user</span>-&gt;lastname = <span class="variable">$lastName</span>;
+                <span class="variable">$user</span>-&gt;roles = <span class="variable">$roles</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>Set email as entered email</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$user</span>-&gt;primary_email = <span class="variable">$email</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <p>Creating of new user. $clientId - user id, $firstName - entered first name, $user - object with new user info</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="variable">$newUser</span> = <span class="variable">$mgmtApi</span>-&gt;UpdateAccountUser(<span class="variable">$clientId</span>, <span class="variable">$email</span>, <span class="variable">$user</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>Check the result of the request</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="keyword">if</span> (<span class="variable">$newUser</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>Get user GUID</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="variable">$userGuid</span> = <span class="variable">$newUser</span>-&gt;result-&gt;guid;
+                } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <p>Throw error message</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$newUser</span>-&gt;error_message);
+                }
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p>Get all collaborators for current document</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="variable">$getCollaborators</span> = <span class="variable">$antApi</span>-&gt;GetAnnotationCollaborators(<span class="variable">$clientId</span>, <span class="variable">$fileId</span>);
+            <span class="keyword">if</span> (<span class="variable">$getCollaborators</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <p>Loop for checking all collaborators</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="keyword">for</span> (<span class="variable">$n</span> = <span class="number">0</span>; <span class="variable">$n</span> &lt; count(<span class="variable">$getCollaborators</span>-&gt;result-&gt;collaborators); <span class="variable">$n</span>++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>Check is user with entered email already in collaborators</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="keyword">if</span> (<span class="variable">$getCollaborators</span>-&gt;result-&gt;collaborators[<span class="variable">$n</span>]-&gt;guid == <span class="variable">$userGuid</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>Add user GUID as “uid” parameter to the iframe URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="variable">$url</span> = <span class="variable">$url</span> . <span class="string">"?uid="</span> . <span class="variable">$userGuid</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <p>Sign iframe URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="variable">$url</span> = <span class="variable">$signer</span>-&gt;signUrl(<span class="variable">$url</span>);
+                        <span class="keyword">break</span>;
+                    }
+                }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <p>Check whether user was founded in collaborators list</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="keyword">if</span> (strpos(<span class="variable">$url</span>, <span class="string">"?uid="</span>)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <p>If was set variable with URL for iframe</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    F3::set(<span class="string">"url"</span>, <span class="variable">$url</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <p>If user wasn&#39;t founded in collaborators list - add him to it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <p>Create array with entered email for SetAnnotationCollaborators method </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="variable">$arrayEmail</span> = <span class="keyword">array</span>(<span class="variable">$email</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <p>Add user as collaborators for the document</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    <span class="variable">$setCollaborator</span> = <span class="variable">$antApi</span>-&gt;SetAnnotationCollaborators(<span class="variable">$clientId</span>, <span class="variable">$fileId</span>, <span class="string">"v2.0"</span>, <span class="variable">$arrayEmail</span>);
+                    <span class="keyword">if</span> (<span class="variable">$setCollaborator</span>-&gt;status == <span class="string">"Ok"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>Check the result of the request</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$setCollaborator</span>-&gt;result)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <p>Add user GUID as “uid” parameter to the iframe URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                            <span class="variable">$url</span> = <span class="variable">$url</span> . <span class="string">"?uid="</span> . <span class="variable">$userGuid</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-60">&#182;</a>
+              </div>
+              <p>Sign iframe URL</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                            <span class="variable">$url</span> = <span class="variable">$signer</span>-&gt;signUrl(<span class="variable">$url</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-61">&#182;</a>
+              </div>
+              <p>If request was successfull - set variables for template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                            F3::set(<span class="string">'result'</span>, <span class="variable">$setCollaborator</span>-&gt;result);
+                            F3::set(<span class="string">"url"</span>, <span class="variable">$url</span>);
+                        }
+                    } <span class="keyword">else</span> {
+                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$setCollaborator</span>-&gt;error_message);
+                    }
+                }
+            } <span class="keyword">else</span> {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$getCollaborators</span>-&gt;error_message);
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="variable">$allUsers</span>-&gt;error_message);
+        }
+    } <span class="keyword">catch</span> (<span class="keyword">Exception</span> <span class="variable">$e</span>) {
+        <span class="variable">$error</span> = <span class="string">'ERROR: '</span> . <span class="variable">$e</span>-&gt;getMessage() . <span class="string">"\n"</span>;
+        F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+    }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-62">&#182;</a>
+              </div>
+              <p>Process template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">echo</span> Template::serve(<span class="string">'sample38.htm'</span>);</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

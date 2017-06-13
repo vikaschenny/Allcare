@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140328*0500*^*00501*023266680*0*T*:~GS*HC**zz*20140328*0500*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140328*0500*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P~NM1*IL*1******MI~NM1*PR*2*MEDICARE OF TEXAS - J4*****PI~N3*PO BOX 61010~N4*VIRGINIA BEACH*VA*23466~HL*3*2*23*0~PAT~NM1*QC*1*PATIENT5*TEST~N3*1615 SOUTH ZANG BLVD~N4*DALLAS*TX*75224~DMG*D8*19800316*M~CLM*5145-72*5000.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:6020~NM1*DN*1*2*REFERINGPROVIDER****XX~NM1*DQ*1*1*REFERINGPROVIDER****XX~LX*1~SV1*HC:99211*5000.00*UN*1***1~DTP*472*D8*20140328~SE*31*0001~GE*1*1~IEA*1*023266680~
+                                        MEDICARE OF TEXAS - J4
+                                        
+                                        PO BOX 61010
+                                        VIRGINIA BEACH, VA 23466
+
+
+                                            X    
+
+PATIENT5, TEST                03 16 1980 X       , 
+
+1615 SOUTH ZANG BLVD                          X  
+
+DALLAS                   TX             X                                
+
+75224         757 6392609         X                                 
+
+                                                 
+
+                                        X           03 16 1980     X
+
+                                        X        
+
+                                        X        
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+2, REFERINGPROVIDER
+
+                                                        X
+
+  602 0                                                      
+
+                                                 
+
+
+                        
+03 28 14 03 28 14 12    99211               1     5000 00 1        
+
+
+
+
+
+
+
+
+
+
+
+                  X   5145-72        X              5000 00      0 00  5000 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

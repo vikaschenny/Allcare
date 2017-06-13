@@ -1,0 +1,2239 @@
+/*COLOR INFORMATION*/
+
+
+/* THINGS THAT ARE SHADES OF BLUE ******************/
+
+	a.button,
+	input.button,
+	.uploader div.button,
+	.button.disabled:hover,
+	#wrap a.navbar,
+	#banner h2,
+	.back a.button,
+	#calendar table,
+	#pagecalendar,
+	#calendar table td.hdr,
+	#calendar table td.ctrl,
+	.section .content .iconcalendar th,
+	.section .content .iconcalendar th.nav:hover,
+	.titlebar,
+	.innernavparent .flyoutprompt,
+	.innernavparent .flyoutitem:hover
+	{
+		background-color: #344A6B;
+	}
+
+	.messagebox .titlebar {
+	
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZiOTBjZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzNjODllMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzI4ODBlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzQzOTBlZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MjdhYWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(top, #6b90cf 0%, #3c89e2 50%, #2880e4 51%, #4390EF 95%, #527aaa 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6b90cf), color-stop(50%,#3c89e2), color-stop(51%,#2880e4), color-stop(95%,#4390EF), color-stop(100%,#527aaa)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #6b90cf 0%,#3c89e2 50%,#2880e4 51%,#4390EF 95%,#527aaa 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #6b90cf 0%,#3c89e2 50%,#2880e4 51%,#4390EF 95%,#527aaa 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #6b90cf 0%,#3c89e2 50%,#2880e4 51%,#4390EF 95%,#527aaa 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #6b90cf 0%,#3c89e2 50%,#2880e4 51%,#4390EF 95%,#527aaa 100%); /* W3C */
+	}
+
+	.title,
+	.back,
+	.loginassist h1,
+	.section .remoteLink a,
+	#content .creleft,
+	#content .cre a,
+	.section h1,
+	.section h2,
+	.section h4,
+	.content table th,
+	.content table thead th,
+	.content table tfoot th,
+	.content table tfoot tr td,
+	.section .content h2,
+	.section .terms h2,
+	.section .message,
+	.section .unansweredquestion,
+	.section .unansweredsubsquestion,
+	.section .Notes a,
+	.section .withhr,
+	fieldset,
+	fieldset legend.header,
+	div.tabcontainer,
+	#calendar table,
+	#pagecalendar,
+	#pagecalendar *,
+	.section .content .iconcalendar table,
+	.section .content .iconcal_legend,
+	.section .Notes span.notetitle,
+	.section .content .formsection > legend,
+	div.actionmenucontainer ul.actionmenu,
+	.innernavparent .flyoutExt,
+	.ExternalAccount .vendorlogo
+	{
+		border-color: #344A6B;
+	}
+  
+	.innernavparent .flyoutprompt:focus {
+		outline-color: #344A6B;
+	}
+
+	h1,
+	.section h2,
+	.section h4,
+	.title h2,
+	.title h4,
+	dl dt,
+	#alerts h3,
+	span.h3,
+	fieldset legend.header,
+	#content h1,
+	#content .storyhead,
+	.section .content h2,
+	.section .content table thead th,
+	.section .content table tfoot th,
+	.section .content table tfoot tr td,
+	.section .content table tfoot tr td a,
+	.section .content table tfoot tr td h2,
+	.section .content table tr.header td,
+	.section .content table tbody tr.footer td,
+	.section .content table tr th a,
+	.section .chart table tr.header,
+	.section .tallchart table tr.header,
+	.section .chart table tr td.group,
+	.section .tallchart table tr td.group,
+	.section .Notes span.notetitle,
+	.section .rx h2,
+	.section .rx h3,
+	.section .terms h2,
+	.section .content .formsection > legend,
+	.section .content .PEF .prompts div.grouper,
+	.section .content .PEF fieldset.reading legend,
+	.section .content  table th.listSeparator,
+	div.sidetab ul.sectiontabs li a span,
+	a.contactcard span span.header,
+	a.contactcard span.name,
+	.innernavparent .innertabs .tab a,
+	.innernavparent .flyout .flyoutitem,
+	.innernavparent .flyoutitem.chosen:hover,
+	.innernavparent .innertabs .tab:after
+	{
+		color: #344A6B;		
+	}
+
+
+/* DEEP BLUE ------------------------------------- */
+	
+	.quicklinks a
+	{
+		background-color: #344A6B;
+	}
+	
+/* LIGHT BLUE ------------------------------------ */
+
+	.section .rxholder .rx,
+	.section .unansweredquestion,
+	.section .unansweredsubsquestion,
+	.section .Notes,
+	.section .content table.billing td.outstanding,
+	a.contactcard 
+	{
+		background-color: #F0EFED;	
+	}
+	
+	a.contactcard {
+		background-image:    -moz-linear-gradient(top,#EAEFF7 0%,#D7E1EF 100%); /* FF3.6+ */
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(0%,#EAEFF7),color-stop(100%,#D7E1EF)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#EAEFF7 0%,#D7E1EF 100%); /* Chrome10+,Safari5.1+ */
+		background-image:      -o-linear-gradient(top,#EAEFF7 0%,#D7E1EF 100%); /* Opera 11.10+ */
+		background-image:     -ms-linear-gradient(top,#EAEFF7 0%,#D7E1EF 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#EAEFF7 0%,#D7E1EF 100%); /* W3C */
+	}
+
+/* PALE BLUE ------------------------------------- */
+
+	.section table td span.password
+    	{
+        	background-color: #D9E3F4;
+    	}
+
+    	.button[src*="item_"]                   /* For plus/minus/restore/edit buttons. This styling is applied */	
+	{                                       /* because the regular button style is too dark for the icons.  */
+		background-color: #D9E3F4;
+		background-position:0 -4px;         /* Assumes that buttons have the gradient background image applied */
+	}
+	.button[src*="item_"]:hover,
+	.button[src*="item_"]:focus
+	{
+		background-color: #E0E8F6;
+	}
+
+    	.menuontop #menu .menugroup ul,
+	.menuontop #menu .menugroup div.hiddenlist,
+	.menuontop #menu .keywordsearch
+	{
+		background-color: #EBF3F4;
+		background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(248,251,252,0.95)), color-stop(41%, rgba(231,243,246,0.95)), color-stop(100%,rgba(185,185,185,0.95))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, rgba(248,251,252,0.95) 0%, rgba(231,243,246,0.95) 41%, rgba(185,185,185,0.95) 100%); /* Chrome10+,Safari5.1+ */
+		background:     -ms-linear-gradient(top, rgba(248,251,252,0.95) 0%, rgba(231,243,246,0.95) 41%, rgba(185,185,185,0.95) 100%); /* IE10+ */
+		background:         linear-gradient(to bottom, rgba(248,251,252,0.95) 0%, rgba(231,243,246,0.95) 41%, rgba(185,185,185,0.95) 100%); /* W3C */
+	}
+	.menuontop #menu ul li a:hover,
+	.menuontop #menu ul li a:focus
+	{
+		box-shadow: 0 1px 3px 0 #B9B9B9;
+		background-color: #fff;
+		background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,0.13)), color-stop(42%, rgba(255,255,255,0.01)), color-stop(47%, rgba(59,161,192,0)), color-stop(68%,rgba(59,161,192,0.15)), color-stop(100%,rgba(59,161,192,0.32))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.01) 42%, rgba(59,161,192,0) 47%, rgba(59,161,192,0.15) 68%, rgba(59,161,192,0.32) 100%); /* Chrome10+,Safari5.1+ */
+		background:     -ms-linear-gradient(top, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.01) 42%, rgba(59,161,192,0) 47%, rgba(59,161,192,0.15) 68%, rgba(59,161,192,0.32) 100%); /* IE10+ */
+		background:         linear-gradient(to bottom, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.01) 42%, rgba(59,161,192,0) 47%,rgba(59,161,192,0.15) 68%, rgba(59,161,192,0.32) 100%); /* W3C */
+	}
+	
+	
+	
+
+/***************************************************/
+
+/* THINGS THAT ARE SHADES OF BROWN *****************/
+
+	#menu h2,
+	#menu h3,
+	#menu li,	
+	#menu li a,
+	#menu > span.header,
+	#menu > span.subheader,
+	#menu .button,
+	#menu > h2:first-child
+	{
+		color: #815959;
+	}
+
+/* MEDIUM BROWN ---------------------------------- */
+
+	#menu .button,
+	#defaultFooter h2 a,
+	.section .intab label.unselected,
+	.section .question label.unselected,
+	.section .subsquestion label.unselected,
+	.section .unansweredquestion label.unselected,
+	.section .unansweredsubsquestion label.unselected,
+	.section .famhxtopic label.unselected,
+	.section .questiongroup label.unselected,
+	#CRE,
+	#calendar table td.wknd,
+	.section .content .iconcalendar td.wknd,
+	.section .content .iconcalendar td.wknd.past,/* overrides .wknd with specificity */
+	.section .content .iconcalendar td.past,
+	.section .content .iconcal_legend
+	{
+		background-color: #E9E3D7;	
+	}
+	
+	.section .intab label.radio,
+	.section .question label.radio,
+	.section .subsquestion label.radio,
+	.section .unansweredquestion label.radio,
+	.section .unansweredsubsquestion label.radio,
+	.section .famhxtopic label.radio,
+	.section .questiongroup label.radio,
+	.section canvas.graphCanvas
+	{
+		border-color: #E9E3D7;
+	}
+	
+	html
+	{
+		background-color:#FFFFFF;
+	}
+	
+/* LIGHT TAN ------------------------------------- */
+
+	#defaultForm,
+	#defaultDigiDForm,
+	#defaultFooter,
+	#signupFooter
+	{
+		background-color: #FFFFFF; /* Old browsers */
+		background-image:    -moz-linear-gradient(top,#FFFFFF 0%,#FFFFFF 100%); /* FF3.6+ */
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(0%,#FFFFFF),color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#FFFFFF 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background-image:      -o-linear-gradient(top,#FFFFFF 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background-image:     -ms-linear-gradient(top,#FFFFFF 0%,#FFFFFF 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#FFFFFF 0%,#FFFFFF 100%); /* W3C */
+	}
+
+/***************************************************/
+
+/* THINGS THAT ARE SHADES OF YELLOW ****************/
+
+	span.hilite,
+	.section .content .iconcalendar td.today 
+	{
+	 	background-color: #FFFF77;
+	}
+	#srotext,
+	#loginnotice
+	{
+		border-color: #FFFF77;
+	}
+
+/* PALE YELLOW ----------------------------------- */
+
+	.notice,
+	div.payplandetails div.balancenotcovered
+	{
+		background-color: #FFFFCC;
+	}
+
+	#main > #srotext {
+		background: -moz-linear-gradient(top, #fefcea 0%, #f1da36 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefcea), color-stop(100%,#f1da36)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #fefcea 0%,#f1da36 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #fefcea 0%,#f1da36 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #fefcea 0%,#f1da36 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #fefcea 0%,#f1da36 100%); /* W3C */
+	}
+
+/* DARKER PALE YELLOW ---------------------------- */
+
+	.notice
+	{
+		border-color: #FFFFAC;
+	}
+  
+	.inputHighlighted,
+	#wrap > #banner + .alert,
+	#srotext,
+	#loginnotice,
+	#calendar table td.hi,
+	#pagecalendar div.NoData.hover,
+	#pagecalendar div.EditData.hover,
+	#pagecalendar .NoData:hover,
+	#pagecalendar .EditData:hover,	
+	.section .content .iconcal_legend a .legenditem:hover,
+	.section .content .iconcalendar a .eventitem:hover 
+	{
+		background-color: #FFFFAC;
+	}
+	
+/***************************************************/
+
+/*THINGS THAT ARE SHADES OF RED*********************/
+
+	.alert,
+	.alert *,
+	.helptext.alert,
+	.section .content table tbody tr td.notgiven,
+	.panic,
+	.required:before,
+	span.error
+	{
+		color: #F75656;
+	}
+	
+	.alertborder
+	{
+		border-color: #F75656;
+	}
+
+/* PALE RED -------------------------------------- */
+
+	#banner a.button,
+	.button.inlinedelete
+	{
+		background-color: #344A6B;
+	}
+	#banner #bannertext
+	{
+		color: #344A6B;
+	}
+
+
+/***************************************************/
+
+/*THINGS THAT ARE GREEN #4874B3*********************/
+
+	a,
+	input.link,
+	.section table tr td.action a,
+	div.payplanuptodate 
+	{
+		color: #4874B3;
+	}
+	
+/*THINGS THAT ARE GREEN #344A6B*********************/
+
+	.button.nextstep,
+	.button.completeworkflow
+	{
+		background-color: #344A6B;
+	}
+/***************************************************/
+
+/*THINGS THAT ARE BRIGHT GREEN #474747**************/
+
+	.button.nextstep:hover,
+	.button.nextstep:focus,
+	.button.completeworkflow:hover,
+	.button.completeworkflow:focus
+	{
+		background-color: #474747;
+	}
+
+	
+/***************************************************/
+
+/*THINGS THAT ARE ORANGE ***************************/
+
+	.section .chart table tr td.abnormal,
+	.section .tallchart table tr td.abnormal
+	{
+		color: #FF6600;
+	}
+
+/***************************************************/
+
+/*THINGS THAT ARE BLACK ****************************/
+
+	#baselinks,
+	#baselinks a,
+	#footer,
+	#footer a,
+	.loginalert a,
+	.section table tr td a,
+	.section .content h4,
+	.section .intab h4,
+	.section .question h4,
+	.section .subsquestion h4,
+	.section .unansweredquestion h4,
+	.section .unansweredsubsquestion h4,
+	.section .intab label.radio a,
+	.section .question label.radio a,
+	.section .subsquestion label.radio a,
+	.section .unansweredquestion label.radio a,
+	.section .unansweredsubsquestion label.radio a,
+	.section .famquestion h4,
+	.section .unansweredfamquestion h4,
+	.section .intab label,
+	.section .question label,
+	.section .subsquestion label,
+	.section .unansweredquestion label,
+	.section .unansweredsubsquestion label,
+	div.tooltipDiv,
+	.section .content table.iconcalendar a,
+	.section .content .iconcal_legend a,
+	#calendar table a,
+	#calendar table td.ctrl.hi a,
+	#pagecalendar div.NoData a,
+	#pagecalendar div.EditData a,
+	#pagecalendar div.ctrl.hover a,
+	.popupInstructions,
+	.popupInstructions .header,
+	div.pageturner a.selected,
+	div.balancenotcovered
+	{
+		color: #000000;
+	}
+
+/***************************************************/
+
+/*THINGS THAT ARE SHADES OF GRAY *******************/
+
+	#wrap,
+	.section .question legend label, /* this override is needed because of the above .section .question label { color: black } */
+	div#usePwd .intab label
+	{
+		color: #363636;
+	}
+	
+/* ----------------------------------------------- */
+
+	.section .Notes pre,
+	.helptext,
+	#infoColumn #features span + span,
+	.menuontop #wrap #menu .menugroup ul a,
+	.menuontop #wrap #menu .menugroup .menugroup .mnutitle a,
+	.menuontop #wrap #menu #KeywordSearch .header,
+	a.contactcard,
+	div.sidetab ul.sectiontabs li a span.subtitle,
+	div.actionmenucontainer ul.actionmenu li a,
+	div.actionmenucontainer ul.actionmenu li span,
+	#pagecalendar .inactive
+	{
+		color: #555555;
+	}
+	
+	.section .content .iconcalendar td.has_bottom
+	{
+		border-bottom-color: #666;
+	}
+	.section .content .iconcalendar td.has_left
+	{
+		border-left-color: #666;
+	}
+	
+	.section .content table tfoot tr td .inactive,
+	.section .content div.listcontrol div.listsearch input.empty,
+	.section h4,
+	.section span.source,
+	.proxymessage,
+	.letterfooter,
+	input.readonly,
+	input.inactivefield,
+	input.disabled,
+	input.disabled:hover,
+	.uploader div.button.disabled,
+	p.disabled,
+	label.disabled,
+	.section .tallchart table tr td div.inlinetime,
+	.section .chart table tr td div.inlinetime,
+	.section .rxholder .rx .commonname,
+	.fadedtext,
+	.section .content .iconcalendar td.month_context .numlabel,
+	#calendar table td.n,
+	#calendar table td.ctrln,
+	#calendar table td.wkndn
+	{
+		color: #777777;
+	}
+	
+	input.disabledfield {	
+		border-color: #777777;
+	}
+
+
+/* ----------------------------------------------- */
+
+	.popupInstructions,
+	div.tooltipDiv,
+	div.ttSeriesNameDiv
+	{
+		border-color: #999999;
+	}
+	
+/* ----------------------------------------------- */
+
+	input.inactivefield,
+	input.disabledbg,
+	input.disabledfield,
+	input.disabledfield.jsreq:hover,
+	input.disabledfield:hover,
+	#calendar table td.n,
+	#calendar table td.ctrln,
+	#calendar table td.wkndn,
+	#pagecalendar .weekrow div
+	{
+		background-color: #CCCCCC;
+	}
+
+	ul.sectiontabs li a:focus span,
+	fieldset.questiongroup
+	{
+		border-color: #CCCCCC;
+	}
+
+	.section .chart table tr td.scroll,
+	.section .tallchart table tr td.scroll
+	{
+		border-color: #CCCCCC !important;
+	}
+
+/* ----------------------------------------------- */
+
+	input,
+	select,
+	textarea,
+	.loginalert,
+	.confMessage,
+	#confMesg2,
+	#wrap a.navbar,
+	.terms,
+	#defaultColumn .item,
+	#infoColumn,
+	#menu .mnutitle,
+	#menu ul,
+	iframe.graphFrame,
+	.section div.cgImgContainer,
+	.section canvas.graphCanvas,
+	.section .Notes,
+	.section .rxholder .rx,
+	.section .content .highlight,
+	.extlink-available,
+	.extlink-active,
+	p.alert.ques,
+	.content table thead th,
+	.content table tfoot th,
+	.content table tfoot tr td,
+	.section table tr.header th,
+	.menuontop #KeywordSearch input.textInput,
+	.section .content .PEF .prompts div.header,
+	.section .content .PEF fieldset.reading legend,
+	.section .chart table tbody tr:nth-last-child(2),
+	.section .chart table tbody tr.header:nth-of-type(n + 2),
+	a.contactcard,
+	div.actionmenucontainer ul.actionmenu li.actionmenuheader,
+	div.payplanheader,
+	div.payplandetails div.balancenotcovered
+	{
+		border-color: #DBDBDB;
+	}
+
+/* ----------------------------------------------- */
+	
+	div.sidetab ul.sectiontabs li
+	{
+		border-color: #E7E7E7;
+		border-right-color: #D5D5D5;
+	}
+	
+	#alerts,
+	#alerts .loginalert > a,
+	.content table tr td,
+	.content table tbody th,
+	.section table td,
+	fieldset div.row span.col,
+	fieldset div.row span.btnColumn,
+	.section .content .PEF .prompts div.grouper,
+	.section .content .PEF fieldset.reading .grouper,
+	.section .content .PEF .prompt,
+	.section .content .PEF div.reading,
+	div.sidetab
+	{
+		border-color: #e7e7e7;
+	}
+	
+	div.sidetab ul.sectiontabs li {
+		background-color: #EBEBEB; /* Old browsers */
+		background-image: none;  /* clears out the blue li background in case all the following fail */
+		background-image: -moz-linear-gradient(top,  #F8F8F8 0%, #EBEBEB 100%); /* FF3.6+ */
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F8F8F8), color-stop(100%,#EBEBEB)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,  #F8F8F8 0%,#EBEBEB 100%); /* Chrome10+,Safari5.1+ */
+		background-image: -o-linear-gradient(top,  #F8F8F8 0%,#EBEBEB 100%); /* Opera 11.10+ */
+		background-image: -ms-linear-gradient(top,  #F8F8F8 0%,#EBEBEB 100%); /* IE10+ */
+		background-image: linear-gradient(to bottom,  #F8F8F8 0%,#EBEBEB 100%); /* W3C */
+	}
+	
+	input.inactivefield:hover
+	{
+		background-color: #EEEEEE;
+	}
+	
+	
+	.section .content table tr td.colorband
+	{
+		background-color: #f2f2f2;
+		border-top-color: #f2f2f2;
+	}
+	
+	.content table th,
+	.content table tfoot tr td,
+	.section table th,
+	.section table colgroup.header,
+	.section .tallchart > table > tbody > tr > td:first-child.odd,
+	.section .chart table td.action,
+	.section .content .PEF .prompts div.header,
+	.section .content .PEF fieldset.reading legend,
+	.chart .tableOverlay table tr.header th,
+	.tallchart .tableOverlay table tr.header th,
+	div.payplanheader
+	{
+		background-color:#f5f5f5;
+	}
+	
+	textarea.readonly,
+	.section .remoteLink a,
+	.section .chart table tr.odd,
+	.section .chart table tr.odd td,
+	.section .tallchart table tr.odd,
+	.section .tallchart table tr.odd td,
+	#components tr.odd,
+	#components tr.odd td,
+	div .section .addenda,
+	.section .content table.visitSummaryTable tr.odd,
+	.section .content table.visitSummaryTable tr.odd td,
+	.section .content .iconcalendar td,
+	div.seriessel table tr.odd,
+	div.seriessel table tr.odd td,
+	.content table tr.preview td,
+	.content table tr.clickable td,
+	.content table tr.clickable td.multideptband,
+	.content table tbody tr.clickable th
+	{
+		background-color: #F9F9F9;
+	}
+	
+	#alerts > .loginalert,
+	#alerts > .loginalert .loginalert
+	{
+		background-color: #F9F9F9;
+		background-image:    -moz-linear-gradient(top,#F9F9F9 70%,#E9E9E9 100%); /* FF3.6+ */
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(70%,#F9F9F9),color-stop(100%,#E9E9E9)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#F9F9F9 70%,#E9E9E9 100%); /* Chrome10+,Safari5.1+ */
+		background-image:      -o-linear-gradient(top,#F9F9F9 70%,#E9E9E9 100%); /* Opera 11.10+ */
+		background-image:     -ms-linear-gradient(top,#F9F9F9 70%,#E9E9E9 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#F9F9F9 70%,#E9E9E9 100%); /* W3C */
+	}
+	  
+	.section .content table tbody tr.header td,
+	.section .content table tbody tr.footer td,
+	.section .chart table tr td.group,
+	.section .content .PEF .prompts div.grouper,
+	.section .content .PEF fieldset.reading .grouper
+	{
+		background-color: #FBFBFB;
+	}
+
+/***************************************************/
+
+/*THINGS THAT ARE WHITE ****************************/
+
+	.terms,
+	.section .content .highlight,
+	.section.extlink > .extlink-available,
+	input,
+	select,
+	textarea,
+	div.listpagelinks div:hover,
+	div.tooltipDiv,
+	.chart table tr,
+	.chart table tr td,
+	.tallchart table tr,
+	.tallchart table tr td,
+	#components tr,
+	#components tr td,
+	.section .content table.visitSummaryTable tr ,
+	.section .content table.visitSummaryTable tr td,
+	.popupInstructions,
+	div.seriessel tr,
+	div.seriessel tr td,
+	#pagecalendar div.NoData,
+	#pagecalendar div.EditData,
+	#pagecalendar div.ctrl.hover,
+	#CRE,
+	#calendar table td,
+	.lightboxContainer,
+	.lb_content.template,
+	div.sidetab,
+	.innernavparent .flyout,
+	.innernavparent .flyoutitem.chosen:hover
+	{
+		background-color: #FFFFFF;
+	}
+	
+	div.sidetab ul.sectiontabs li.selected {
+		background-color: #FFFFFF;
+		background-image: none;
+	}
+	
+	#banner h2,
+	.button,
+	.button:hover,
+	.quicklinks a,
+	.quicklinks .h3,
+	ul.sectiontabs li a,
+	.tc #footer,
+	.tc #footer a,
+	.accesscheck #footer,
+	.accesscheck #footer a,
+	.oe #footer,
+	.oe #footer a,
+	.oesignup #footer,
+	.oesignup #footer a,
+	.publicform #footer,
+	.publicform #footer a,
+	.stdfile #footer,
+	.stdfile #footer a,
+	#calendar table td.ctrl a,
+	#pagecalendar .ctrlrow,
+	#pagecalendar .ctrlrow a,
+	#pagecalendar .daysrow,
+	.section .content .iconcalendar a.nav,
+	.section table a.button,
+	.section .content .iconcalendar th,
+	.menuontop ul#proxyTabs li[class] a,
+	.titlebar,
+	.innernavparent .flyoutprompt,
+	.innernavparent .flyoutitem:hover,
+	div.payplanoverdue,
+	div.payplanautooverdue
+	{
+		color: #FFFFFF;
+	}
+	
+	#infoColumn,
+	#main,
+	#datatile,
+	.popupInstructions,
+	.subsquestion,
+	.questiongroup,
+	.lightboxContainer 
+	{
+		background-color: #FFFFFF;
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(70%,#FFFFFF),color-stop(100%,#F4F4F4)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#FFFFFF 70%,#F4F4F4 100%); /* Chrome10+,Safari5.1+ */
+		background-image:     -ms-linear-gradient(top,#FFFFFF 70%,#F4F4F4 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#FFFFFF 70%,#F4F4F4 100%); /* W3C */
+	}
+	
+	div.actionmenucontainer ul.actionmenu {
+		background-color: #FFFFFF;
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(0%, rgba(255,255,255,0.95)),color-stop(100%,rgba(191,221,255,0.95))); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.95) 0%,rgba(191,221,255,0.95) 100%); /* Chrome10+,Safari5.1+ */
+		background-image:     -ms-linear-gradient(top,rgba(255,255,255,0.95) 0%,rgba(191,221,255,0.95) 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,rgba(255,255,255,0.95) 0%,rgba(191,221,255,0.95) 100%); /* W3C */
+	}
+	
+	textarea.filedescription
+	{
+		scrollbar-face-color:#fff;
+		scrollbar-arrow-color:#fff;
+		scrollbar-highlight-color:#fff;
+		scrollbar-shadow-color:#fff;
+		scrollbar-3dlight-color:#fff;
+		scrollbar-darkshadow-color:#fff;
+		scrollbar-track-color:#fff;
+	}
+	
+/***************************************************/
+
+
+/* FONT INFORMATION ********************************/
+	body
+	{
+		font-size: 80%;     /* Set to 66% for fonts like Arial,Trebuchet,Tahoma,Verdana,etc. */
+	}
+	
+	ul#proxyTabs a,
+	ul#proxyTabs .moresuffix
+	{
+		font-family: "MV Boli",sans-serif;
+	}
+	
+	.errorpage h1,
+	.title h1,
+	#bannertext 
+	{
+		font-family: Rockwell,'Palatino Linotype',Georgia,serif;
+		font-weight: normal;
+	}
+	
+	#wrap,
+	#datatile,
+	input.button,
+	input.link[type=submit],
+	#calendar td,
+	.section h1,
+	.section h2,
+	.section .content h2
+	{
+		font-family: Calibri,Arial,sans-serif;
+	}
+	
+	select,
+	input[type=text],
+	textarea,
+	.section .Notes textarea
+	{
+		font-family: Segoe UI,Calibri,Arial,sans-serif;
+	}
+
+/***************************************************/
+
+
+/* HOVER INFORMATION *******************************/
+
+	a:hover,
+	.section .content table a:hover,
+	.nolinelist:hover,
+	.nolinelist:active,
+	.section table tr td.action a:hover
+	{
+		color:#636B78;
+	}
+	
+	.back a.button:hover,
+	.section table a.button:hover
+	{
+		color: #ffffff;
+	}
+	
+	#calendar table thead td.hi,
+	#calendar table td#calcancel.hi
+	{
+		background-color: #ffffff;
+	}
+	
+	dt a:hover
+	{
+		color: inherit;
+	}
+	
+	div#innertabs > div > a.selected:hover 
+	{
+		color: inherit;
+	}
+	
+	.button:hover,
+	.button:focus
+	{
+		background-color:#f3efe8;
+	}
+	
+	a.button:hover,
+	a.button:focus,
+	input.button:hover,
+	input.button:focus,
+	.uploader div.hover,
+	.uploader div.focus
+	{
+		background-color:#474747;
+	}
+	
+	#banner a.button:hover,
+	#banner a.button:focus,
+	.button.inlinedelete:hover,
+	.button.inlinedelete:focus
+	{
+		background-color:#344A6B;
+	}
+	
+	.button.disabled,
+	.button.disabled:hover,
+	.uploader div.button.disabled
+	{
+		background-color:#ddd;
+	}
+	
+	.section .intab label.selected,
+	.section .question label.selected,
+	.section .intab .label.radio.selected:hover,
+	.section .question .label.radio.selected:hover,
+	.section .subsquestion label.selected,
+	.section .subsquestion .label.radio.selected:hover,
+	.section .unansweredquestion label.selected,
+	.section .unansweredquestion .label.radio.selected:hover,
+	.section .unansweredsubsquestion label.selected,
+	.section .unansweredsubsquestion .label.radio.selected:hover,
+	.section .famhxtopic label.selected,
+	.section .famhxtopic .label.radio.selected:hover,
+	.section .questiongroup label.selected,
+	.section .questiongroup .label.radio.selected:hover
+	{
+		background-color: #D9E3F4;
+	}
+	
+	.section .content table tr.hover td,
+	.section .content div.hover,
+	.section .intab .buttonanchor:hover,
+	.section .question .buttonanchor:hover,
+	table tr td.selected,
+	.loginalert a:hover
+	{
+		color: black;
+		cursor: pointer;
+	}
+	
+	.button:focus,
+	.quicklinks a:focus,
+	#defaultFooter h1 a:focus,
+	#signupFooter h1 a:focus,
+	.popupInstructions a:focus,
+	img.focus,
+	.messagebox .buttoncontainer a:focus,
+	.uploader div.button.focus {			
+		outline: 1px dotted #000000;
+	}
+	input.button::-moz-focus-inner
+	{
+		border:0; /* prevent double outline in Firefox */
+	}
+	
+	#alerts > .loginalert > a:hover,
+	#alerts > .loginalert > a:focus,
+	#alerts > .loginalert .loginalert:hover > a.head,
+	#alerts > .loginalert .loginalert:hover > a.head + .body,
+	#alerts > .loginalert .loginalert > a.head:focus,
+	#alerts > .loginalert .loginalert > a.head:focus + .body,
+	.section .content table tr.hover td,
+	.section .content div.hover,
+	table tr td.selected
+	{
+		background-color: #E0E8F6;
+	}
+	
+	.quicklinks a:hover,
+	.quicklinks a:focus,
+	.section .remoteLink a:hover
+	{
+		background-color: #474747;
+		text-shadow: 0 1px 7px #FFFFFF;
+		color: #ffffff;
+	}
+	
+	a.contactcard:hover {
+		color: #555555;
+		background-color: #FFFFFF;
+		background-image:    -moz-linear-gradient(top,#FFFFFF 0%,#DCE5F2 100%); /* FF3.6+ */
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(0%,#FFFFFF),color-stop(100%,#DCE5F2)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#FFFFFF 0%,#DCE5F2 100%); /* Chrome10+,Safari5.1+ */
+		background-image:      -o-linear-gradient(top,#FFFFFF 0%,#DCE5F2 100%); /* Opera 11.10+ */
+		background-image:     -ms-linear-gradient(top,#FFFFFF 0%,#DCE5F2 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#FFFFFF 0%,#DCE5F2 100%); /* W3C */
+	}
+	
+	div.actionmenucontainer ul.actionmenu li.actionmenuitem:hover {
+		background-color: #BFDDFF;
+		background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(0%, #FFFFFF),color-stop(100%,#BFDDFF)); /* Chrome,Safari4+ */
+		background-image: -webkit-linear-gradient(top,#FFFFFF 0%,#BFDDFF 100%); /* Chrome10+,Safari5.1+ */
+		background-image:     -ms-linear-gradient(top,#FFFFFF 0%,#BFDDFF 100%); /* IE10+ */
+		background-image:         linear-gradient(to bottom,#FFFFFF 0%,#BFDDFF 100%); /* W3C */	
+	}
+
+
+/*EXTERNAL SITE COLOR INFORMATION*/
+
+
+/*THINGS THAT ARE BLUE #344A6B***********************/
+
+#defaultForm h1,
+#defaultColumn h2,
+#defaultForm label,
+#defaultForm label.hint a,
+#defaultForm legend,
+#defaultForm .accessibleLabel,
+#defaultDigiDForm h1,
+#defaultDigiDForm label,
+#defaultDigiDForm label.hint a,
+#defaultDigiDForm .accessibleLabel,
+#infoColumn h1,
+#infoColumn h2.faq,
+#infoColumn #features li,
+#defaultForm span.header,
+#defaultColumn span.subheader,
+#defaultDigiDForm span.header
+{
+	color: #344A6B;
+}
+/***************************************************/
+
+/*THINGS THAT ARE BLACK #000000*********************/
+
+#defaultColumn h3.alert,
+#defaultColumn span.alert
+{
+	color: #000000;
+}
+/***************************************************/
+
+/*THINGS THAT ARE RED #D70000***********************/
+
+#defaultForm label.alert,
+.signUpFieldError,
+.recoverFieldError
+{
+	color: #D70000;
+}
+/***************************************************/
+
+
+/*THINGS THAT ARE BROWN #766EF6*********************/
+
+#defaultFooter a,
+#signupFooter a,
+.loginhint,
+.loginhint a
+{
+	color: #4874B3;
+}
+
+/***************************************************/
+
+/*THINGS THAT ARE GREEN #344A6B*********************/
+
+#defaultFooter h1 a,
+#signupFooter h1 a
+{
+	background-color: #344A6B;
+}
+/***************************************************/
+
+/*THINGS THAT ARE BRIGHT GREEN #474747**************/
+
+#defaultFooter h1 a:hover,
+#defaultFooter h1 a:focus,
+#signupFooter h1 a:hover,
+#signupFooter h1 a:focus
+{
+	background-color: #474747;
+}
+/***************************************************/
+
+/*THINGS THAT ARE WHITE #FFFFFF*********************/
+
+#defaultFooter h1 a,
+#signupFooter h1 a
+{
+	color: #FFFFFF;
+}
+
+#infoColumn ul#features
+{
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.7);
+}
+
+/***************************************************/
+/* COLOR INFORMATION WHILE IN PROXY CONTEXT 
+ * Any rules here overrule the rules defined in inside.css/colors.css
+ * when the site is viewed in a proxy context. 
+ */
+ 
+/* USER DEFINED TABS COLORS
+ * If change tab colors in this file, also update DisplayConfig.xml for color names and ProxyTabs.png to match. 
+ */
+
+/* color1 light brown*/
+ul#proxyTabs li.color1        {background-position:  0     0  ;} 
+ul#proxyTabs li.color1 a      {background-position:100%    0  ;}
+ul#proxyTabs li.color1.curr   {background-position:  0  -315px;}
+ul#proxyTabs li.color1.curr a {background-position:100% -315px;}
+
+.menuontop ul#proxyTabs li.color1:hover        {background-position:   0   0;}
+.menuontop ul#proxyTabs li.color1              {background-position:  -5px 0;}
+.menuontop ul#proxyTabs li.color1:hover:before {background-position: -93px 0;}
+.menuontop ul#proxyTabs li.color1:before       {background-position: -98px 0;}
+.menuontop ul#proxyTabs li.color1:hover:after  {background-position:-186px 0;}
+.menuontop ul#proxyTabs li.color1:after        {background-position:-191px 0;}
+.menuontop ul#proxyTabs li.color1.curr         {background-position:-279px 0;}
+.menuontop ul#proxyTabs li.color1.curr:before  {background-position:-372px 0;}
+.menuontop ul#proxyTabs li.color1.curr:after   {background-position:-465px 0;}
+
+.menuontop.color1 #menu .menugroup:after           {background-position:   0      0  ;}
+.menuontop.color1 #menu .menugroup                 {background-position: -38px    0  ;}
+.menuontop.color1 #menu .menugroup:before          {background-position:   0    -55px;}
+.menuontop.color1 #menu .menugroup.selected:after,
+.menuontop.color1 #menu .richdisplay:hover:after   {background-position:   0   -110px;}
+.menuontop.color1 #menu .menugroup.selected,
+.menuontop.color1 #menu .richdisplay:hover         {background-position: -38px -110px;}
+.menuontop.color1 #menu .menugroup.selected:before,
+.menuontop.color1 #menu .richdisplay:hover:before  {background-position:   0   -165px;}
+
+
+ul#proxyTabs li.color1,
+ul#proxyTabs li.color1 a,
+ul#proxyTabs li #moretabs a.color1,
+.menuontop ul#proxyTabs #moretabs a.color1,
+.menuontop ul#proxyTabs .color1 .moresuffix,
+.color1 #menuheader {
+  color:#594727;
+}
+
+ul#proxyTabs li #moretabs a.color1,
+.menuontop ul#proxyTabs li #moretabs a.color1,
+img.photo.color1,
+.colorprev.color1 {
+  background-color: #E0DFDC;
+}
+
+.menuontop ul#proxyTabs li.color1 a {
+  background-color: #9C988B;
+}
+ 
+
+/* color2 green*/
+ul#proxyTabs li.color2        {background-position:  0   -45px;}
+ul#proxyTabs li.color2 a      {background-position:100%  -45px;}
+ul#proxyTabs li.color2.curr   {background-position:  0  -360px;}
+ul#proxyTabs li.color2.curr a {background-position:100% -360px;}
+
+.menuontop ul#proxyTabs li.color2:hover        {background-position: -558px 0;}
+.menuontop ul#proxyTabs li.color2              {background-position: -563px 0;}
+.menuontop ul#proxyTabs li.color2:hover:before {background-position: -651px 0;}
+.menuontop ul#proxyTabs li.color2:before       {background-position: -656px 0;}
+.menuontop ul#proxyTabs li.color2:hover:after  {background-position: -744px 0;}
+.menuontop ul#proxyTabs li.color2:after        {background-position: -749px 0;}
+.menuontop ul#proxyTabs li.color2.curr         {background-position: -837px 0;}
+.menuontop ul#proxyTabs li.color2.curr:before  {background-position: -930px 0;}
+.menuontop ul#proxyTabs li.color2.curr:after   {background-position:-1023px 0;}
+
+.menuontop.color2 #menu .menugroup:after           {background-position:   0   -220px;}
+.menuontop.color2 #menu .menugroup                 {background-position: -38px -220px;}
+.menuontop.color2 #menu .menugroup:before          {background-position:   0   -275px;}
+.menuontop.color2 #menu .menugroup.selected:after,
+.menuontop.color2 #menu .richdisplay:hover:after   {background-position:   0   -330px;}
+.menuontop.color2 #menu .menugroup.selected,
+.menuontop.color2 #menu .richdisplay:hover         {background-position: -38px -330px;}
+.menuontop.color2 #menu .menugroup.selected:before,
+.menuontop.color2 #menu .richdisplay:hover:before  {background-position:   0   -385px;}
+
+
+ul#proxyTabs li.color2,
+ul#proxyTabs li.color2 a,
+ul#proxyTabs li #moretabs a.color2,
+.menuontop ul#proxyTabs #moretabs a.color2,
+.menuontop ul#proxyTabs .color2 .moresuffix,
+.color2 #menuheader {
+  color:#0B2F00;
+}
+
+ul#proxyTabs li #moretabs a.color2,
+.menuontop ul#proxyTabs li #moretabs a.color2,
+img.photo.color2,
+.colorprev.color2 {
+  background-color: #CAE2C0;
+}
+
+.menuontop ul#proxyTabs li.color2 a {
+  background-color: #50A033;
+}
+
+
+/* color3 purple*/
+ul#proxyTabs li.color3        {background-position:  0   -90px;}
+ul#proxyTabs li.color3 a      {background-position:100%  -90px;}
+ul#proxyTabs li.color3.curr   {background-position:  0  -405px;}
+ul#proxyTabs li.color3.curr a {background-position:100% -405px;}
+
+.menuontop ul#proxyTabs li.color3:hover        {background-position:-1116px 0;}
+.menuontop ul#proxyTabs li.color3              {background-position:-1121px 0;}
+.menuontop ul#proxyTabs li.color3:hover:before {background-position:-1209px 0;}
+.menuontop ul#proxyTabs li.color3:before       {background-position:-1214px 0;}
+.menuontop ul#proxyTabs li.color3:hover:after  {background-position:-1302px 0;}
+.menuontop ul#proxyTabs li.color3:after        {background-position:-1307px 0;}
+.menuontop ul#proxyTabs li.color3.curr         {background-position:-1395px 0;}
+.menuontop ul#proxyTabs li.color3.curr:before  {background-position:-1488px 0;}
+.menuontop ul#proxyTabs li.color3.curr:after   {background-position:-1581px 0;}
+
+.menuontop.color3 #menu .menugroup:after           {background-position:   0   -440px;}
+.menuontop.color3 #menu .menugroup                 {background-position: -38px -440px;}
+.menuontop.color3 #menu .menugroup:before          {background-position:   0   -495px;}
+.menuontop.color3 #menu .menugroup.selected:after,
+.menuontop.color3 #menu .richdisplay:hover:after   {background-position:   0   -550px;}
+.menuontop.color3 #menu .menugroup.selected,
+.menuontop.color3 #menu .richdisplay:hover         {background-position: -38px -550px;}
+.menuontop.color3 #menu .menugroup.selected:before,
+.menuontop.color3 #menu .richdisplay:hover:before  {background-position:   0   -605px;}
+
+
+ul#proxyTabs li.color3,
+ul#proxyTabs li.color3 a,
+ul#proxyTabs li #moretabs a.color3,
+.menuontop ul#proxyTabs #moretabs a.color3,
+.menuontop ul#proxyTabs .color3 .moresuffix,
+.color3 #menuheader {
+  color:#3C2859;
+}
+
+ul#proxyTabs li #moretabs a.color3,
+.menuontop ul#proxyTabs li #moretabs a.color3,
+img.photo.color3,
+.colorprev.color3 {
+  background-color: #D8CAEC;
+}
+
+.menuontop ul#proxyTabs li.color3 a {
+  background-color: #8152C1;
+}
+
+
+/* color4 teal*/
+ul#proxyTabs li.color4        {background-position:  0  -135px;}
+ul#proxyTabs li.color4 a      {background-position:100% -135px;}
+ul#proxyTabs li.color4.curr   {background-position:  0  -450px;}
+ul#proxyTabs li.color4.curr a {background-position:100% -450px;}
+
+.menuontop ul#proxyTabs li.color4:hover        {background-position:-1674px 0;}
+.menuontop ul#proxyTabs li.color4              {background-position:-1679px 0;}
+.menuontop ul#proxyTabs li.color4:hover:before {background-position:-1767px 0;}
+.menuontop ul#proxyTabs li.color4:before       {background-position:-1772px 0;}
+.menuontop ul#proxyTabs li.color4:hover:after  {background-position:-1860px 0;}
+.menuontop ul#proxyTabs li.color4:after        {background-position:-1865px 0;}
+.menuontop ul#proxyTabs li.color4.curr         {background-position:-1953px 0;}
+.menuontop ul#proxyTabs li.color4.curr:before  {background-position:-2046px 0;}
+.menuontop ul#proxyTabs li.color4.curr:after   {background-position:-2139px 0;}
+
+.menuontop.color4 #menu .menugroup:after           {background-position:   0   -660px;}
+.menuontop.color4 #menu .menugroup                 {background-position: -38px -660px;}
+.menuontop.color4 #menu .menugroup:before          {background-position:   0   -715px;}
+.menuontop.color4 #menu .menugroup.selected:after,
+.menuontop.color4 #menu .richdisplay:hover:after   {background-position:   0   -770px;}
+.menuontop.color4 #menu .menugroup.selected,
+.menuontop.color4 #menu .richdisplay:hover         {background-position: -38px -770px;}
+.menuontop.color4 #menu .menugroup.selected:before,
+.menuontop.color4 #menu .richdisplay:hover:before  {background-position:   0   -825px;}
+
+
+ul#proxyTabs li.color4,
+ul#proxyTabs li.color4 a,
+ul#proxyTabs li #moretabs a.color4,
+.menuontop ul#proxyTabs #moretabs a.color4,
+.menuontop ul#proxyTabs .color4 .moresuffix,
+.color4 #menuheader {
+  color:#012923;
+}
+
+ul#proxyTabs li #moretabs a.color4,
+.menuontop ul#proxyTabs li #moretabs a.color4,
+img.photo.color4,
+.colorprev.color4 {
+  background-color: #ABD6DF;
+}
+
+.menuontop ul#proxyTabs li.color4 a {
+  background-color: #027D9A;
+}
+
+
+/* color5 pink*/
+ul#proxyTabs li.color5        {background-position:  0  -180px;}
+ul#proxyTabs li.color5 a      {background-position:100% -180px;}
+ul#proxyTabs li.color5.curr   {background-position:  0  -495px;}
+ul#proxyTabs li.color5.curr a {background-position:100% -495px;}
+
+.menuontop ul#proxyTabs li.color5:hover        {background-position:-2232px 0;}
+.menuontop ul#proxyTabs li.color5              {background-position:-2237px 0;}
+.menuontop ul#proxyTabs li.color5:hover:before {background-position:-2325px 0;}
+.menuontop ul#proxyTabs li.color5:before       {background-position:-2330px 0;}
+.menuontop ul#proxyTabs li.color5:hover:after  {background-position:-2418px 0;}
+.menuontop ul#proxyTabs li.color5:after        {background-position:-2423px 0;}
+.menuontop ul#proxyTabs li.color5.curr         {background-position:-2511px 0;}
+.menuontop ul#proxyTabs li.color5.curr:before  {background-position:-2604px 0;}
+.menuontop ul#proxyTabs li.color5.curr:after   {background-position:-2697px 0;}
+
+.menuontop.color5 #menu .menugroup:after           {background-position:   0    -880px;}
+.menuontop.color5 #menu .menugroup                 {background-position: -38px  -880px;}
+.menuontop.color5 #menu .menugroup:before          {background-position:   0    -935px;}
+.menuontop.color5 #menu .menugroup.selected:after,
+.menuontop.color5 #menu .richdisplay:hover:after   {background-position:   0    -990px;}
+.menuontop.color5 #menu .menugroup.selected,
+.menuontop.color5 #menu .richdisplay:hover         {background-position: -38px  -990px;}
+.menuontop.color5 #menu .menugroup.selected:before,
+.menuontop.color5 #menu .richdisplay:hover:before  {background-position:   0   -1045px;}
+
+
+ul#proxyTabs li.color5,
+ul#proxyTabs li.color5 a,
+ul#proxyTabs li #moretabs a.color5,
+.menuontop ul#proxyTabs #moretabs a.color5,
+.menuontop ul#proxyTabs .color5 .moresuffix,
+.color5 #menuheader {
+  color:#472D4A;
+}
+
+ul#proxyTabs li #moretabs a.color5,
+.menuontop ul#proxyTabs li #moretabs a.color5,
+img.photo.color5,
+.colorprev.color5 {
+  background-color: #F3D3F9;
+}
+
+.menuontop ul#proxyTabs li.color5 a {
+  background-color: #D976EB;
+}
+
+
+/* color6 orange*/
+ul#proxyTabs li.color6        {background-position:  0  -225px;}
+ul#proxyTabs li.color6 a      {background-position:100% -225px;}
+ul#proxyTabs li.color6.curr   {background-position:  0  -540px;}
+ul#proxyTabs li.color6.curr a {background-position:100% -540px;}
+
+.menuontop ul#proxyTabs li.color6:hover        {background-position:-2790px 0;}
+.menuontop ul#proxyTabs li.color6              {background-position:-2795px 0;}
+.menuontop ul#proxyTabs li.color6:hover:before {background-position:-2883px 0;}
+.menuontop ul#proxyTabs li.color6:before       {background-position:-2888px 0;}
+.menuontop ul#proxyTabs li.color6:hover:after  {background-position:-2976px 0;}
+.menuontop ul#proxyTabs li.color6:after        {background-position:-2981px 0;}
+.menuontop ul#proxyTabs li.color6.curr         {background-position:-3069px 0;}
+.menuontop ul#proxyTabs li.color6.curr:before  {background-position:-3162px 0;}
+.menuontop ul#proxyTabs li.color6.curr:after   {background-position:-3255px 0;}
+
+.menuontop.color6 #menu .menugroup:after           {background-position:   0   -1100px;}
+.menuontop.color6 #menu .menugroup                 {background-position: -38px -1100px;}
+.menuontop.color6 #menu .menugroup:before          {background-position:   0   -1155px;}
+.menuontop.color6 #menu .menugroup.selected:after,
+.menuontop.color6 #menu .richdisplay:hover:after   {background-position:   0   -1210px;}
+.menuontop.color6 #menu .menugroup.selected,
+.menuontop.color6 #menu .richdisplay:hover         {background-position: -38px -1210px;}
+.menuontop.color6 #menu .menugroup.selected:before,
+.menuontop.color6 #menu .richdisplay:hover:before  {background-position:   0   -1265px;}
+
+
+ul#proxyTabs li.color6,
+ul#proxyTabs li.color6 a,
+ul#proxyTabs li #moretabs a.color6,
+.menuontop ul#proxyTabs #moretabs a.color6,
+.menuontop ul#proxyTabs .color6 .moresuffix,
+.color6 #menuheader {
+  color:#753E07;
+}
+
+ul#proxyTabs li #moretabs a.color6,
+.menuontop ul#proxyTabs li #moretabs a.color6,
+img.photo.color6,
+.colorprev.color6 {
+  background-color: #FAC28E;
+}
+
+.menuontop ul#proxyTabs li.color6 a {
+  background-color: #EE4004;
+}
+
+
+/* color7 blue*/
+ul#proxyTabs li.color7        {background-position:  0  -270px;}
+ul#proxyTabs li.color7 a      {background-position:100% -270px;}
+ul#proxyTabs li.color7.curr   {background-position:  0  -585px;}
+ul#proxyTabs li.color7.curr a {background-position:100% -585px;}
+
+.menuontop ul#proxyTabs li.color7:hover        {background-position:-3348px 0;}
+.menuontop ul#proxyTabs li.color7              {background-position:-3353px 0;}
+.menuontop ul#proxyTabs li.color7:hover:before {background-position:-3441px 0;}
+.menuontop ul#proxyTabs li.color7:before       {background-position:-3446px 0;}
+.menuontop ul#proxyTabs li.color7:hover:after  {background-position:-3534px 0;}
+.menuontop ul#proxyTabs li.color7:after        {background-position:-3539px 0;}
+.menuontop ul#proxyTabs li.color7.curr         {background-position:-3627px 0;}
+.menuontop ul#proxyTabs li.color7.curr:before  {background-position:-3720px 0;}
+.menuontop ul#proxyTabs li.color7.curr:after   {background-position:-3813px 0;}
+
+.menuontop.color7 #menu .menugroup:after           {background-position:   0   -1320px;}
+.menuontop.color7 #menu .menugroup                 {background-position: -38px -1320px;}
+.menuontop.color7 #menu .menugroup:before          {background-position:   0   -1375px;}
+.menuontop.color7 #menu .menugroup.selected:after,
+.menuontop.color7 #menu .richdisplay:hover:after   {background-position:   0   -1430px;}
+.menuontop.color7 #menu .menugroup.selected,
+.menuontop.color7 #menu .richdisplay:hover         {background-position: -38px -1430px;}
+.menuontop.color7 #menu .menugroup.selected:before,
+.menuontop.color7 #menu .richdisplay:hover:before  {background-position:   0   -1485px;}
+
+
+ul#proxyTabs li.color7,
+ul#proxyTabs li.color7 a,
+ul#proxyTabs li #moretabs a.color7,
+.menuontop ul#proxyTabs #moretabs a.color7,
+.menuontop ul#proxyTabs .color7 .moresuffix,
+.color7 #menuheader {
+  color:#104373;
+}
+
+ul#proxyTabs li #moretabs a.color7,
+.menuontop ul#proxyTabs li #moretabs a.color7,
+img.photo.color7,
+.colorprev.color7 {
+  background-color: #C5D9F5;
+}
+
+.menuontop ul#proxyTabs li.color7 a {
+  background-color: #387CD9;
+}
+
+
+/* config icon*/
+ul#proxyTabs li.config     {color:#666666; background-image:none;}
+ul#proxyTabs li.config a   {color:#666666; background-image:none;}
+/* Deleted config icon changes in override */
+ 
+#proxyprefsuccessmessage {
+	color: green;
+}
+ 
+/*  WHEAT */
+  
+  .color1 #wrap,
+  .color1 #wrap:before,
+  .color1 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color1,
+  body.menuontop.color1 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }  
+  
+  .color1 #wrap #menu .button:hover
+  {
+    background-color: #EFEAE1;
+  }
+  
+  .color1 #wrap #menu h2,
+  .color1 #wrap #menu h3,
+  .color1 #wrap #menu .header,
+  .color1 #wrap #menu .subheader,
+  .color1 #wrap #menu .mnutitle a,
+  .color1 #wrap #menu li a,
+  .color1 #wrap #menu .button,
+  .color1 #wrap .subjectIndicator,
+  .color1 #wrap #menu .moremenu,
+  .color1 #wrap #menu .moremenu a,
+  #menuheader
+  {
+    color:#4874B3;
+  }
+  
+  
+  
+  
+  
+  
+/* DEFAULT OVERRIDE / GREEN ***************************************************/
+  
+  .color2 #wrap,
+  .color2 #wrap:before,
+  .color2 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color2,
+  body.menuontop.color2 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color2 #main:before
+  {
+    background-position:-986px 0;
+  }
+    
+  .color2 #wrap #menu .button  
+  {
+    background-color: #C7DAC8;
+  }
+  
+  .color2 #wrap #menu .button:hover
+  {
+    background-color: #D9E6D9;
+  }
+  
+  .color2 #wrap #menu h2,
+  .color2 #wrap #menu h3,
+  .color2 #wrap #menu .header,
+  .color2 #wrap #menu .subheader,
+  .color2 #wrap #menu .mnutitle a,
+  .color2 #wrap #menu li a,
+  .color2 #wrap #menu .button,
+  .color2 #wrap .subjectIndicator,
+  .color2 #wrap #menu .moremenu,
+  .color2 #wrap #menu .moremenu a
+  {
+    color:#0B2F00;
+  }
+  
+  
+  
+
+
+
+
+/* PURPLE *********************************************************************/
+
+  .color3 #wrap,
+  .color3 #wrap:before,
+  .color3 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color3,
+  body.menuontop.color3 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color3 #main:before
+  {
+    background-position:-1972px 0;
+  }
+  
+  .color3 #wrap #menu .button
+  {
+    background-color: #CDC5D9;
+  }
+  
+  .color3 #wrap #menu .button:hover
+  {
+    background-color: #DBD7E1;
+  }
+  
+  .color3 #wrap #menu h2,
+  .color3 #wrap #menu h3,
+  .color3 #wrap #menu .header,
+  .color3 #wrap #menu .subheader,
+  .color3 #wrap #menu .mnutitle a,
+  .color3 #wrap #menu li a,
+  .color3 #wrap #menu .button,
+  .color3 #wrap .subjectIndicator,
+  .color3 #wrap #menu .moremenu,
+  .color3 #wrap #menu .moremenu a
+  {
+    color:#3C2859;
+  }
+  
+  
+  
+
+
+
+
+/* TEAL ***********************************************************************/
+
+  .color4 #wrap,
+  .color4 #wrap:before,
+  .color4 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color4,
+  body.menuontop.color4 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color4 #main:before
+  {
+    background-position:-2958px 0;
+  }
+  
+  .color4 #wrap #menu .button
+  {
+    background-color: #B5CCCC;
+  }
+  
+  .color4 #wrap #menu .button:hover
+  {
+    background-color: #CCDBDB;
+  }
+  
+  .color4 #wrap #menu h2,
+  .color4 #wrap #menu h3,
+  .color4 #wrap #menu .header,
+  .color4 #wrap #menu .subheader,
+  .color4 #wrap #menu .mnutitle a,
+  .color4 #wrap #menu li a,
+  .color4 #wrap #menu .button,
+  .color4 #wrap .subjectIndicator,
+  .color4 #wrap #menu .moremenu,
+  .color4 #wrap #menu .moremenu a
+  {
+    color:#012923;
+  }
+  
+  
+  
+
+
+
+
+/* PINK *********************************************************************/
+
+  .color5 #wrap,
+  .color5 #wrap:before,
+  .color5 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color5,
+  body.menuontop.color5 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color5 #main:before
+  {
+    background-position:-3944px 0;
+  }
+  
+  .color5 #wrap #menu .button
+  {
+    background-color: #F3E8F4;
+  }
+  
+  .color5 #wrap #menu .button:hover
+  {
+    background-color: #FDFBFD;
+  }
+  
+  .color5 #wrap #menu h2,
+  .color5 #wrap #menu h3,
+  .color5 #wrap #menu .header,
+  .color5 #wrap #menu .subheader,
+  .color5 #wrap #menu .mnutitle a,
+  .color5 #wrap #menu li a,
+  .color5 #wrap #menu .button,
+  .color5 #wrap .subjectIndicator,
+  .color5 #wrap #menu .moremenu,
+  .color5 #wrap #menu .moremenu a
+  {
+    color:#472D4A;
+  }
+  
+  
+  
+
+
+
+
+/* ORANGE *********************************************************************/
+
+  .color6 #wrap,
+  .color6 #wrap:before,
+  .color6 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color6,
+  body.menuontop.color6 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color6 #main:before
+  {
+    background-position:-4930px 0;
+  }
+  
+  .color6 #wrap #menu .button
+  {
+    background-color: #F9E1BF;
+  }
+  
+  .color6 #wrap #menu .button:hover
+  {
+    background-color: #FEEBD6;
+  }
+  
+  .color6 #wrap #menu h2,
+  .color6 #wrap #menu h3,
+  .color6 #wrap #menu .header,
+  .color6 #wrap #menu .subheader,
+  .color6 #wrap #menu .mnutitle a,
+  .color6 #wrap #menu li a,
+  .color6 #wrap #menu .button,
+  .color6 #wrap .subjectIndicator,
+  .color6 #wrap #menu .moremenu,
+  .color6 #wrap #menu .moremenu a
+  {
+    color:#753E07;
+  }
+  
+  
+  
+
+
+
+
+/* BLUE *********************************************************************/
+
+  .color7 #wrap,
+  .color7 #wrap:before,
+  .color7 #wrap:after /*skeuo*/
+  {
+    /* Deleted image reference in override */
+  }
+  body.menuontop.color7,
+  body.menuontop.color7 #blftwrapper
+  {
+    /* Deleted image reference in override */
+  }
+  .menuontop.color7 #main:before
+  {
+    background-position:-5916px 0;
+  }
+  
+  .color7 #wrap #menu .button
+  {
+    background-color: #CDDCEB;
+  }
+  
+  .color7 #wrap #menu .button:hover
+  {
+    background-color: #E6EEF7;
+  }
+  
+  .color7 #wrap #menu h2,
+  .color7 #wrap #menu h3,
+  .color7 #wrap #menu .header,
+  .color7 #wrap #menu .subheader,
+  .color7 #wrap #menu .mnutitle a,
+  .color7 #wrap #menu li a,
+  .color7 #wrap #menu .button,
+  .color7 #wrap .subjectIndicator,
+  .color7 #wrap #menu .moremenu,
+  .color7 #wrap #menu .moremenu a
+  {
+    color:#104373;
+  }
+/* BEGIN CUSTOM CSS TWEAKS REQUIRED FOR SUNDAY MATINEE 2014 THEME */
+
+/* ENABLE EDITING OF HYPERLINKS IN TABLES SEPARATELY FROM GENERIC HYPERLINKS */
+.section .content table a, .section table tr td.action a {color: #4874B3;}
+.section .content table a:hover, .section table tr td.action a:hover {color: #636B78;}
+
+/* FIX PARAGRAPH ISSUES WITH PREFORMATTED TEXT */
+p {white-space: normal; word-wrap: normal;}
+
+/* ALLOW EDITING OF TABLE HEADER HYPERLINK COLORS */
+div.section .content table tr th a {color: #4874B3;}
+div.section .content table tr th a:hover {color: #636B78;}
+
+
+/* FIX PIXILATED TEXT ON FEATURES BAR ON LOGIN SCREEN IN OLDER IE */
+#infoColumn ul#features li span{filter: none !important;}
+#infoColumn ul#features li.show span{filter: none !important;}
+
+/* HYPERLINKS ON LOGIN PAGE, ENABLE ABILITY TO CHANGE HOVER COLOR */
+#signupFooter a:hover, .loginhint a:hover {color: #636B78;}
+
+/* ENABLE EDITING OF FEATURES BAR ON LOGIN SCREEN*/
+#infoColumn #features span + span {color: #474747;}
+#infoColumn #features li {color: #344A6B;}
+
+/* ENABLE EDITING OF LOGIN SCREEN SUB HEADERS, SUCH AS YOU HAVE BEEN LOGGED OUT MESSAGE*/
+#defaultColumn span.subheader {color: #344A6B;}
+
+/* ENABLED EDITING OF LOGIN BOX COPYRIGHT TEXT */
+#loginForm + span.subheader {color: #1B6DD1;}
+
+/* ENABLE EDITING OF LOGIN SCREEN FORM LABELS */
+#loginForm .item label {color: #344A6B;}
+
+/* ENABLE EDITING OF NEW USER? LOGIN BOX */
+#defaultFooter h1 {color: #344A6B;}
+#signupFooter h1 {color: #344A6B;}
+
+/* ENABLE EDITING OF LOGIN PAGE ERROR MESSAGES */
+#defaultColumn div#loginErrorMessage span, #defaultColumn div#nojavascript span {color: #FF0000;}
+#defaultColumn div#loginErrorMessage span *, #defaultColumn div#nojavascript span * {color: #FF0000;}
+#defaultColumn div#loginErrorMessage span a, #defaultColumn div#nojavascript span a {color: #FF0000;}
+#defaultColumn div#loginErrorMessage span a:hover, #defaultColumn div#nojavascript span a:hover {color: #FF0000;}
+
+/* ADDING ABILITY TO CHANGE BANNER BUTTON TEXT COLOR AND HOVER COLOR */
+#banner a.button {color: #FFFFFF;}
+#banner a.button:hover {color: #FFFFFF;}
+
+/* SEPARATING INLINE DELETE COLOR FROM BANNER TEXT AND BUTTON COLORS */
+.button.inlinedelete {color: #FFFFFF;}
+.button.inlinedelete {background-color: #344A6B;}
+.button.inlinedelete:hover, .button.inlinedelete:focus {color: #FFFFFF;}
+.button.inlinedelete:hover, .button.inlinedelete:focus {background-color: #344A6B;}
+.button.disabled, .button.disabled:hover, .button.disabled:focus  {background-color: #DDDDDD; color: #777777;}
+
+/* ENABLE EDITING OF LOCALE HYPERLINK */
+div#localeswitch.prelogin a {color: #4874B3;}
+div#localeswitch.prelogin a:hover {color: #636B78;}
+div#localeswitch.prelogin ul.dropdown > li:first-child a:after {color: #606060; content:' '; font-size: 0.8em;}
+div#localeswitch a {color: #4874B3;}
+div#localeswitch a:hover {color: #636B78;}
+div#localeswitch ul.dropdown > li > ul#morelocales > li {background-color: #FBFDFD; color: #363636;}
+div#localeswitch ul.dropdown > li > ul#morelocales > li:hover {background-color: #D9EBF2;}
+div#localeswitch ul.dropdown > li > ul#morelocales > li > a {color: #4874B3;}
+div#localeswitch ul.dropdown > li > ul#morelocales > li:hover > a {color: #636B78;}
+div#localeswitch ul.dropdown > li:first-child a:after {color: #606060; content:' '; font-size: 0.8em;}
+
+/* hide the released drop down arrow image so we can replace it with unicode character */
+div#localeswitch ul.dropdown > li:first-child a img ~ img {display: none;}
+
+/* ENABLE CHANGING OF BODY BACKGROUND IMAGE, USE SAME IMAGE FOR REGULAR SITE AND OPEN SCHEDULING  */
+html {background-image: none;}
+
+/* THE BACKGROUND COLOR OF THE DRAWING QUESTION GROUP SELECTED LABELS. */
+.section .question .drawingcontainer #drawingtools #patterns .selected {background-color: #D9E3F4;}
+
+/* ENABLE CHANGING OF QUICK LINK COLORS */
+/* Standard Quick Link Text */
+div.quicklinks a {color: #FFFFFF;}
+/* Standard Quick Link Hover Text */
+div.quicklinks a:hover, .quicklinks a:active, .quicklinks a:focus {color: #FFFFFF;}
+
+/* ENABLE CHANGING OF TOP MENU TEXT COLOR FOR DROP DOWN MENU */
+html body.inside.menuontop div#wrap div#menu.collapsible div#keywordsearchwrapper.menugroup form#KeywordSearch div.keywordsearch span.header,html body.inside.menuontop div#wrap div#menu.collapsible div.menugroup ul a, html body.inside.menuontop div#wrap div#menu.collapsible div.menugroup.droppeddown div.hiddenlist a, body.menuontop #menu > .menugroup a, body.inside.menuontop #wrap #menu.collapsible > .menugroup.droppeddown a{color: #555555;}
+
+/* ENABLE CHANGING OF FOOTER TEXT COLOR */
+/* Footer on folder */
+div#blftwrapper div#footer a, div#blftwrapper div#footer {color: #000000;}
+div#blftwrapper div#footer a:hover, div#blftwrapper div#footer a:active, div#blftwrapper div#footer a:focus {color: #636B78;}
+
+/* Footer below folder*/
+div#blftwrapper.Tall div#footer a, div#blftwrapper.Tall div#footer {color: #000000;}
+div#blftwrapper.Tall div#footer a:hover, div#blftwrapper.Tall div#footer a:active, div#blftwrapper.Tall div#footer a:focus {color: #636B78;}
+
+/* Footer below login screen */
+div#wrap div#infoColumn + div#blftwrapper div#footer a, div#wrap div#infoColumn + div#blftwrapper div#footer {color: #000000;}
+div#wrap div#infoColumn + div#blftwrapper div#footer a:hover, div#wrap div#infoColumn + div#blftwrapper div#footer a:active, div#wrap div#infoColumn + div#blftwrapper div#footer a:focus {color: #636B78;}
+
+/* Footer below login assist letter */
+body.loginassist div#wrap div#footer, body.loginassist div#wrap div#footer a {color: #000000;}
+body.loginassist div#wrap div#footer a:hover, body.loginassist div#wrap div#footer a:active, body.loginassist div#wrap div#footer a:focus {color: #636B78;}
+
+/* Footer on clipboard */
+body.accesscheck div#wrap div#footer, body.accesscheck div#wrap div#footer a, body.tc div#wrap div#footer, body.tc div#wrap div#footer a, body.stdfile div#wrap div#infoColumn + div#blftwrapper div#footer, body.stdfile div#wrap div#infoColumn + div#blftwrapper div#footer a {color: #FFFFFF;}
+body.accesscheck div#wrap div#footer a:hover, body.accesscheck div#wrap div#footer a:active, body.accesscheck div#wrap div#footer a:focus, body.tc div#wrap div#footer a:hover, body.tc div#wrap div#footer a:active, body.tc div#wrap div#footer a:focus, body.stdfile div#wrap div#infoColumn + div#blftwrapper div#footer a:hover, body.stdfile div#wrap div#infoColumn + div#blftwrapper div#footer a:active, body.stdfile div#wrap div#infoColumn + div#blftwrapper div#footer a:focus {color: #636B78;}
+
+/* Baselinks on folder */
+div#blftwrapper div#baselinks a, div#blftwrapper div#baselinks {color: #4874B3;}
+div#blftwrapper div#baselinks a:hover, div#blftwrapper div#baselinks a:active, div#blftwrapper div#baselinks a:focus {color: #636B78;}
+
+/* Baselinks below folder*/
+div#blftwrapper.Tall div#baselinks a, div#blftwrapper.Tall div#baselinks {color: #4874B3;}
+div#blftwrapper.Tall div#baselinks a:hover, div#blftwrapper.Tall div#baselinks a:active, div#blftwrapper.Tall div#baselinks a:focus {color: #636B78;}
+
+/* ENABLE CHANGING THE CLIPBOARD CLIP ON STDFILE PAGES AND SIGN UP */
+.tc #banner:after, .accesscheck #banner:after, .oe #banner:after, .oesignup #banner:after, .publicform #banner:after, .stdfile #banner:after {
+content: url("../images/bg_clipboardclip.png");
+top: 115px;
+}
+
+/* FIX INABILITY TO HAVE A TRANSPARENT BANNER BY USING LONGER BACKGROUND IMAGES */
+body.menuontop {background-position: 50% -180px;}
+
+/* FIX ERRANT UNDERLINE IN BANNER IMAGE HYPERLINK */
+#banner > a {
+	text-decoration: none;
+}
+
+/* TWEAK NECESSARY TO HAVE EXTERNAL BANNER THE SAME HEIGHT AS INTERNAL BANNER */
+#wrap, #wrap[class]:first-child {margin-top: 120px;}
+#banner{margin-top: -117px;}
+
+body.inside #wrap, body.inside #wrap[class]:first-child {margin-top: 160px;}
+body.inside #banner {margin-top: -192px;}
+
+body.inside.menuontop #wrap, body.inside.menuontop #wrap[class]:first-child {margin-top: 120px;}
+body.inside.menuontop #banner {margin-top: -152px;}
+
+/* ENABLE CHANGING COLOR OF CLASSIC MENU ON SIDE HYPERLINKS */
+/* color of the selected page in the menu */
+.color1 #wrap #menu .selected {color: #474747;}
+.color2 #wrap #menu .selected {color: #0B2F00;}
+.color3 #wrap #menu .selected {color: #3C2859;}
+.color4 #wrap #menu .selected {color: #012923;}
+.color5 #wrap #menu .selected {color: #472D4A;}
+.color6 #wrap #menu .selected {color: #753E07;}
+.color7 #wrap #menu .selected {color: #104373;}
+
+/* ENABLE DIFFERENT LOCALE DROP ARROW COLORS ON PRE AND POST LOGIN SCREENS */
+/* Hide the original image */
+.dropdown img + img {
+    display: none;
+}
+/* Login Screen, default */
+body .dropdown > li:first-child {
+	background: url("../images/select_light.png");
+	background-position: 100% 0;
+	background-repeat: no-repeat;
+	padding-right: 10px;	
+}
+
+/* Pre login paper */
+body[class] .dropdown > li:first-child {
+	background-position: 100% -50px;
+}
+
+/* Post login banner */
+body.inside .dropdown > li:first-child {
+	background-position: 100% -100px;
+}
+
+/* Locale drown down too wide and blocks banner*/
+#wrap #localeswitch.postlogin {
+    position: absolute;
+    right: 13px;
+    width: 200px;
+}
+
+/* BEGIN: Optional Disclaimer DIVs */
+/* Pseudo alerts */
+#Custom_PageDisclaimer #alerts {
+	border-style: solid;
+	border-width: 1px;
+	float: left;
+	width: 100%;
+}					
+#Custom_PageDisclaimer #alerts .loginalert a img.icon, #Custom_PageDisclaimer #alerts .loginalert .head img.icon {
+	height: 32px;
+	left: 10px;
+	position: absolute;
+	top: 10px;
+	width: 32px;
+}
+
+#Custom_PageDisclaimer #alerts .loginalert > a, #Custom_PageDisclaimer #alerts .loginalert > .head {
+	border-top-style: solid;
+	border-top-width: 1px;
+	display: table-cell;
+	font-weight: normal;
+	height: 48px;
+	padding: 2px 0 5px 50px;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+#Custom_PageDisclaimer #alerts .loginalert {
+	float: left;
+}
+#Custom_PageDisclaimer #alerts .loginalert {
+	position: relative;
+}						
+#Custom_PageDisclaimer #alerts > .loginalert:first-child > a, #Custom_PageDisclaimer #alerts > .loginalert:first-child .loginalert:first-child > .head {
+	border-top: medium none;
+}
+
+#Custom_PageDisclaimer #alerts {
+	margin: 15px 30px;
+	width: 705px;
+}						
+#Custom_PageDisclaimer #alerts a{
+	width: 735px;	
+}
+
+body.menuontop #Custom_PageDisclaimer #alerts {
+	margin: 15px 0;
+	width: 770px;
+}					
+body.menuontop #Custom_PageDisclaimer #alerts a {
+	width: 735px;	
+}		
+
+/* Top Proxy Disclaimer */
+#Custom_PageDisclaimer {
+	background-color: #FFFFFF;
+	background-image:        -webkit-gradient(linear,left top,left bottom,color-stop(70%,#FFFFFF),color-stop(100%,#F4F4F4)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,#FFFFFF 70%,#F4F4F4 100%); /* Chrome10+,Safari5.1+ */
+	background-image:     -ms-linear-gradient(top,#FFFFFF 70%,#F4F4F4 100%); /* IE10+ */
+	background-image:         linear-gradient(to bottom,#FFFFFF 70%,#F4F4F4 100%); /* W3C */
+	top: 87px;    /* Adjust this enough to cover up the messaging form but not the title */
+	bottom: -5px; /* Adjust this enough to cover up the message submit buttons, but not the back button */
+	left: 0px;    /* Adjust this value to cover up the buttons and other text message */
+	width: 765px; /* Adjust to fit width of content */
+	position: absolute;
+	z-index: 999;
+	padding-top: 10px;
+}
+					 
+/* Side Proxy Disclaimer */
+body.menuontop #Custom_PageDisclaimer {
+	top: 120px;   /* Adjust this enough to cover up the messaging form but not the title */
+	bottom: -5px; /* Adjust this enough to cover up the message submit buttons, but not the back button */
+	left: 58px;   /* Adjust this value to cover up the buttons and other text message */
+	width: 774px; /* Adjust to fit width of content */
+	background: url("../images/bg_folder_color1.png") repeat scroll -1243px -459px #FFFFFF;
+    background-repeat: no-repeat;
+} 
+
+/* Hide the disclaimer if there is an error on the page */
+div#main p.alert ~ div#Custom_PageDisclaimer {
+    display: none;
+}
+/* END: Optional Disclaimer Divs */
+
+/* Fix IE8 VDT Menu */
+@media \0screen
+{
+    div.actionmenucontainer ul.actionmenu
+        {
+        border: 1px #B1B1B1 solid; /* color comes from actionmenutop.png */
+        border-top: none; /* because it uses actionmenutop.png instead */
+    }
+}
+
+/* Fix IE8 Test result options drop down border and alignment with radio button */
+form[id^="tstDtlsChtGrph"] div.seriessel
+{
+	border: 1px solid #CCCCCC\0;
+}
+form[id^="tstDtlsChtGrph"] div.seriessel label
+{
+	width: auto\0;
+}
+
+/* Fix IE8 Flowsheet extra readings header alignment */
+div#PEF-Table fieldset.reading
+{
+	padding-top: 0px\0;
+}
+
+/* Adjusting the clipboard background on these pages to fit a taller external banner */
+.tc, .accesscheck, .oe, .oesignup, .publicform, .stdfile {
+    background-position: 50% 132px;
+}
+
+.HSQnr {
+  background-position: 50% 0px;
+}
+
+.tc #banner:after, .accesscheck #banner:after, .oe #banner:after, .oesignup #banner:after, .publicform #banner:after, .stdfile #banner:after {
+	top: 132px; 
+}
+
+/* Fix overflow issue with "Dates By Rows" result tables with lots of components */
+.section .tallchart {overflow:auto;}
+
+/* BEGIN: ROI Download Button Tweaks */
+div#wrap div#main div.section div.content table#patientReleased .button span,
+div#wrap div#main div.section div.content table#patientReleased div.downloadButton a
+{
+	color: #FFFFFF;
+}
+/* END: ROI Download Button Tweaks */
+
+/* BEGIN: Fix IE11 PEF Edit/Delete Hyperlink Issue - QAN 2320160 */
+div#pefltdtl div#chart div.chart tr.text td.action.scroll a
+{
+    position: relative;
+    z-index: 1;
+}
+/* END: Fix IE11 PEF Edit/Delete Hyperlink Issue - QAN 2320160 */
+
+/* BEGIN: Workaround for squished photo upload progress animated gif - QAN - 2422202*/
+td.proxyphoto #progbar > img {
+    width: auto;
+}
+/* END: Workaround for squished photo upload progress animated gif - QAN - 2422202*/
+
+/* BEGIN: Add gray border around snail mail background on Login Assist pages */
+body.loginassist div.title {
+    border: 1px solid #dddddd;
+}
+/* END: Add gray border around snail mail background on Login Assist pages */
+
+/* BEGIN: Fix My Conditions Fly out menu in IE8 - QAN 2716298 */
+div#flyoutparent a.flyoutprompt  {
+    padding: 0;
+}
+
+div#flyoutparent a.flyoutprompt span:first-child {
+    display: inline-block;
+    padding: 4px 6px 6px;
+}
+/* END: Fix My Conditions Fly out menu in IE8 - QAN 2716298 */
+
+/* BEGIN: Fix My Conditions Fly out menu in IE8 - QAN 2716298 */
+div#flyoutparent a.flyoutprompt  {
+    padding: 0;
+}
+
+div#flyoutparent a.flyoutprompt span:first-child {
+    display: inline-block;
+    padding: 4px 6px 6px;
+}
+/* END: Fix My Conditions Fly out menu in IE8 - QAN 2716298 */
+
+/* BEGIN: Match upload button on image attachment background color to other buttons */
+div.uploader div.uploaderbutton div#MEDADVICE_ATTACHMENTS_browsebutton.hover
+{
+	background-color: #474747;
+}
+/* END: Match upload button on image attachment background color to other buttons */
+
+/* BEGIN: Improve spacing on search results for current health issues, allergies - QAN 2714598*/
+body.md_webtrol > div#wrap > div#main > form > div.section.search > div.content > table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    width: 100%;
+}
+body.md_webtrol > div#wrap > div#main > form > div.section.search > div.content > table > tbody > tr > td {
+    padding: 8px 10px;
+}
+/* END: Improve spacing on search results for current health issues, allergies - QAN 2714598 */
+
+/* BEGIN: make questionnaire buttons more obvious when clicked */
+span.radiocontainer label.radiolabel:before, input.radio + label:before, input.clearradio + label:before, td.prob label:before {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px #aaa inset;
+    content: " ";
+    display: inline-block;
+    height: 0.85em;
+    line-height: 0.8em;
+    margin: 0 0.3em -0.1em 0;
+    position: relative;
+    width: 0.85em;
+}
+span.radiocontainer label.radiolabel.selected:before, input.radio + label.selected:before, input.clearradio + label.selected:before, td.prob label.selected:before {
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAf0lEQVR42mNgIA8oAPECcjQWAPEHUjULQDX8B+IEUjVeoFTjAnI1biA1cA5ANV6AGoTTBnRJWOCAQtYAl8YEqIIP0PiDif2H4gJ8TnuApHAB1IAPUP4BYgIF2YALSM5VICZgkJ0Jww2khCyy7R/whS6uNAvTmEBqnMIShAKxGgBKgy9cbSeYGwAAAABJRU5ErkJggg==") !important;
+    margin-top: 1px;
+    vertical-align: top;
+}
+
+
+/* Fix Yes/No Widths */
+table.medsurg th.response {
+    width: 20%;
+}
+table.adl th.response {
+    width: 20%;
+}
+
+/* Hide the pseudo-checkbox display on inline labels, such as those used in checkboxes in demographics and insurance update of direct scheduling, and on confidential messaging checkboxes, and on growth charts, and health trends data select */
+div.dataselect input.radio + label:before, li > input.radio + label:before, input.radio + label.inlinelabel:before {
+    display: none;
+}
+
+/* Old version using background image, left for reference
+.section .question label.radio, .section .subsquestion label.radio, .section .unansweredquestion label.radio, .section .unansweredsubsquestion label.radio, .section .famhxtopic label.radio, .section .questiongroup label.radio, .section canvas.graphCanvas, .section .intab label.radio, .intab .radiooptions label.selected, .intab .radiooptions label.radio.selected:hover
+{
+	padding: 1px 25px;
+}
+
+.section .question label.selected, .section .question .label.radio.selected:hover, .section .subsquestion label.selected, .section .subsquestion .label.radio.selected:hover, .section .unansweredquestion label.selected, .section .unansweredquestion .label.radio.selected:hover, .section .unansweredsubsquestion label.selected, .section .unansweredsubsquestion .label.radio.selected:hover, .section .famhxtopic label.selected, .section .famhxtopic .label.radio.selected:hover, .section .questiongroup label.selected, .section .questiongroup .label.radio.selected:hover, .section .intab label.selected {
+    background-image: url("../images/checkmark.png") !important;
+    background-position: 4px center  !important;
+    background-repeat: no-repeat  !important ;
+}
+
+.section .question input.clearradio, .section .questiongroup input.clearradio {
+    margin-left: 0; 
+} */
+/* END: make questionnaire buttons more obvious when clicked */
+/* BEGIN: Mobile app style quicklink icons */
+.quicklinks a img  {
+    border-radius: 4px 4px 4px 4px;
+}
+.quicklinks a img {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.7);
+}
+.quicklinks a img {
+    background-image:url(../images/btngradientlarge.png);
+    background-repeat:repeat-x;
+}
+div.quicklinks a img {
+    padding: 5px;
+}
+div.quicklinks a, div.quicklinks a:hover, div.quicklinks a:active, div.quicklinks a:focus, p.alert.ques {
+    margin: 0;
+    padding:  0;
+    vertical-align: top;
+    width: 16.25%;
+}
+
+div.quicklinks a, div.quicklinks a:hover, div.quicklinks a:active, div.quicklinks a:focus {
+    background-image: none;
+    margin-bottom: 20px;
+}
+ 
+.quicklinks a img {
+    background-color: #344A6B;
+}
+.quicklinks a:hover,
+.quicklinks a:focus, 
+.quicklinks a:hover img,
+.quicklinks a:focus img {
+    background-color: #474747;
+    text-shadow: none;
+}
+
+div.quicklinks a:hover, .quicklinks a:active, .quicklinks a:focus {color: #222222;}
+div.quicklinks a, div.quicklinks h3 {color: #222222;}	  
+
+div.quicklinks a,  div.quicklinks a:hover, .quicklinks a:active, .quicklinks a:focus {
+    background-color: transparent !important;
+    box-shadow: none;
+}
+/* END: Mobile app style quicklink icons */
+/* BEGIN: Hide dot one column on coverages page */
+table#coveragelist colgroup > col:first-child + col, table#coveragelist th:first-child + th, table#coveragelist td:first-child + td
+{
+	display: none;
+}
+/* END: Hide dot one column on coverages page */
+
+
+/* BEGIN CUSTOMER-SPECIFIC CUSTOM CSS  */
+
+#loginErrorMessage
+{
+	margin-top: 40px;
+}

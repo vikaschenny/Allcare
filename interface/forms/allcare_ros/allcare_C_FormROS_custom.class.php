@@ -1,0 +1,79 @@
+<?php
+require_once ($GLOBALS['fileroot'] . "/library/classes/Controller.class.php");
+require_once ($GLOBALS['fileroot'] . "/library/forms.inc");
+require_once("allcare_FormROS_custom.class.php");
+class allcare_C_FormROS1 extends Controller {
+
+	var $template_dir;
+	
+        function allcare_C_FormROS1($template_mod = "general") {
+            parent::Controller();
+           // $returnurl = $GLOBALS['concurrent_layout'] ? 'encounter_top.php' : 'patient_encounter.php';
+            $this->template_mod = $template_mod;
+            $this->template_dir = dirname(__FILE__) . "/templates/allcare_ros/";
+            $this->assign("FORM_ACTION", $GLOBALS['web_root']);
+            $this->assign("DONT_SAVE_LINK",$GLOBALS['webroot'] . "/interface/reports/incomplete_charts.php");
+            //$this->assign("DONT_SAVE_LINK1","window.close();");
+            $this->assign("STYLE", $GLOBALS['style']);
+            //$this->assign("DETAILS_LINK", $GLOBALS['webroot'] . "/interface/forms/allcare_ros/details_page.php");
+            
+        }
+    
+        function default_action1($enc,$pid1,$location,$id1,$provider,$isSingleView,$isFromCharts) {
+           $ros = new allcare_FormROS(0,$pid1,$location,$provider);
+            $this->assign("form",$ros);
+            $this->assign("encounter",$enc);
+            $this->assign("pid",$pid1);
+            $this->assign("id1",$id1);
+            $this->assign("location",$location);
+            $this->assign("isFromCharts",$isFromCharts);
+            $this->assign("isSingleView",$isSingleView);
+            $this->assign("provider",$provider);
+            //$this->assign("form_status",$ros->_form_layout());
+            return $this->fetch($this->template_dir . $this->template_mod . "_new_custom.html");
+	}
+	
+	function view_action1($form_id,$pid1,$location,$provider,$encounter,$isSingleView,$isFromCharts) {
+		
+            if (is_numeric($form_id)) {
+                $ros = new allcare_FormROS($form_id,$pid1,$location,$provider,$encounter,$isSingleView,$isFromCharts);
+            }
+            else {
+                $ros = new allcare_FormROS(0,$pid1,$location,$provider,$encounter,$isSingleView,$isFromCharts);
+            }
+
+            $this->assign("form",$ros);
+            //$this->assign("form_status",$ros->_form_layout());
+            return $this->fetch($this->template_dir . $this->template_mod . "_new_custom.html");
+
+	}
+	
+	function default_action_process1() {
+		if ($_POST['process'] != "true"){
+			return;
+		}
+		$this->allcareros = new allcare_FormROS($_POST['id1'],$_POST['pid2']);//print_r($_POST);
+		 //print_r($this->allcareros);
+		parent::populate_object($this->allcareros);
+		$this->allcareros->persist();
+               
+                if($_POST['encounter']!=''){
+                    $encounter=$_POST['encounter'];
+                }else if($_POST['encounter1']!=''){
+                     $encounter=$_POST['encounter1'];
+                }
+                if ($_POST['encounter'] == "" && $_POST['encounter1'] == "") {
+			//$_POST['encounter'] = date("Ymd");
+                        $encounter = date("Ymd");
+		}
+		if($_POST['id']==0)
+		{
+			addForm($encounter, "Allcare Review Of Systems", $this->allcareros->id, "allcare_ros", $_POST['pid2'], $_SESSION['userauthorized']);
+			$_POST['process'] = "";
+                       
+		}
+		return;
+	}
+    
+}
+?>

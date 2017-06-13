@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Powered by <?php echo  (F3::get('ESCAPE')?F3::htmlencode(($_VERSION=F3::get('VERSION'))):($_VERSION=F3::get('VERSION'))) ; ?></title>
+    <style type="text/css">
+        <?php echo  Web::minify('templates/',array('style.css'),FALSE) ; ?>
+    </style>
+</head>
+<body>
+<h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample17</h3>
+
+<div class='samplecontent' style="padding:10px;">
+    <span class="description"><i>This sample will show how to upload a file into the storage and compress it into zip archive using PHP SDK</i></span> <br/>
+    <br />
+    <span class="documentation"><a href="/docs/sample17.html">Docs for this sample</a></span>
+    <br />
+    <br/><p>You entered:
+    <p>ClientID = <?php echo (F3::get('ESCAPE')?F3::htmlencode(($_userId=F3::get('userId'))):($_userId=F3::get('userId'))); ?>
+    <p>PrivateKey = <?php echo (F3::get('ESCAPE')?F3::htmlencode(($_privateKey=F3::get('privateKey'))):($_privateKey=F3::get('privateKey'))); ?>
+    <p><span style="color: red"><?php echo (F3::get('ESCAPE')?F3::htmlencode(($_error=F3::get('error'))):($_error=F3::get('error'))); ?></span>
+        <br/>
+    <div id="requestForm" style="padding:20px; border:1px solid black;">
+        <p>Enter data for request and press "Make request" button</p>
+        <form action="sample17" method = "post" enctype = 'multipart/form-data'>
+            <label for='clientId'>GroupDocs ClientID</label>
+            <br />
+            <input type='text' name='clientId' id="clientId" value="<?php echo $_userId; ?>" />
+            <br />
+            <label for='privateKey'>GroupDocs PrivateKey</label>
+            <br />
+            <input type='text' name='privateKey' id="privateKey" value="<?php echo $_privateKey; ?>" />
+            <br />
+            <input type="radio" name="sourse" value="local" id="localField" onClick="display('local');" checked>Local file </input>
+            <br />
+            <input type="radio" name="sourse" value="url" id="urlField" onClick="display('url');" >From URL </input>
+            <br />
+            <br />
+            <label for='file' id="file">File</label>
+            <br />
+            <input type='file' name='file' id="fileField" />
+
+            <label for='urlField' style="display:none;" id="url">File URL</label>
+            <br />
+            <input type='text' name='url'  value="" id="urlField" style="display:none;" />
+            <br /><br />
+            <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+            <br />
+            <input type ="text" name="basePath" id="basePath" />
+            <br />
+            <input type='submit' value='Upload'/>
+        </form>
+    </div>
+    <div  style="padding:20px; border:1px solid black;">
+        <p>Results:</p>
+        <span style="color: green"><?php echo  (F3::get('ESCAPE')?F3::htmlencode(($_message=F3::get('message'))):($_message=F3::get('message'))) ; ?></span>
+    </div>
+</div>
+
+ Choose another one sample:
+<div style="padding:10px;">
+  
+  <ul>
+        <li> <a href="sample01">Sample01 - How to login to GroupDocs using the API</a></li>
+        <li> <a href="sample02">Sample02 - How to list files within GroupDocs Storage using the Storage API</a></li>
+        <li> <a href="sample03">Sample03 - How to upload a file to GroupDocs using the Storage API</a></li>
+        <li> <a href="sample04">Sample04 - How to download a file from GroupDocs Storage using the Storage API</a></li>
+        <li> <a href="sample05">Sample05 - How to copy / move a file using the GroupDocs Storage API</a></li>
+        <li> <a href="sample06">Sample06 - How to add a Signature to a document in GroupDocs Signature</a></li>
+        <li> <a href="sample07">Sample07 - How to create a list of thumbnails for a document</a></li>
+        <li> <a href="sample08">Sample08 - How to return a URL representing a single page of a Document</a></li>
+        <li> <a href="sample09">Sample09 - how to generate an embedded Viewer/Annotation URL for a Document</a></li>
+        <li> <a href="sample10">Sample10 - How to share a document to other users</a></li>
+        <li> <a href="sample11">Sample11 - How programmatically create and post an annotation into document. How to delete the annotation</a></li>
+        <li> <a href="sample12">Sample12 - How to list all annotations from document</a></li>
+        <li> <a href="sample13">Sample13 - How to add collaborator to doc with annotations</a></li>
+        <li> <a href="sample14">Sample14 - How to check the list of shares for a folder</a></li>
+        <li> <a href="sample15">Sample15 - How to check the number of document's views</a></li>
+        <li> <a href="sample16">Sample16 - How to insert Assembly questionary into webpage</a></li>
+        <li> <a href="sample17">Sample17 - How to upload a file into the storage and compress it into zip archive</a></li>
+        <li> <a href="sample18">Sample18 - How to convert Doc to Docx, Docx to Doc, Docx to PDF and PPT to PDF</a></li>
+        <li> <a href="sample19">Sample19 - How to Compare documents using PHP SDK</a></li>
+        <li> <a href="sample20">Sample20 - How to Get Compare Change list for document using PHP SDK</a></li>
+        <li> <a href="sample21">Sample21 - How to Create and Upload Envelop to GroupDocs account using PHP SDK</a></li>
+        <li> <a href="sample22">Sample22 - This sample will show how create or update user and add him to collaborators using PHP SDK</a></li>
+        <li> <a href="sample23">Sample23 - How to View Document pages as images using PHP SDK</a></li>
+        <li> <a href="sample24">Sample24 - How to use StorageApi to upload file from URL to GroupDocs account using PHP SDK</a></li>
+        <li> <a href="sample25">Sample25 - How to  merge/assemble data fields in docx file with data source and get result file as PDF file using PHP SDK</a></li>
+        <li> <a href="sample26">Sample26 - How to use login method in the API</a></li>
+        <li> <a href="sample27">Sample27 - How to create your own questionary using forms and show the result document using PHP SDK</a></li>
+        <li> <a href="sample28">Sample28 - How to delete all annotations from document</a></li>
+        <li> <a href="sample29">Sample29 - How to use Filepicker.io to upload document and get it's URL</a></li>
+        <li> <a href="sample30">Sample30 - How to delete file from GroupDocs Storage using PHP SDK</a></li>
+        <li> <a href="sample31">Sample31 - How to dinamically create Signature Form using data from HTML form</a></li>
+        <li> <a href="sample32">Sample32 - How to create signature form, publish it and configure notification when it was signed</a></li>
+        <li> <a href="sample33">Sample33 - How to convert several HTML documents to PDF and merge them to one document</a></li>
+        <li> <a href="sample34">Sample34 - How to create folder in the GroupDocs account</a></li>
+        <li> <a href="sample35">Sample35 - How to create assembly from document and merge fields</a></li>
+        <li> <a href="sample36">Sample36 - How to download document after sign envelope using PHP SDK</a></li>
+        <li> <a href="sample37">Sample37 - How to Create and Upload Envelop to GroupDocs account and get signed document using PHP SDK</a></li>
+        <li> <a href="sample38">Sample38 - How to create new user and add him as collaborator to doc with annotations</a></li>
+        <li> <a href="sample39">Sample39 - How to add a Signature to a document and redirect after signing with GroupDocs widget</a></li>
+        <li> <a href="sample40">Sample40 - How to set callback for signature form and re-direct when it was signed</a></li>
+        <li> <a href="sample41">Sample41 - How to set callback for Annotation and manage user rights using PHP SDK</a></li>
+        <li> <a href="sample42">Sample42 - How to download document with annotations using PHP SDK</a></li>
+        <li> <a href="sample43">Sample43 - How to add numeration in the doc file using PHP SDK</a></li>
+        <li> <a href="sample44">Sample44 - How to assemble document and add multiple Signatures and Signers to a document</a></li>
+        
+  </ul>
+</div>
+  <script type="text/javascript">
+        function display(_element_id) {
+
+            if (_element_id == "local") {
+                var element1 = document.getElementById("file");
+                var element2 = document.getElementById("fileField");
+                var element3 = document.getElementById("url");
+                var element4 = document.getElementById("urlField");
+                element1.style.display = "inline";
+                element2.style.display = "inline";
+                element3.style.display = "none";
+                element4.style.display = "none";
+
+            }
+
+            if (_element_id == "url") {
+                var element1 = document.getElementById("url");
+                var element2 = document.getElementById("urlField");
+                var element3 = document.getElementById("file");
+                var element4 = document.getElementById("fileField");
+                element1.style.display = "inline";
+                element2.style.display = "inline";
+                element3.style.display = "none";
+                element4.style.display = "none";
+            }
+           
+        }
+</script>
+</body>
+</html>

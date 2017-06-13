@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140219*0329*^*00501*023213369*0*T*:~GS*HC**zz*20140219*0329*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140219*0329*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P********16~NM1*IL*1******MI~NM1*PR*2*TESTINSURANCE1*****PI~N3*GANGAPUR LAYOUT~N4~HL*3*2*23*0~PAT~NM1*QC*1*TEST*TESTPATIENT1~N3~N4**TX~DMG*D8*19900109*M~CLM*1-12*1400.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:9914*BF:9911*BF:9921~LX*1~SV1*HC:99211*800.00*UN*2***1~DTP*472*D8*20140219~NTE*ADD*TEST~LX*2~SV1*HC:99212*600.00*UN*1***2~DTP*472*D8*20140219~NTE*ADD*TEST~SE*34*0001~GE*1*1~IEA*1*023213369~
+                                        TESTINSURANCE1
+                                        
+                                        GANGAPUR LAYOUT
+                                         
+
+
+                                      X          
+
+TEST, TESTPATIENT1            01 09 1990 X       , 
+
+                                              X  
+
+                         TX       X                                      
+
+              757 6392609         X                                 
+
+                                                 
+
+                                        X           00 00 0000
+
+                                        X        
+
+                                        X        
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+
+
+                                                        X
+
+  991 4                      992 1                           
+
+  991 1                                          
+
+
+                        TEST
+02 19 14 02 19 14 12    99211               1      800 00 2        
+                        TEST
+02 19 14 02 19 14 12    99212               2      600 00 1        
+
+
+
+
+
+
+
+
+
+                  X   1-12           X              1400 00      0 00  1400 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

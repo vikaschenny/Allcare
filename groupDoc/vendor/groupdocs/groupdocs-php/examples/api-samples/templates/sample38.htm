@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Powered by {{ @VERSION }}</title>
+    <style type="text/css">
+        {{ Web::minify('templates/',array('style.css'),FALSE) }}
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample38</h3>
+
+<div class='samplecontent' style="padding:10px;">
+    <span class="description"><i>This sample will show how to create new user and add him as collaborator to doc with annotations using PHP SDK</i></span> <br/>
+    <br />
+    <span class="documentation"><a href="/docs/sample38.html">Docs for this sample</a></span>
+    <br />
+    <br/><p>You entered:
+    <p>ClientID = {{@userId}}
+    <p>PrivateKey = {{@privateKey}}
+    <p>FileId = {{@fileId}}
+    <p>Email = {{@email}}
+    <p>First name = {{@firstName}}
+    <p>Last name = {{@lastName}}
+    <p><span style="color: red">{{@error}}</span>
+    <div id="requestForm" style="padding:20px; border:1px solid black;">
+        <p> Enter data for request and press "Make request" button </p>
+        <form action="sample38" method = "post" enctype = 'multipart/form-data'>
+            <label for='clientId'>GroupDocs ClientID</label>
+            <br />
+            <input type='text' name='clientId' id="clientId" value="{{@userId}}" />
+            <br />
+            <label for='privateKey'>GroupDocs PrivateKey</label>
+            <br />
+            <input type='text' name='privateKey' id="privateKey" value="{{@privateKey}}" />
+            <br />
+            <input type="radio" name="sourse" value="guid" id="id" onClick="display('guid');" checked>File ID (GUID) </input>
+            <br />
+            <input type="radio" name="sourse" value="local" id="localField" onClick="display('local');" >Upload local file </input>
+            <br />
+            <input type="radio" name="sourse" value="url" id="urlRadio" onClick="display('url');" >Upload file from URL </input>
+            <br />
+            <br />
+            <label for='guidField' id="guid">GroupDocs fileID</label>
+            <br />
+            <input type='text' name='fileId' id="guidField" value="{{@fileId}}" />
+            
+            <label for='file' id="file" style="display:none;">Local file</label>
+            <br />
+            <input type='file' name='file' id="fileField" style="display:none;" />
+
+            <label for='urlField' style="display:none;" id="url">File URL</label>
+            <br />
+            <input type='text' name='url'  value="" id="urlField" style="display:none;" />
+            <br />
+            <label>User email</label>
+            <br />
+            <input type='text' name='email'  value="" />
+            <br />
+            <br />
+            <label>User first name</label>
+            <br />
+            <input type='text' name='firstName'  value="" />
+            <br />
+            <label>User last name</label>
+            <br />
+            <input type='text' name='lastName'  value="" />
+            <br />
+            <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+            <br />
+            <input type ="text" name="basePath" id="basePath" />
+            <br />
+            <input type='submit' value='Make Request'/>
+        </form>
+    </div>
+    <div  style="padding:20px; border:1px solid black;">
+        <p> Results: </p>
+            <repeat group="{{ @result->collaborators }}" value="{{ @item }}">
+                <span style="color: green">New collaborations: {{ @item->primary_email }}</span>
+            </repeat>
+            <iframe src="{{@url}}" width = '800' height = '1000'></iframe>
+        </p>
+    </div>
+</div>
+
+ <include href="links.htm" />
+<script type="text/javascript">
+    function display(_element_id) {
+
+             if (_element_id == "guid") {
+                 var element1 = document.getElementById("file");
+                 var element2 = document.getElementById("fileField");
+                 var element3 = document.getElementById("url");
+                 var element4 = document.getElementById("urlField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "none";
+                 element2.style.display = "none";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "inline";
+                 element6.style.display = "inline";
+
+             }
+
+             if (_element_id == "local") {
+                 var element1 = document.getElementById("file");
+                 var element2 = document.getElementById("fileField");
+                 var element3 = document.getElementById("url");
+                 var element4 = document.getElementById("urlField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "inline";
+                 element2.style.display = "inline";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+
+             }
+
+             if (_element_id == "url") {
+                 var element1 = document.getElementById("url");
+                 var element2 = document.getElementById("urlField");
+                 var element3 = document.getElementById("file");
+                 var element4 = document.getElementById("fileField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "inline";
+                 element2.style.display = "inline";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+             }
+
+         }
+</script>
+</body>
+</html>

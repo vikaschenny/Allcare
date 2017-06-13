@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Powered by {{ @VERSION }}</title>
+	<style type="text/css">
+		{{ Web::minify('templates/',array('style.css'),FALSE) }}
+	</style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://dev-apps.groupdocs.com/content/signaturewidgets/groupdocs.sign.js"></script>
+</head>
+<body>
+<h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample6</h3>
+
+<div class='samplecontent' style="padding:10px;">
+   <span class="description"><i>This sample will show how to add provided signature to provided document using PHP SDK. Signed file will be uploaded to GroupDocs account and its GUID will be returned and embed into webpage with GroupDocs Ebedded Viewer.</i></span> <br/>
+    <br />
+    <span class="documentation"><a href="/docs/sample06.html">Docs for this sample</a></span>
+    <br />
+   <div id="files_form">
+    <form action='sample06' method="post" enctype = 'multipart/form-data'>
+        <br />
+        <label for='clientId'>GroupDocs ClientID</label>
+        <br />
+        <input type='text' id='clientId' name='clientId' />
+        <br />
+        <label for='privateKey'>GroupDocs PrivateKey</label>
+        <br />
+        <input type='text' id='privateKey' name='privateKey' />
+        <br />
+        <label for='fiDocument'>Document to sign</label>
+        <br />
+        <input type='file' id='fiDocument' name="fiDocument" />
+        <br />
+        <label for='fiSignature'>Signature</label>
+        <br />
+        <input type='file' id='fiSignature' name="fiSignature" />
+        <br />
+        <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+        <br />
+        <input type ="text" name="basePath" id="basePath" />
+        <br />
+        <input type='submit' value='Sign' id="btnLoad" />
+        <br />
+        <br />
+    </form>
+    </div>
+    <div  style="padding:20px; border:1px solid black;">
+        <p> Results:</p>
+        {{ @error }}
+        <iframe src="{{@iframe}}" frameborder="0" width="600" height="500"></iframe>
+        
+    </div>
+</div>
+
+ <include href="links.htm" />
+
+</body>
+</html>

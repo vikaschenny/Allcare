@@ -1,0 +1,62 @@
+ISA*00*          *00*          *ZZ*               *ZZ*               *140613*0439*^*00501*023377539*0*T*:~GS*HC***20140613*0439*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140613*0439*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*RANJITA X12*****46~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P********16~NM1*IL*1******MI*7~NM1*PR*2*RANJITA INSURANCE*****PI~N3~N4~HL*3*2*23*0~PAT~NM1*QC*1*GULVINDAL*SANTOSHI~N3*2696 BICKER ST 2225~N4*DALLAS*TX*75212~DMG*D8*20010614*F~CLM*5167-257*15000.00***12:B:1*Y*A*Y*Y~AMT*F5*5000~REF*X4*123456789~HI*BK:30010*BF:30016~NM1*DN*1*1*REFERINGPROVIDER****XX~LX*1~SV1*HC:99202*5000.00*UN*1***1~DTP*472*D8*20140613~LX*2~SV1*HC:99213*10000.00*UN*1***2~DTP*472*D8*20140613~SE*34*0001~GE*1*1~IEA*1*023377539~
+                                        RANJITA INSURANCE
+                                        
+                                        
+                                         
+
+
+                                      X          7
+
+GULVINDAL, SANTOSHI           06 14 2001      X  , 
+
+2696 BICKER ST 2225                           X  2696 BICKER ST 2225
+
+DALLAS                   TX       X                                      
+
+75212                             X                                 
+
+                                                 
+
+                                        X           06 14 2001            X
+
+                                        X        
+
+                                        X        X
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+1, REFERINGPROVIDER
+
+                                                        X
+
+  300 10                                                     
+
+  300 16                                         
+
+
+                        
+06 13 14 06 13 14 12    99202               1     5000 00 1        
+                        
+06 13 14 06 13 14 12    99213               2    10000 00 1        
+
+
+
+
+
+
+
+
+
+                  X   5167-257       X             15000 00   5000 00 10000 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

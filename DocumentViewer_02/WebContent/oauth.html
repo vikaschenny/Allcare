@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Google Web Application</title>
+		<script type="text/javascript" src="ExtJS/ext-all.js"></script>
+        <link rel="stylesheet" type="text/css" href="ExtJS/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="ExtJS/chooser.css" />
+		<script type="text/javascript">
+			function formSubmit()
+			{
+				document.getElementById("login").submit();
+			}
+		</script>
+	</head>
+	<body onload="formSubmit()">
+    <div style="display:none;">
+		<form id="login" action="https://accounts.google.com/o/oauth2/auth" method="GET" >
+			<br />response_type: <input type="text" name="response_type" value="code">
+			<br />client_id: <input type="text" name="client_id" value="298984030540.apps.googleusercontent.com.apps.googleusercontent.com" />
+			<!-- br />redirect_uri:<input type="text" name="redirect_uri" value="http://ec2-23-21-48-239.compute-1.amazonaws.com/DocumentViewer_02/drive?fileID=ALL" /-->
+			<br />redirect_uri:<input type="text" name="redirect_uri" value="http://localhost:8080/DocumentViewer_02/drive?fileID=ALL" />
+			<br />scope: <input type="text" name="scope" value="https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" /><!-- https://www.googleapis.com/auth/drive  -->
+			<br />access_type:<input type="text" name="access_type" value="offline" />
+			<br />approval_prompt:<input type="text" name="approval_prompt" value="force" /> 
+			<br />state: <input type="text" name="state" value="/login">
+			
+			<input type="submit" value="Submit" />
+		</form>
+   </div>
+	</body>
+</html>

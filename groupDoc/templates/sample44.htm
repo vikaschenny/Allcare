@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Powered by {{ @VERSION }}</title>
+        <style type="text/css">
+            {{ Web::minify('templates/',array('style.css'),FALSE) }}
+        </style>
+    </head>
+    <body>
+        <h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample44</h3>
+
+        <div class='samplecontent' style="padding:10px;">
+            <span class="description"><i>This sample will show how to assemble document and add multiple Signatures and Signers to a document</i></span>
+            <br />
+            <span class="documentation"><a href="/docs/sample44.html">Docs for this sample</a></span>
+            <br />
+            <br/><p>You entered:
+            <p>ClientID = {{@userId}}
+            <p>PrivateKey = {{@privateKey}}
+            <p><span style="color: red">{{@error}}</span>
+            <div id="requestForm" style="padding:20px; border:1px solid black;">
+                <p> Enter data for request and press "Make request" button </p>
+                <form action="sample44" method = "post" enctype = 'multipart/form-data'>
+                    <br />
+                    <label for='clientId'>GroupDocs ClientID</label>
+                    <br />
+                    <input type='text' name='clientId' id="clientId" value="" />
+                    <br />
+                    <label for='privateKey'>GroupDocs PrivateKey</label>
+                    <br />
+                    <input type='text' name='privateKey' id="privateKey" value="" />
+                    <br />
+                    <div style="background-color: #e5e5e5; border: 3px double gray; width: 700px; padding: 3px; font-size: 10pt;">
+                        <label for='firstName'>Signer name?</label>
+                        <br />
+                        <input type='text' name='firstName' value="" />
+                        <br />
+                        <label for="gender">What is signer gender?</label>
+                        <input type="checkbox" name="gender" value="Man" /><label for="gender">Man</label>
+                        <input type="checkbox" name="gender" value="Woman" /><label for="gender">Woman</label>
+                    </div>
+                    <label for='firstEmail' id="emailLabel">First signer email</label>
+                    <br />
+                    <input type='text' name='firstEmail' id="firstEmail" value="" />
+                    <br />
+                    <label for='secondEmail' id="lastNameLabel">Second signer email</label>
+                    <br />
+                    <input type='text' name='secondEmail' id="secondEmail" value="" />
+                    <br />
+                    <br />
+                    <label for="lastName">Signer last name <span class="optional">(Optional)</span></label>
+                    <br />
+                    <input type='text' name='lastName' id="lastName" value="" />
+                    <br />
+                    <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+                    <br />
+                    <input type="text" name="basePath" id="basePath" />
+                    <br />
+                    <label for='file' id="file">Upload local file (<span class="testfile"><a href='/templates/sample44_test_file.docx'>Please use this document for testing</a></span>)</label>
+                    <br />
+                    <input type='file' name='file' id="fileField" />
+                    <br />
+                    <input type='submit' id='btnLoad' value='Make request' />
+                </form>
+            </div>
+            <div  style="padding:20px; border:1px solid black;">
+                <check if="{{ @url1 !='' }}">
+                    <true>
+                        <div>
+                            <span style="color: green">Document for first signer</span>
+                            <iframe id='downloadframe' src="{{@url1}}" width = '800' height = '1000'></iframe>
+                        </div>
+                        <div>
+                            <span style="color: green">Document for second signer</span>
+                            <iframe id='downloadframe' src="{{@url2}}" width = '800' height = '1000'></iframe>
+                        </div>
+                    </true>
+                </check>
+            </div>
+            <br/>
+        </div>
+
+    <include href="links.htm" />
+
+</body>
+</html>

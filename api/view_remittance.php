@@ -1,0 +1,72 @@
+<?php
+// Initialize cURL
+$curl = curl_init();
+
+// Define URL where the form resides
+
+//$posted = "CustID=101247&DocDate=02/04/2016&PatAcctNum=615&Reqtype=PS&Version=1.0";
+//$posted = "CustID=101247&DocDate=02/04/2016&PatAcctNum=5797&Reqtype=EOB&Version=1.0";
+$posted = "claimnum=6027-10026&CustID=101246&dos=2016-01-11&reqtype=EOB&Exact=true&version=1.0";
+// remove delimiters "&" and "="
+$exploded_string = explode("&", $posted);
+
+$posted_array = array();
+
+foreach($exploded_string as $ekey => $evalue){
+    $value = explode("=", $evalue);
+    $posted_array[trim($value[0])] = $value[1];
+}
+
+$sorted_array = array();
+ 
+//remove empty key/value pairs
+$filterd_array   = array_filter($posted_array);
+
+// sort key and value 
+ksort($filterd_array,SORT_STRING | SORT_FLAG_CASE);
+
+
+$sorted_string = '';
+foreach($filterd_array as $skey => $salue){
+    $sorted_string .= $skey.$salue;
+}
+
+// base64_encode for signature creation
+$encoded_signature = base64_encode(hash_hmac('sha1', $sorted_string, 'f6sdnmV1ItrAoOzlR1QZRSGSnGng5HV0KQZtSR4U',true));
+$form_url='https://www.zirmed.com/Services/ServiceHandler.ashx?'.$posted.'&Signature='.$encoded_signature;
+//The computed signature, with the "Signature" key, is added to the original POST data, to form the following POST data string:
+// This is the data to POST to the form. The KEY of the array is the name of the field. The value is the value posted.
+//$data_to_post = array();
+//$data_to_post['claimnum	'] = '5703-9852';
+//$data_to_post['CustID'] = '101246';
+//$data_to_post['dos' ]= '2016-01-05'; 
+//$data_to_post['reqtype'] = 'clm';
+//$data_to_post['version'] = '1.0';
+//$data_to_post['Signature'] = 'N4pZQevC5OCZIw4ckI4NyN5+l6o=';
+
+//
+//// Set the options
+curl_setopt($curl,CURLOPT_URL, $form_url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_BINARYTRANSFER, 1);
+//// This sets the number of fields to post
+//curl_setopt($curl,CURLOPT_POST, sizeof($data_to_post));
+
+//
+//// This is the fields to post in the form of an array.
+//curl_setopt($curl,CURLOPT_POSTFIELDS, $data_to_post);
+//
+////execute the post
+$result = curl_exec($curl);
+//header('Cache-Control: public'); 
+header('Content-type: application/pdf');
+//header('Content-Disposition: attachment; filename="new.pdf"');
+//header('Content-Length: '.strlen($result));
+echo $result;
+//
+////close the connection
+curl_close($curl);
+
+?>
+
+    

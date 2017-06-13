@@ -1,0 +1,282 @@
+<html>
+<head>
+    <title>Documentation of Face-to-Face Encounter</title>
+    <table><tr><td><p align='left'><img id="img_sign" src='{logo}' width="200" height="93" /></p> </td>
+                <td><p align='center'>2925 Skyway Circle North, Irving, TX 75038, Tel: 972 675 7313  Fax : 972 675 7310   <br>
+                 www.texashousecalls.com    email: hhsupport@texashousecalls.com
+            </p></td></tr></table><br>
+
+<style type="text/css">
+  /*  .under {
+ border-style: solid;
+ border-width: 0 0 1px 0;
+ border-color: #999999;
+}*/
+.underline {
+ line-height: 200%;
+ text-decoration:underline;
+}
+p:after {
+   text-decoration:underline;
+}
+.f2ftable 
+{
+font-family:Arial;
+font-size:11pt;
+}
+h2{
+font-family:Times New Roman;
+font-size:16pt;
+}
+</style>
+<style type='text/css'>
+@media print {
+   thead {display: table-header-group;}
+}
+@page  {
+    size: letter portrait;
+    @top-left { content: "PSKPSK"; }
+}
+</style>
+<style type='text/css'>    
+.tab { list-style: none; }
+.tab li { display: inline; }
+.tab li  { color: black; float: left; display: block; padding: 4px 10px; margin-left: -1px; position: relative; left: 1px; background: white; text-decoration: none; }
+
+.group1:after{ visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+ul.tab.group1 {margin-top:0px !important;margin-bottom:0px !important; padding-left:0px;}
+.box-wrap { position: relative; min-height: auto; }
+.tabbed-area div div { background: white; padding: 20px; min-height:auto;  top: -1px; left: 0; width: auto; }
+.tabbed-area div div, .tab li  { border: 1px solid #ccc;}
+.tabbed-area .tab li  { border: 1px solid #ccc; -moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px; -moz-border-radius-topright: 5px;-webkit-border-top-right-radius: 5px;}
+</style>
+<style>
+    .fake-underline {
+
+        border-bottom: solid 1px black;
+    }
+    del {
+        text-decoration: line-through;
+    }
+    del span {
+        color: red;
+    }
+         </style>  
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<!--    
+<div id="divF2FPrintContainer" style="padding:10px;border:1px solid #000">
+    <table>
+        <tr>
+            <td><b>{date_stamp_updated}</b></td>
+            <td>
+            <label>{header1}</label>
+            </td>
+        </tr>
+    </table>
+</div> -->
+ 
+<body>
+<div id="divF2FPrintContainer" style="padding:10px;border:1px solid #000">
+    <center><h2>Documentation of Face-to-Face Encounter</h2></center>
+    <table class="f2ftable">
+     <tr>
+            <td>
+           {patient_name and identification}
+            </td>
+
+            <td class="under"><b>{identification}</b>
+             </td></tr>
+    </table>
+     <p class="f2ftable">I certify that this patient is under my care and that I, or a nurse practitioner or physician’s 
+    assistant working with me, had a face-to-face encounter that meets the physician face-to-face 
+    encounter requirements with this patient on: (insert date that visit occurred)
+    </p>
+    <p class="f2ftable"><b>{date1}</b></p>
+    <table class="f2ftable">
+        <tr>
+            <td>{1}</td>
+            <td>
+                <label><b>{f2f_mobility}</b></label>
+            </td>
+        </tr>
+    </table> 
+    <table class="f2ftable">
+        <tr>
+        <td>{2}</td>
+        <td>
+            <label><b>{f2f_hh}</b></label>
+        </td></tr>
+    </table>
+    <table class="f2ftable">
+        <tr>
+        <td>{3}</td>
+        <td>       
+            <label><b>{f2f_pcp}</b></label>
+        </td></tr>
+    </table>
+    <table class="f2ftable">
+    <tr>
+    <td>{4}</td>       
+    <td>
+        <label><b>{f2f_visit}</b></label>
+    </td>
+    </tr>
+    </table>
+    <table class="f2ftable">
+        <tr>
+        <td>The encounter with the patient was in whole or in part for the following medical condition which is the 
+            primary reason for home health care and<b> HOW LONG:</b> (List medical condition)<br>
+        </td></tr>
+        <tr><td>
+                <!--<b  class="under"> {diagnosis_id}</b>-->
+                <b>{f2f_med}</b>
+        </td></tr>
+        <tr><td class="under">    
+              <label><b>{f2f_addl_med}</b></label>
+      </td></tr>
+    </table>
+    <!--<table>
+    <tr>
+    <td>{5}</td>
+    <td>        
+        <label><b>{f2f_duration}</b></label>
+     </td></tr>
+    </table>
+    <table>
+    <tr>
+    <td>{6}</td>         
+    <td>
+        <label><b>{f2f_hhagency}</b></label>
+    </td>         
+    </tr>
+    </table>-->
+     <!--<table>
+    <tr>
+    <td>{7} 
+    </td></tr>
+    <tr><td class="under">
+            <label><b>{f2f_med}</b></label>
+    </td></tr>
+    </table>-->
+    
+    <!--<table>
+      <tr><td>{8}</td></tr>
+      <tr><td class="under">    
+              <label><b>{f2f_addl_med}</b></label>
+      </td></tr>
+   </table> -->
+    <p class="f2ftable">I certify that, based on my findings, the following services are medically necessary home health 
+    services:
+    </p> 
+    <table class="f2ftable">
+        <tr><td>{9}</td>
+        <td>
+                <label><b>{f2f_nursing}</b></label>
+        </td></tr> 
+   </table>
+   <table class="f2ftable">
+        <tr><td>{10}</td>
+        <td>
+                <label><b>{f2f_pt}</b></label>
+        </td></tr> 
+  </table> 
+  <table  class="f2ftable">
+    <tr><td>{11}</td>
+    <td>
+            <label><b>{f2f_ot}</b></label>
+    </td></tr>
+  </table>
+  <table class="f2ftable">   
+    <tr><td>{12}</td>
+     <td>
+             <label><b>{f2f_sp}</b></label>
+     </td></tr>
+  </table>
+ <table class="f2ftable">
+    <tr><td>To provide the following care/treatments: (Required only when the physician completing 
+                the face to face encounter documentation is different than the physician completing the plan of care):</td></tr><br><br>
+    <tr><td class="under"><b>{f2f_care}</b></td></tr>
+ </table>
+ <table class="f2ftable">
+    <tr><td>My clinical findings support the need for the above services because:</td></tr><br><br>
+    <tr><td class="under"><b>{f2f_findings}</b></td></tr>
+ </table>
+ <table class="f2ftable">
+    <tr><td>Further, I certify that my clinical findings support that this patient is homebound 
+                (i.e. absences from home require considerable and taxing effort and are for medical reasons or religious 
+                services or infrequently or of short duration when for other reasons) because</td></tr><br><br>
+    <tr><td class="under"><b>{f2f_cert}</b></td></tr>
+ </table>
+  <!--<table class="f2ftable">
+  <tr><td>
+    {13}
+    </td></tr>
+    <tr><td class="under">
+            <label><b>{f2f_care}</b></label>
+   </td></tr>
+  </table> -->
+   <!--<table>
+     <tr><td>
+        <b>{13}
+     </b></td></tr>
+     <tr><td class="under">
+         {f2f_findings}
+     </td></tr>
+   </table> -->
+  <!-- <table class="f2ftable">
+      <tr><td>{15}</td></tr>
+      <tr><td class="under">
+              <b>{f2f_cert}</b>
+      </td></tr>
+   </table>-->
+   <table class="f2ftable">
+     <tr><td>Nurse Practioner: {electronically_signed_by}  <b>{np_name} {np_cred}</b> On  <b>{f2f_np_on}</b></td></tr>
+   </table>
+   <table class="f2ftable">
+     <tr><td>NP Signature:</td></tr>
+     <tr><td>
+             <img id="img_sign" src='{f2f_np}' /> <br>
+      </td></tr>
+   </table> 
+   <!--<table>
+     <tr><td>{17}</td>
+     <td class="under">
+      <b>{f2f_np_on}</b>
+      </td></tr>
+   </table> -->
+    <table class="f2ftable">
+     <tr><td>Physician: {electronically_signed_by} <b>{ps_name} {ps_cred}</b>  On <b>{f2f_ps_on}</b></td></tr>
+    </table> 
+    <table class="f2ftable">
+     <tr><td>Physician Signature:</td></tr>
+     <tr><td>
+      <img id="img_sign" src='{f2f_ps}' /> <br>
+         </td></tr>
+     <tr><td></td></tr>
+   </table> 
+    <!-- <table>
+     <tr><td>{19}</td>
+     <td>
+             <b>{f2f_ps_on}</b>
+      </td></tr>
+   </table> -->
+   <!--<table>
+     <tr><td>{printed_name}</td>
+     <td>
+             <b>{ps_name}</b>
+      </td></tr>
+   </table> 
+       <table>
+     <tr><td>{date_of_sign}</td>
+     <td>
+             <b>{date_sign}</b>
+      </td></tr>
+   </table> -->
+  
+</div>  
+<script type="text/javascript">   
+window.print();
+</script>
+</body>
+</html>

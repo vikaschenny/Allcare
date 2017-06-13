@@ -1,0 +1,734 @@
+<html>
+<head>
+<link rel=stylesheet href="/interface/themes/style_purple.css" type="text/css">
+<style type="text/css">
+ body       { font-family:sans-serif; font-size:8pt; font-weight:normal }
+ .dehead    { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:bold }
+ .olddetail { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .newdetail { color:#00dd00; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .errdetail { color:#dd0000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .infdetail { color:#0000ff; font-family:sans-serif; font-size:9pt; font-weight:normal }
+</style>
+<title>EOB Posting - Electronic Remittances</title>
+<script language="JavaScript">
+</script>
+</head>
+<body leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
+<form action="sl_eob_process.php" method="get" >
+<center>
+        <table border='0' cellpadding='2' cellspacing='0' width='100%'>
+        
+         <tr bgcolor="#cccccc">
+          <td class="dehead">
+           Patient          </td>
+          <td class="dehead">
+           Invoice          </td>
+          <td class="dehead">
+           Code          </td>
+          <td class="dehead">
+           Date          </td>
+          <td class="dehead">
+           Description          </td>
+          <td class="dehead" align="right">
+           Amount&nbsp;
+          </td>
+          <td class="dehead" align="right">
+           Balance&nbsp;
+          </td>
+         </tr>
+        
+         <tr bgcolor='#ffffff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Payer: NOVITAS SOLUTIONS, INC.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 19: Processed as Primary, Forwarded to Additional Payer(s)</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Asterio Aganon</td>
+  <td class='olddetail'>420.2942</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-05-28</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-81.14</td>
+  <td class='newdetail' align='right'>48.86</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>22.36</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.66</td>
+  <td class='newdetail' align='right'>20.70</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 20.70</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is processed by Insurance 1 and automatically forwarded to Insurance 2 for processing. </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 19: Processed as Primary, Forwarded to Additional Payer(s)</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Rosita Aganon</td>
+  <td class='olddetail'>559.2944</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-05-28</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-81.14</td>
+  <td class='newdetail' align='right'>48.86</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>22.36</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.66</td>
+  <td class='newdetail' align='right'>20.70</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 20.70</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is processed by Insurance 1 and automatically forwarded to Insurance 2 for processing. </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Margie Cepeda</td>
+  <td class='olddetail'>304.2935</td>
+  <td class='olddetail'>99214:25</td>
+  <td class='olddetail'>2015-05-26</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-81.14</td>
+  <td class='newdetail' align='right'>48.86</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>22.36</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.66</td>
+  <td class='newdetail' align='right'>20.70</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 20.70</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>99406</td>
+  <td class='olddetail'>2015-05-26</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>18.00</td>
+  <td class='olddetail' align='right'>38.70</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 13.62</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-10.68</td>
+  <td class='newdetail' align='right'>28.02</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-4.38</td>
+  <td class='newdetail' align='right'>23.64</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-0.22</td>
+  <td class='newdetail' align='right'>23.42</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 2.72</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Rochelle Doss</td>
+  <td class='olddetail'>878.2929</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-05-07</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-17.85</td>
+  <td class='newdetail' align='right'>112.15</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>85.65</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-0.36</td>
+  <td class='newdetail' align='right'>85.29</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>1: Deductible Amount 80.74</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 4.55</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 19: Processed as Primary, Forwarded to Additional Payer(s)</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Cynthia Higgs</td>
+  <td class='olddetail'>350.2936</td>
+  <td class='olddetail'>99215:25</td>
+  <td class='olddetail'>2015-05-26</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>174.00</td>
+  <td class='olddetail' align='right'>174.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 139.54</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-109.40</td>
+  <td class='newdetail' align='right'>64.60</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-34.46</td>
+  <td class='newdetail' align='right'>30.14</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-2.23</td>
+  <td class='newdetail' align='right'>27.91</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 27.91</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>99406</td>
+  <td class='olddetail'>2015-05-26</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>18.00</td>
+  <td class='olddetail' align='right'>45.91</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 13.62</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-10.68</td>
+  <td class='newdetail' align='right'>35.23</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-4.38</td>
+  <td class='newdetail' align='right'>30.85</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-0.22</td>
+  <td class='newdetail' align='right'>30.63</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 2.72</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is processed by Insurance 1 and automatically forwarded to Insurance 2 for processing. </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 19: Processed as Primary, Forwarded to Additional Payer(s)</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Lee Holland</td>
+  <td class='olddetail'>311.2923</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-03-02</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 92.61</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-72.61</td>
+  <td class='newdetail' align='right'>57.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-37.39</td>
+  <td class='newdetail' align='right'>20.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.48</td>
+  <td class='newdetail' align='right'>18.52</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 18.52</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is processed by Insurance 1 and automatically forwarded to Insurance 2 for processing. </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Nancy Hudgins</td>
+  <td class='olddetail'>383.2946</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-05-28</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-81.14</td>
+  <td class='newdetail' align='right'>48.86</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>22.36</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.66</td>
+  <td class='newdetail' align='right'>20.70</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 20.70</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Larry Palmer</td>
+  <td class='olddetail'>314.2938</td>
+  <td class='olddetail'>99211</td>
+  <td class='olddetail'>2015-05-26</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>24.00</td>
+  <td class='olddetail' align='right'>24.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 19.17</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-15.03</td>
+  <td class='newdetail' align='right'>8.97</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-4.83</td>
+  <td class='newdetail' align='right'>4.14</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-0.31</td>
+  <td class='newdetail' align='right'>3.83</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 3.83</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Lana Todd</td>
+  <td class='olddetail'>382.2940</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-05-27</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 92.61</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-72.61</td>
+  <td class='newdetail' align='right'>57.39</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-37.39</td>
+  <td class='newdetail' align='right'>20.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.48</td>
+  <td class='newdetail' align='right'>18.52</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 18.52</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>MOA segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Vivian Wilson</td>
+  <td class='olddetail'>422.2925</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-03-24</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 103.50</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>Ins1/890383253 payment</td>
+  <td class='newdetail' align='right'>-81.14</td>
+  <td class='newdetail' align='right'>48.86</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-26.50</td>
+  <td class='newdetail' align='right'>22.36</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-06-16</td>
+  <td class='newdetail'>253: </td>
+  <td class='newdetail' align='right'>-1.66</td>
+  <td class='newdetail' align='right'>20.70</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 20.70</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+        </table>
+</center>
+<script language="JavaScript">
+</script>
+<input type="hidden" name="paydate" value="2015-06-16" />
+<input type="hidden" name="post_to_date" value="2015-06-23" />
+<input type="hidden" name="deposit_date" value="" />
+<input type="hidden" name="debug" value="0" />
+<input type="hidden" name="InsId" value="2" />
+<input type="hidden" name="eraname" value="20150616_1014_" />
+</form>
+</body>
+</html>

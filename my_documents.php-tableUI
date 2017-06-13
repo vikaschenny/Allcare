@@ -1,0 +1,123 @@
+<html>
+<head>
+<style>
+.datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: scroll; border: 1px solid #A65B1A; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }.datagrid table td, .datagrid table th { padding: 3px 10px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #A65B1A), color-stop(1, #7F4614) );background:-moz-linear-gradient( center top, #A65B1A 5%, #7F4614 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#A65B1A', endColorstr='#7F4614');background-color:#A65B1A; color:#FFEA61; font-size: 14px; font-weight: bold; border-left: 1px solid #BF691E; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #7F4614; border-left: 1px solid #D9CFB8;font-size: 12px;font-weight: normal; }.datagrid table tbody .alt td { background: #F0E5CC; color: #7F4614; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }.datagrid table tfoot td div { border-top: 1px solid #A65B1A;background: #F0E5CC;} .datagrid table tfoot td { padding: 0; font-size: 12px } .datagrid table tfoot td div{ padding: 2px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #A65B1A;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #A65B1A), color-stop(1, #7F4614) );background:-moz-linear-gradient( center top, #A65B1A 5%, #7F4614 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#A65B1A', endColorstr='#7F4614');background-color:#A65B1A; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7F4614; color: #FFFFFF; background: none; background-color:#A65B1A;}</style>
+<script language="javascript">
+ function open_editor(pid, docid) {
+	window.open('http://'+window.location.host+'/interface/patient_file/DocEditor.php?pid='+pid+'&document='+docid,'Edit Document','width=700,height=500');
+	return false;
+	}
+function open_viewer(pid, docid) {
+	window.open('http://'+window.location.host+'/interface/patient_file/DocViewer.php?pid='+pid+'&document='+docid,'View Document','width=700,height=500');
+	return false;
+}
+</script>
+</head>
+<body>
+<?php 
+include_once("globals.php");
+session_start();
+/* 
+ * Desc: Send Email with/without attachment based on the file type of the Document(file_url/web_url) when a user clicks email button with email address provided
+ */ 
+if(isset($_POST['Email']))
+{	
+	$details = explode('-',$_POST['emaildetails']);	//Split the Document id and Patient id submitted in the form(emaildetails hidden field) 
+	//Check if emaildetails(docid, patientid) are provided properly
+	if(sizeof($details) > 0) {
+		//Get the Document and Patient Details from the database to send email
+		$docDetails = sqlQuery("SELECT pdata.id, pdata.fname, pdata.lname, docs.id AS docid, docs.url, docs.type FROM patient_data AS pdata INNER JOIN documents AS docs ON pdata.pid = docs.foreign_id WHERE pdata.id =".$details[0]." AND docs.id =".$details[1]." LIMIT 1 ");
+		//Check if any record is fetched
+		if(isset($docDetails)) {
+			include_once("../library/classes/postmaster.php");
+			$mail = new MyMailer();
+			$mail->From = 'admin@emrsb.risecorp.com';
+			$mail->FromName = 'RISE EMR';
+			$doctitle = explode('/',$docDetails['url']);			
+			$mail->Subject = $docDetails['fname'].' '.$docDetails['lname'].' - '.$doctitle[sizeof($doctitle) - 1];
+			$mail->AddAddress( $_POST[recipient], 'Recipient'.", ".'Lname' );			
+			if ($docDetails['type']=='file_url') {				
+				$mail->Body = 'Please find the attached Document';
+				$status = $mail->AddAttachment($docDetails['url']);
+				if($status) {
+					print 'File attached Successfully!';
+				} else {
+					print 'Could not attach file';
+				}				
+			}
+			elseif ($docDetails['type']=='web_url'){				
+				//Send Document url in the email body
+				$mail->Body = 'Click the link to download the Document '.$docDetails['url'];
+			}
+			//Send email
+			if(!$mail->send()){
+					echo 'mail not send';
+				}
+				else{
+					echo '<div class="success">Email sent to '.$_POST['recipient'].'</div>';
+				}					
+		}
+		else {
+			echo '<div class="error">Could not fetch Document details. Email failed.</div>';
+		}	
+	}
+	else {
+		echo '<div class="error">Insufficient information provided.</div>';
+	}		
+}
+/*
+ * End of Email code
+ */
+?>
+<div class="datagrid">
+	<table class="datagrid" border="1" cellpadding="0" cellborder="0" width="100%">
+		<thead>
+			<tr style="font-weight: bold;">
+				<td width="10%">PId-Full Name</td>
+				<td width="20%">Email</td>
+				<td width="10%">Document</td>
+				<td width="10%">Type</td>
+				<td width="10%">Status</td>
+				<td width="10%">View</td>
+				<td width="10%">Edit</td>
+				<td width="20%">Send<br>Email</td>			
+		</thead>	
+	<?php 
+	//Get all the Patients associated to the Provider
+	$patientRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.pid FROM patient_data AS pdata LEFT JOIN users ON pdata.providerID = users.ID where pdata.providerID = ".$_SESSION['authUserID']." order by pdata.pid");
+	if(sqlNumRows($patientRes) > 0) {	
+		while ($row = sqlFetchArray($patientRes))
+		{
+			echo '<tr><td>'.$row['pid'].' - '.$row['fname'].' '.$row['lname'].'</td><td>'.$row['email'].'</td><td>&nbsp;</td><td></td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+			//Get all documents associated to the current patient
+			$documentRes = array();
+			$documentRes = sqlStatement("SELECT pdata.id, pdata.fname, pdata.lname, pdata.email, pdata.providerID, docs.id as docid, docs.url, docs.mimetype, docs.status FROM patient_data as pdata INNER JOIN documents AS docs ON pdata.pid = docs.foreign_id INNER JOIN users ON
+		pdata.providerID = users.ID AND users.ID = ".$_SESSION['authUserID']." and pdata.id = ".$row['id']." order by docs.id");
+			if(sqlNumRows($documentRes) > 0) {
+				while ($docRec = sqlFetchArray($documentRes))
+				{
+					echo '<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>'.$docRec['url'].'</td>
+								<td>'.$docRec['mimetype'].'</td>
+								<td>'.$docRec['status'].'</td>
+								<td><a class="css_button" href="" onclick="return open_viewer('.$row['pid'].','. $docRec["docid"].')">View Document</span></a></td>
+								<td><a class="css_button" href="" onclick="return open_editor('.$row['pid'].','. $docRec["docid"].')">Edit Document</span></a></td>						
+								<td><form action="" method=post><input type="hidden" name="emaildetails" value ="'.$row["id"].'-'.$docRec["docid"].'" ><input type="text" name="recipient" value="" placeholder="email address"><input type="submit" value="Email" id="Email" name="Email" class="submit_mail"></form></td>
+						  </tr>';
+				}
+			}
+			else {
+				echo '<tr><td colspan="8" align="center">There are no Documents associated with this Patient</td></tr>';
+			}
+		}		
+	}
+	else {
+		echo '<tr><td colspan="8" align="center">There are no records</td></tr>';
+	}
+	?>
+	</table>
+</div>
+</body>
+</html>

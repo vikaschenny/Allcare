@@ -1,0 +1,3 @@
+20140516:080514 csv_files_header error: incorrect file type text
+20140516:080514 csv_files_header error: incorrect file type text
+20150807:110803 csv_claim_history: failed to locate 2438 in batch claims record

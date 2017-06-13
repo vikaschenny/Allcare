@@ -1,0 +1,95 @@
+/*! pop windew tables responsive*/
+table { 
+        width: 100%; 
+        border-collapse: collapse; 
+}
+/* Zebra striping 
+tr:nth-of-type(odd) { 
+        background:transparent;
+        padding-bottom: 10px;
+}
+th { 
+        background: #333; 
+        color: white; 
+        font-weight: bold; 
+}*/
+td, th { 
+        padding: 6px; 
+        border: 1px solid #ccc; 
+        text-align: left;
+}
+
+@media only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+            #transaction tr:nth-of-type(1){
+                display: none;
+            }
+            #transaction table, #transaction thead, #transaction tbody, #transaction th, #transaction td, #transaction tr {
+		display: block;
+                font-size: 11pt !important;
+            }
+		/* Hide table headers (but not display: none;, for accessibility) */
+		#transaction thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+
+		#transaction tr { border: 1px solid #ccc; }
+
+		#transaction td {
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee;
+			position: relative;
+			padding-left: 50% !important;
+		}
+		#transaction #patient_stats .center{
+			text-align: left !important;
+		}
+
+		#transaction td:before {
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			padding-right: 10px;
+			white-space: nowrap;
+		}
+
+		/*
+		Label the data
+		*/
+		#transaction td:before {content: attr(data-th) }
+		/*#transaction td:nth-of-type(2):before { content: "Begin"; }
+		#transaction td:nth-of-type(3):before { content: "End"; }
+		#transaction td:nth-of-type(4):before { content: "Diag"; }
+		#transaction td:nth-of-type(5):before { content: "Status"; }
+		#transaction td:nth-of-type(6):before { content: "Occurrence"; }
+		#transaction td:nth-of-type(7):before { content: "Reaction"; }
+		#transaction td:nth-of-type(8):before { content: "Referred By"; }
+		#transaction td:nth-of-type(9):before { content: "Comments"; }
+		#transaction td:nth-of-type(10):before { content: "Enc"; }*/
+		#transaction td:empty:after{
+			content: "\0000a0";
+		}
+		.tabContainer table td {
+			display: inline;
+		}
+		
+		td input[type="text"], td textarea {
+			display: block;
+			max-width: 100%;
+			width: 100%;
+		}
+		.tabContainer td {
+			padding-left:0px !important;
+		}
+		.tabContainer select{
+			max-width: 100%;
+			width: 100%;
+		}
+        }
+        
+        

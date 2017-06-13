@@ -1,0 +1,2174 @@
+<?php
+/**
+ * Copyright (C) 2010 OpenEMR Support LLC
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * 2013/02/08 Minor tweaks by EMR Direct to allow integration with Direct messaging
+ * 2013-03-27 by sunsetsystems: Fixed some weirdness with assigning a message recipient,
+ *   and allowing a message to be closed with a new note appended and no recipient.
+ */
+
+require_once("verify_session.php");
+require_once("$srcdir/patient.inc");
+require_once("$srcdir/sql-ledger.inc");
+require_once("$srcdir/invoice_summary.inc.php");
+//require_once($GLOBALS['OE_SITE_DIR'] . "/statement.inc.php");
+require_once("statement.inc.php");
+require_once("$srcdir/parse_era.inc.php");
+require_once("$srcdir/sl_eob.inc.php");
+require_once("$srcdir/formatting.inc.php");
+require_once("$srcdir/classes/class.ezpdf.php");//for the purpose of pdf creation
+
+ini_set('max_execution_time', 300);
+ini_set('memory_limit','50M');
+require_once("$srcdir/tcpdf/tcpdf.php");
+
+$pagename = "plist"; 
+if(isset($_SESSION['portal_username']) !=''){
+   $provider=$_SESSION['portal_username']; 
+}else {
+   $provider=$_REQUEST['provider'];
+}
+
+
+ $sql=sqlStatement("SELECT id, fname, lname, specialty FROM users " .
+      "WHERE active = 1 AND ( info IS NULL OR info NOT LIKE '%Inactive%' ) " .
+      "AND authorized = 1 AND username='".$provider."'" .
+      "ORDER BY lname, fname");
+$id=sqlFetchArray($sql);
+$id1=$id['id'];
+
+
+
+
+
+$DEBUG = 0; // set to 0 for production, 1 to test
+
+$INTEGRATED_AR = $GLOBALS['oer_config']['ws_accounting']['enabled'] === 2;
+
+$alertmsg = '';
+$where = '';
+$eraname = '';
+$eracount = 0;
+$html = "";
+// This is called back by parse_era() if we are processing X12 835's.
+//
+// create new PDF document
+class MYPDF extends TCPDF {
+    //Page header
+    public function Header() {
+    }
+    public function Footer() {
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 8);
+        // Page number
+        $this->Cell(0, 0, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+    }
+}
+ 
+$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+$pdf->SetMargins(8, 0, 8);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+    require_once(dirname(__FILE__).'/lang/eng.php');
+    $pdf->setLanguageArray($l);
+}
+function era_callback(&$out) {
+  global $where, $eracount, $eraname, $INTEGRATED_AR;
+  // print_r($out); // debugging
+  ++$eracount;
+  // $eraname = $out['isa_control_number'];
+  $eraname = $out['gs_date'] . '_' . ltrim($out['isa_control_number'], '0') .
+    '_' . ltrim($out['payer_id'], '0');
+  list($pid, $encounter, $invnumber) = slInvoiceNumber($out);
+
+  if ($pid && $encounter) {
+    if ($where) $where .= ' OR ';
+    if ($INTEGRATED_AR) {
+      $where .= "( f.pid = '$pid' AND f.encounter = '$encounter' )";
+    } else {
+      $where .= "invnumber = '$invnumber'";
+    }
+  }
+}
+
+function bucks($amount) {
+  if ($amount) echo oeFormatMoney($amount);
+}
+
+// Upload a file to the client's browser
+//
+function upload_file_to_client($file_to_send) {
+  header("Pragma: public");
+  header("Expires: 0");
+  header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+  header("Content-Type: application/force-download");
+  header("Content-Length: " . filesize($file_to_send));
+  header("Content-Disposition: attachment; filename=" . basename($file_to_send));
+  header("Content-Description: File Transfer");
+  readfile($file_to_send);
+  // flush the content to the browser. If you don't do this, the text from the subsequent
+  // output from this script will be in the file instead of sent to the browser.
+  flush();
+  exit(); //added to exit from process properly in order to stop bad html code -ehrlive
+  // sleep one second to ensure there's no follow-on.
+  sleep(1);
+}
+function upload_file_to_client_pdf($file_to_send) {
+    //Function reads a text file and converts to pdf.
+ 
+    global $pdf;
+   //Close and output PDF document
+   $pdf->Output('patient-statements-'. date("Y-m-d h:i:sa").'.pdf', 'D');
+ 
+}
+
+// billing facility
+ $res = sqlStatement("SELECT * FROM facility WHERE billing_location = 1");
+
+    // This loops once for billing facility details.
+    //
+    $practiceName = $practiceAddr = $practiceCity = $practiceState = $practiceZip = $domain_identifier = "";
+    while ($row = sqlFetchArray($res)) {
+        $practiceName = $row['name'];
+        $practiceAddr = $row['street'];
+        $practiceCity = $row['city'];
+        $practiceState = $row['state'];
+        $practiceZip = $row['postal_code'];
+    }
+    $res = sqlStatement("SELECT x12_sender_id FROM x12_partners WHERE name = 'ZIRMED'");
+    while ($row = sqlFetchArray($res)) {
+        $domain_identifier = $row['x12_sender_id'];
+    }
+
+$today = date("Y-m-d");
+
+if ($INTEGRATED_AR) {
+
+  // Print or download statements if requested.
+  //
+  if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $_POST['form_cb']) {
+
+    $fhprint = fopen($STMT_TEMP_FILE, 'w');
+
+    $where = "";
+    foreach ($_POST['form_cb'] as $key => $value) $where .= " OR f.id = $key";
+    $where = substr($where, 4);
+
+    $res = sqlStatement("SELECT " .
+      "f.id, f.date, f.pid, f.encounter, f.stmt_count, f.last_stmt_date, " .
+      "p.fname, p.mname, p.lname, p.street, p.city, p.state, p.postal_code " .
+      "FROM form_encounter AS f, patient_data AS p " .
+      "WHERE ( $where ) AND " .
+      "p.pid = f.pid " .
+      "ORDER BY p.lname, p.fname, f.pid, f.date, f.encounter");
+
+    $stmt = array();
+    $stmt_count = 0;
+    $leedval = strpos($_POST['form_ageby'], 'Last');
+    // This loops once for each invoice/encounter.
+    //
+    while ($row = sqlFetchArray($res)) {
+      $svcdate = substr($row['date'], 0, 10);
+      $duedate = $svcdate; // TBD?
+      $duncount = $row['stmt_count'];
+
+      // If this is a new patient then print the pending statement
+      // and start a new one.  This is an associative array:
+      //
+      //  cid     = same as pid
+      //  pid     = OpenEMR patient ID
+      //  patient = patient name
+      //  amount  = total amount due
+      //  adjust  = adjustments (already applied to amount)
+      //  duedate = due date of the oldest included invoice
+      //  age     = number of days from duedate to today
+      //  to      = array of addressee name/address lines
+      //  lines   = array of:
+      //    dos     = date of service "yyyy-mm-dd"
+      //    desc    = description
+      //    amount  = charge less adjustments
+      //    paid    = amount paid
+      //    notice  = 1 for first notice, 2 for second, etc.
+      //    detail  = array of details, see invoice_summary.inc.php
+      //
+      if ($stmt['cid'] != $row['pid']) {
+        if (!empty($stmt)) ++$stmt_count;
+        fwrite($fhprint, create_statement($stmt));
+        create_statementpdf($stmt,$_POST['form_age_cols'],$_POST['form_age_inc'],$leedval);
+        $stmt['cid'] = $row['pid'];
+        $stmt['pid'] = $row['pid'];
+        $stmt['patient'] = $row['fname'] . ' ' . $row['lname'];
+        $stmt['to'] = array($row['fname'] . ' ' . $row['lname']);
+        if ($row['street']) $stmt['to'][] = $row['street'];
+        $stmt['to'][] = $row['city'] . ", " . $row['state'] . " " . $row['postal_code'];
+        $stmt['lines'] = array();
+        $stmt['amount'] = '0.00';
+        $stmt['today'] = $today;
+        $stmt['duedate'] = $duedate;
+        $stmt['last_stmt_date'] = $row['last_stmt_date'];
+      } else {
+        // Report the oldest due date.
+        if ($duedate < $stmt['duedate']) {
+          $stmt['duedate'] = $duedate;
+          $stmt['last_stmt_date'] = $row['last_stmt_date'];
+        }
+      }
+
+      // Recompute age at each invoice.
+      $stmt['age'] = round((strtotime($today) - strtotime($stmt['duedate'])) /
+        (24 * 60 * 60));
+      $stmt['last'] = round((strtotime($today) - strtotime($stmt['last_stmt_date'])) /
+        (24 * 60 * 60));
+      $invlines = ar_get_invoice_summary($row['pid'], $row['encounter'], true);
+      foreach ($invlines as $key => $value) {
+        $line = array();
+        $line['dos']     = $svcdate;
+        $line['desc']    = ($key == 'CO-PAY') ? "Patient Payment" : "Procedure $key";
+        $line['amount']  = sprintf("%.2f", $value['chg']);
+        $line['adjust']  = sprintf("%.2f", $value['adj']);
+        $line['paid']    = sprintf("%.2f", $value['chg'] - $value['bal']);
+        $line['notice']  = $duncount + 1;
+        $line['detail']  = $value['dtl'];
+        $line['code_text'] = $value['code_text'];
+        $dispcode = $key;
+        $dxQuery = sqlStatement("SELECT justify,payer_id FROM billing WHERE code = '".$key."' AND pid = ".$row['pid']." AND encounter =".$row['encounter']);
+          while($rowTemp=sqlFetchArray($dxQuery)):
+              $dxCodeArr1 = explode(":",$rowTemp['justify']);
+              $dxCodeArr2 = explode("|",$dxCodeArr1[0]);
+              $line['dxCode'] = $dxCodeArr2[1];
+              $payerId = $rowTemp['payer_id'];
+          endwhile;
+        $stmt['lines'][] = $line;
+        $stmt['amount']  = sprintf("%.2f", $stmt['amount'] + $value['bal']);
+      }
+
+      // Record that this statement was run.
+      if (! $DEBUG && ! $_POST['form_without']) {
+        sqlStatement("UPDATE form_encounter SET " .
+          "last_stmt_date = '$today', stmt_count = stmt_count + 1 " .
+          "WHERE id = " . $row['id']);
+      }
+    } // end for
+
+    if (!empty($stmt)) ++$stmt_count;
+    fwrite($fhprint, create_statement($stmt));
+    create_statementpdf($stmt,$_POST['form_age_cols'],$_POST['form_age_inc'],$leedval);
+    fclose($fhprint);
+    sleep(1);
+
+    // Download or print the file, as selected
+    if ($_POST['form_download']) {
+      upload_file_to_client($STMT_TEMP_FILE);
+    } elseif ($_POST['form_pdf']) {
+      upload_file_to_client_pdf($STMT_TEMP_FILE);
+    } else { // Must be print!
+      if ($DEBUG) {
+        $alertmsg = xl("Printing skipped; see test output in") .' '. $STMT_TEMP_FILE;
+      } else {
+        exec("$STMT_PRINT_CMD $STMT_TEMP_FILE");
+        if ($_POST['form_without']) {
+          $alertmsg = xl('Now printing') .' '. $stmt_count .' '. xl('statements; invoices will not be updated.');
+        } else {
+          $alertmsg = xl('Now printing') .' '. $stmt_count .' '. xl('statements and updating invoices.');
+        }
+      } // end not debug
+    } // end not form_download
+  } // end statements requested
+} // end $INTEGRATED_AR
+else {
+  SLConnect();
+
+  // This will be true starting with SQL-Ledger 2.8.x:
+  $got_address_table = SLQueryValue("SELECT count(*) FROM pg_tables WHERE " .
+    "schemaname = 'public' AND tablename = 'address'");
+
+  // Print or download statements if requested.
+  //
+  if (($_POST['form_print'] || $_POST['form_download'] || $_POST['form_pdf']) && $_POST['form_cb']) {
+
+    $fhprint = fopen($STMT_TEMP_FILE, 'w');
+
+    $where = "";
+    foreach ($_POST['form_cb'] as $key => $value) $where .= " OR ar.id = $key";
+    $where = substr($where, 4);
+
+    // Sort by patient so that multiple invoices can be
+    // represented on a single statement.
+    if ($got_address_table) {
+      $res = SLQuery("SELECT ar.*, customer.name, " .
+        "address.address1, address.address2, " .
+        "address.city, address.state, address.zipcode, " .
+        "substring(trim(both from customer.name) from '% #\"%#\"' for '#') AS fname, " .
+        "substring(trim(both from customer.name) from '#\"%#\" %' for '#') AS lname " .
+        "FROM ar, customer, address WHERE ( $where ) AND " .
+        "customer.id = ar.customer_id AND " .
+        "address.trans_id = ar.customer_id " .
+        "ORDER BY lname, fname, ar.customer_id, ar.transdate");
+    }
+    else {
+      $res = SLQuery("SELECT ar.*, customer.name, " .
+        "customer.address1, customer.address2, " .
+        "customer.city, customer.state, customer.zipcode, " .
+        "substring(trim(both from customer.name) from '% #\"%#\"' for '#') AS lname, " .
+        "substring(trim(both from customer.name) from '#\"%#\" %' for '#') AS fname " .
+        "FROM ar, customer WHERE ( $where ) AND " .
+        "customer.id = ar.customer_id " .
+        "ORDER BY lname, fname, ar.customer_id, ar.transdate");
+    }
+    if ($sl_err) die($sl_err);
+
+    $stmt = array();
+    $stmt_count = 0;
+
+    for ($irow = 0; $irow < SLRowCount($res); ++$irow) {
+      $row = SLGetRow($res, $irow);
+
+      // Determine the date of service.  An 8-digit encounter number is
+      // presumed to be a date of service imported during conversion.
+      // Otherwise look it up in the form_encounter table.
+      //
+      $svcdate = "";
+      list($pid, $encounter) = explode(".", $row['invnumber']);
+      if (strlen($encounter) == 8) {
+        $svcdate = substr($encounter, 0, 4) . "-" . substr($encounter, 4, 2) .
+          "-" . substr($encounter, 6, 2);
+      } else if ($encounter) {
+        $tmp = sqlQuery("SELECT date FROM form_encounter WHERE " .
+          "encounter = $encounter");
+        $svcdate = substr($tmp['date'], 0, 10);
+      }
+
+      // How many times have we dunned them for this invoice?
+      $intnotes = trim($row['intnotes']);
+      $duncount = substr_count(strtolower($intnotes), "statement sent");
+
+      // If this is a new patient then print the pending statement
+      // and start a new one.  This is an associative array:
+      //
+      //  cid     = SQL-Ledger customer ID
+      //  pid     = OpenEMR patient ID
+      //  patient = patient name
+      //  amount  = total amount due
+      //  adjust  = adjustments (already applied to amount)
+      //  duedate = due date of the oldest included invoice
+      //  age     = number of days from duedate to today
+      //  to      = array of addressee name/address lines
+      //  lines   = array of:
+      //    dos     = date of service "yyyy-mm-dd"
+      //    desc    = description
+      //    amount  = charge less adjustments
+      //    paid    = amount paid
+      //    notice  = 1 for first notice, 2 for second, etc.
+      //    detail  = array of details, see invoice_summary.inc.php
+      //
+      if ($stmt['cid'] != $row['customer_id']) {
+        if (!empty($stmt)) ++$stmt_count;
+        fwrite($fhprint, create_statement($stmt));
+        $stmt['cid'] = $row['customer_id'];
+        $stmt['pid'] = $pid;
+
+        if ($got_address_table) {
+          $stmt['patient'] = $row['fname'] . ' ' . $row['lname'];
+          $stmt['to'] = array($row['fname'] . ' ' . $row['lname']);
+        } else {
+          $stmt['patient'] = $row['name'];
+          $stmt['to'] = array($row['name']);
+        }
+
+        if ($row['address1']) $stmt['to'][] = $row['address1'];
+        if ($row['address2']) $stmt['to'][] = $row['address2'];
+        $stmt['to'][] = $row['city'] . ", " . $row['state'] . " " . $row['zipcode'];
+        $stmt['lines'] = array();
+        $stmt['amount'] = '0.00';
+        $stmt['today'] = $today;
+        $stmt['duedate'] = $row['duedate'];
+      } else {
+        // Report the oldest due date.
+        if ($row['duedate'] < $stmt['duedate']) {
+          $stmt['duedate'] = $row['duedate'];
+        }
+      }
+
+      $stmt['age'] = round((strtotime($today) - strtotime($stmt['duedate'])) /
+        (24 * 60 * 60));
+
+      $invlines = get_invoice_summary($row['id'], true); // true added by Rod 2006-06-09
+      foreach ($invlines as $key => $value) {
+        $line = array();
+        $line['dos']     = $svcdate;
+        $line['desc']    = ($key == 'CO-PAY') ? "Patient Payment" : "Procedure $key";
+        $line['amount']  = sprintf("%.2f", $value['chg']);
+        $line['adjust']  = sprintf("%.2f", $value['adj']);
+        $line['paid']    = sprintf("%.2f", $value['chg'] - $value['bal']);
+        $line['notice']  = $duncount + 1;
+        $line['detail']  = $value['dtl']; // Added by Rod 2006-06-09
+        $stmt['lines'][] = $line;
+        $stmt['amount']  = sprintf("%.2f", $stmt['amount'] + $value['bal']);
+      }
+
+      // Record something in ar.intnotes about this statement run.
+      if ($intnotes) $intnotes .= "\n";
+      $intnotes = addslashes($intnotes . "Statement sent $today");
+      if (! $DEBUG && ! $_POST['form_without']) {
+        SLQuery("UPDATE ar SET intnotes = '$intnotes' WHERE id = " . $row['id']);
+        if ($sl_err) die($sl_err);
+      }
+    } // end for
+
+    if (!empty($stmt)) ++$stmt_count;
+    fwrite($fhprint, create_statement($stmt));
+    fclose($fhprint);
+    sleep(1);
+
+    // Download or print the file, as selected
+    if ($_POST['form_download']) {
+      upload_file_to_client($STMT_TEMP_FILE);
+    } elseif ($_POST['form_pdf']) {
+      upload_file_to_client_pdf($STMT_TEMP_FILE);
+    } else { // Must be print!
+      if ($DEBUG) {
+        $alertmsg = xl("Printing skipped; see test output in") .' '. $STMT_TEMP_FILE;
+      } else {
+        exec("$STMT_PRINT_CMD $STMT_TEMP_FILE");
+        if ($_POST['form_without']) {
+          $alertmsg = xl('Now printing') .' '. $stmt_count .' '. xl('statements; invoices will not be updated.');
+        } else {
+          $alertmsg = xl('Now printing') .' '. $stmt_count .' '. xl('statements and updating invoices.');
+        }
+      } // end not debug
+    } // end if form_download
+  } // end statements requested
+} // end not $INTEGRATED_AR
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<?php html_header_show(); ?>
+<!--<link rel=stylesheet href="<?php echo $css_header;?>" type="text/css">-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="../../library/textformat.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Dosis:300,400,500,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="assets/css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="assets/css/owl.transitions.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="css/scollypay.css">
+<link rel="stylesheet" type="text/css" href="assets/css/customize.css">
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/version1.0/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="css/version1.0/responsive.bootstrap.min.css"/>
+<script src="js/responsive_datatable/version1.0/jquery-1.11.3.min.js"></script>
+<script src="js/responsive_datatable/version1.0/jquery.dataTables.min.js"></script>
+<script src="js/responsive_datatable/version1.0/dataTables.bootstrap.min.js"></script>
+<script type='text/javascript' src='js/responsive_datatable/dataTables.tableTools.js'></script>
+<script src="js/responsive_datatable/version1.0/dataTables.responsive.min.js"></script>
+<script type='text/javascript' src='js/responsive_datatable/dataTables.bootstrap.js'></script>
+
+<style>
+	.form-group .radio label, .form-group .checkbox label{
+				padding-left:0px;
+			}
+	#firstset{
+		padding-left:40px;
+	}
+    .bs-docs-sidenav .active a:hover {
+            background-color: #4ac2dc;
+        }
+        #sidenave .active {
+           background-color: #4ac2dc;
+           cursor: default;
+        }
+        #sidenave li:last-child .active {
+            background-color: #4ac2dc;
+            border-radius: 0 0 6px 6px;
+            cursor: default;
+        }
+        
+        #sidenave li:first-child .active {
+            background-color: #4ac2dc;
+            border-radius: 0 0 6px 6px;
+            cursor: default;
+        }
+
+
+        #sidenave .active a {
+            color:#fff !important;
+            font-weight:bold;
+            text-decoration: none;
+        }
+        #content table ul li{
+           display: block;
+        }
+        .bs-docs-sidenav.affix {
+            top: 94px;
+        }
+        #content {
+            padding-bottom: 16px;
+        }
+        #patientstatement_wrapper {
+            overflow-x: visible;
+            overflow-y: hidden;
+            padding-top: 15px;
+        }
+        .DTTT.btn-group{
+            float: right;
+            padding-left: 13px;
+            position: relative;
+        }
+        #patientstatement_length{
+            float:left;
+        }
+        .costmizecolumns {
+            margin-bottom: 7px;
+            margin-top: 13px;
+            text-align: center;
+            margin-left: 30%;
+            width: 220px;
+        }
+        @media only screen and (max-width: 768px){
+            #form_category{
+                margin-top: 10px;
+            }
+			.form-group .radio label, .form-group .checkbox label{
+				padding-left:20px;
+			}
+			#firstset{
+				padding-left:15px;
+			}
+        }
+        @media only screen and (max-width: 620px){
+            .DTTT.btn-group{
+                float: none;
+                margin-bottom: 6px;
+                padding-left: 40%;
+                position: relative;
+            }
+            #patientstatement_length{
+                float:none;
+            }
+            .costmizecolumns {
+                margin-bottom: 7px;
+                margin-top: 13px;
+                text-align: center;
+                margin-left: 0;
+                width: auto;
+            }
+        }
+        .form-control, .input-group-addon {
+            border-radius: 4px;
+        }
+        .input-group-addon{
+             padding: 0 6px !important;
+        }
+		.panel-heading{
+			padding: 0;
+		}
+		a:hover{
+		  text-decoration: none;
+		}
+		.panel-title{
+			display: block;
+			padding: 10px 15px;
+			text-decoration: none;
+		}
+		.panel-heading a:after {
+			font-family:'Glyphicons Halflings';
+			content:"\e114";
+			float: right;
+			color: grey;
+		}
+		.panel-heading a.collapsed:after {
+			content:"\e080";
+		}
+		legend{
+			margin-bottom:10px;
+		}
+		.form-horizontal .control-label{padding-top:0;}
+		label.col-xs-1, label.col-sm-1, label.col-md-1, label.col-lg-1, label.col-xs-2, label.col-sm-2, label.col-md-2, label.col-lg-2, label.col-xs-3, label.col-sm-3, label.col-md-3, label.col-lg-3, label.col-xs-4, label.col-sm-4, label.col-md-4, label.col-lg-4, label.col-xs-5, label.col-sm-5, label.col-md-5, label.col-lg-5, label.col-xs-6, label.col-sm-6, label.col-md-6, label.col-lg-6, label.col-xs-7, label.col-sm-7, label.col-md-7, label.col-lg-7, label.col-xs-8, label.col-sm-8, label.col-md-8, .col-lg-8, label.col-xs-9, label.col-sm-9, label.col-md-9, label.col-lg-9, label.col-xs-10, label.col-sm-10, label.col-md-10, label.col-lg-10, label.col-xs-11, label.col-sm-11, label.col-md-11, label.col-lg-11, label.col-xs-12, label.col-sm-12, label.col-md-12, label.col-lg-12{padding-right:0px;padding-left: 8px;}
+		
+		.form-group .input-group-sm{
+			padding-right:8px;
+			padding-left:8px;
+		}
+		
+
+		@keyframes spinner {
+		to {transform: rotate(360deg);}
+		}
+
+		@-webkit-keyframes spinner {
+		to {-webkit-transform: rotate(360deg);}
+		}
+
+		.spinner {
+			min-width: 24px;
+			min-height: 24px;
+		}
+
+		.spinner:before {
+		content: 'Loading…';
+		position: absolute;
+		width: 70px;
+		height: 70px;
+		margin-top: -10px;
+		margin-left: -10px;
+		}
+
+		.spinner:not(:required):before {
+		content: '';
+		border-radius: 50%;
+		border: 4px solid transparent;
+		border-top-color: #03ade0;
+		border-bottom-color: #03ade0;
+		animation: spinner .8s ease infinite;
+		-webkit-animation: spinner .8s ease infinite;
+		}
+		#mySpinner {
+			left: 48%;
+			position: absolute;
+			top: 140px;
+		}
+		#mySpinner > div {
+			margin-left: -4px;
+			padding-top: 14px;
+		}
+		
+</style>
+<script type='text/javascript'>
+    $(document).ready(function() {
+		 $('#patlistselect').hide();
+		 //$('#patientstatement').css("display","block");
+            var table = $('#patientstatement').dataTable({
+            "iDisplayLength": 10,
+             dom: 'T<\"clear\">lfrtip',
+           tableTools: {
+                 "sSwfPath": "../interface/swf/copy_csv_xls_pdf.swf",
+                aButtons: [
+                    {
+                        sExtends: "xls",
+                        sButtonText: "Save to Excel",
+                        sFileName: $('#openemrTitle').val() + " zirmed patients "+ $('#currTime').val() +".csv"
+                    }
+                ]
+            }
+        });
+        $("#patlist").click(function(){
+            fromdate = $('#form_from_date').val();
+            todate = $('#form_tol_date').val();
+            
+            $.ajax({
+            type: 'POST',
+            url: 'patient-statment-patientlist.php',
+            dataType:'json',
+            data: {                        
+                    fromD: fromdate,
+                    toD: todate
+                },
+            beforeSend: function(){
+                $('#patlistselect').hide();
+                $('#calmsg').show();
+                $('#calmsg').html("Please Wait...");
+              },    
+            success: function(response)
+            {
+                $('#patlistselect').show();
+                $.each(response, function(i, value) {
+                    $('#patlistselect').append($('<option>').text(value).attr('value', i));
+                });
+                
+                $('#calmsg').hide();
+            },
+            failure: function(response)
+            {
+                alert("error");
+            }		
+            });
+        });
+    });     
+    $(function () {
+        setNavigation();
+    });
+    function setNavigation() {
+       $('#sidenave li').eq(5).addClass('active');
+       $('#sidenave li').eq(5).find('a').removeAttr("href");
+    }
+    //hide bellow columns when page load
+    
+    function showpracticeaddr(){
+      
+        fnShowHide(7);
+        fnShowHide(8);
+        fnShowHide(9);
+        fnShowHide(10);
+        fnShowHide(11);
+        fnShowHide(12);
+        fnShowHide(13);
+    }
+    function showbillingaddr(){
+       
+        fnShowHide(16);
+        fnShowHide(17);
+        fnShowHide(18);
+        fnShowHide(19);
+        fnShowHide(20);
+    }
+    function fnShowHide( iCol )
+    {
+        /* Get the DataTables object again - this is not a recreation, just a get of the object */
+        var oTable = $('#patientstatement').dataTable();
+        var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+        oTable.fnSetColumnVis( iCol, bVis ? false : true );
+    }
+     function DoPost(page_name, provider) {
+        method = "post"; // Set method to post by default if not specified.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", page_name);
+        var key='provider';
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", provider);
+
+        form.appendChild(hiddenField);
+        document.body.appendChild(form);
+        form.submit();
+    }
+    function DoPost_patient(url) {
+                    var res = url.split("?");
+                    var param=res[1].split("&");
+                    method = "post"; // Set method to post by default if not specified.
+                    var form = document.createElement("form");
+                        form.setAttribute("method", method);
+                        form.setAttribute("action", res[0]);
+                    for(var i=0; i<param.length; i++){
+                        var param1=param[i].split("=");
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type", "hidden");
+                        hiddenField.setAttribute("name", param1[0]);
+                        hiddenField.setAttribute("value", param1[1]);
+                        form.appendChild(hiddenField);
+                    }
+                      document.body.appendChild(form);
+                      form.submit();
+                }
+</script>
+<style>
+    .bootrapbtn{
+        background: rgba(0, 0, 0, 1) -moz-linear-gradient(center top , #ffffff 0%, #f3f3f3 89%, #f9f9f9 100%) repeat scroll 0 0;
+        border: 1px solid #999;
+        border-radius: 2px;
+        box-shadow: 1px 1px 3px #ccc;
+        color: black !important;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 0.88em;
+        margin-right: 3px;
+        padding: 5px 8px;
+        left:445px;
+        
+    }
+    input[class="bootrapbtn"]:hover{
+        background: rgba(0, 0, 0, 1) -moz-linear-gradient(center top , #ffffe8 0%, #e6e6e6 100%, #e5e5e5 100%) repeat scroll 0 0;
+        box-shadow: 1px 1px 5px #ccc;  
+    }
+    .aligndiv{
+        position: relative;
+        text-align: center;
+        z-index: 9999;  
+    }
+    @media only screen and (max-width:480px){
+        .aligndiv > input{
+            margin-top: 10px;
+        }
+    }
+</style>
+ 
+<script language="JavaScript">
+
+var mypcc = '1';
+
+function checkAll(checked) {
+ var f = document.forms[0];
+ for (var i = 0; i < f.elements.length; ++i) {
+  var ename = f.elements[i].name;
+  if (ename.indexOf('form_cb[') == 0)
+   f.elements[i].checked = checked;
+ }
+}
+
+function npopup(pid) {
+ window.open('sl_eob_patient_note.php?patient_id=' + pid, '_blank', 'width=500,height=250,resizable=1');
+ return false;
+}
+
+</script>
+
+</head>
+
+<body ><?php include 'header_nav.php'; ?>
+             <section id= "services">
+                <div class= "container-fluid">
+				<div class= "row" style="min-height:500px;">
+                                    <div id="contents">
+                                    <div id="sidenave" class="col-sm-3">
+                                         <ul class="nav nav-list bs-docs-sidenav affix">
+                                           <input type="hidden" id="sidenavep" value="<?php echo $page_id; ?>"/>
+                                             <li class=""><a  style="border-radius: 6px 6px 0 0;" href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient_data.php?order=<?php echo $order; ?>&provider=<?php echo $provider; ?>&id=my_patients')>My Patients</a></li>
+                                             <li class=""><a  href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient_data.php?order=<?php echo $order; ?>&provider=<?php echo $provider; ?>&id=all_patients')>All Patients</a></li>
+                                             <li class=""><a  href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient_data.php?order=<?php echo $order; ?>&provider=<?php echo $provider; ?>&id=by_facility')>Patients By Facility</a></li>
+                                             <li class=""><a  href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient_data.php?order=<?php echo $order; ?>&provider=<?php echo $provider; ?>&id=by_appointment')>Patients By Appointments</a></li>
+                                             <?php  $sql_vis=sqlStatement("SELECT provider_plist_links from tbl_user_custom_attr_1to1 where userid='".$id['id']."'");
+                                                    $row1_vis=sqlFetchArray($sql_vis);  
+                                                    if(!empty($row1_vis)){
+                                                        $links=explode("|",$row1_vis['provider_plist_links']);
+                                                         if(in_array('patient_center',$links)){ ?>
+                                                              <li class=""><a href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient-center-batch.php?provider=<?php echo $provider; ?>')>Patient Center Batch</a></li>
+                                                        <?php  } if(in_array('patient_stat',$links)){  ?>
+                                                              <li class=""><a href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>patient-statement.php?provider=<?php echo $provider; ?>')>Patient Statement Batch</a></li>
+                                                        <?php }if(in_array('create_patient',$links)){ 
+                                                           ?>
+                                                               <li class=""><a href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>create_patient/new_comprehensive.php?provider=<?php echo $provider; ?>')>Create Patient</a></li>
+                                                       
+                                                           <?php 
+                                                        }  if(in_array('create_app',$links)){ ?>
+                                                                   <li class=""><a href='#' onclick="window.open('<?php echo $base_url ?>scheduling/calendar/add_edit_event.php','name=appt','width=595,height=300')">Create Appointment</a></li>
+                                                            <?php }  if(in_array('create_enc',$links)){ ?>
+                                                               <li class=""><a href='javascript:;' onclick=DoPost_patient('<?php echo $base_url ?>create_encounter/new.php?provider=<?php echo $provider; ?>')>Create Encounter</a></li>
+                                                        <?php }if(in_array('scheduling',$links)){ ?>
+                                                                   <li class=""><a href='<?php echo $base_url ?>scheduling/scheduling_pop_up.php' target="_blank"">Scheduling</a></li>
+                                                            <?php }
+                                                    }
+                                            ?>
+                                          </ul>
+                                    </div>
+					<div id="content" class="col-sm-9"><h3>Patient Statement batch</h3>
+					<!--<div id="mySpinner" class="spinner"><div>Loading…</div></div>-->
+<form method='post' action='patient-statement.php' enctype='multipart/form-data'>
+	
+	<div class="panel panel-info">
+	<div class="panel-heading"><a class="panel-title" href="#collapse1" data-toggle="collapse"><b>Filters</b></a></div>
+	<div id="collapse1" class=" panel-collapse collapse in">
+		<div class="panel-body">
+		
+									<div class="row form-horizontal" role="form">
+										<div class="col-sm-12">
+						<?php
+						if ($INTEGRATED_AR) {
+						  $payerID = $_POST['form_payer_id'];
+						  $insuredID = $_POST['insuredID'];
+						  $defaultFacility = $_POST['defaultFacility'];
+						  $patlistselect = $_POST['patlistselect'];
+						  $livingFacility = $_POST['livingFacility'];
+						  if($payerID):
+							  foreach ($payerID as $value):
+								$payerIDarray[]=$value;
+							  endforeach;
+						  endif;
+						  $payerIdStr = "";
+						  if(count($payerIDarray)>0):
+							 $payerIdStr = implode(',', $payerIDarray);
+						  endif;
+						  
+						  if($insuredID):
+							  foreach ($insuredID as $value):
+								$insuredIDarray[]=$value;
+							  endforeach;
+						  endif;
+						  $insuredIdStr = "";
+						  if(count($insuredIDarray)>0):
+							 $insuredIdStr = implode("','", $insuredIDarray);
+						  endif;
+						  if($defaultFacility):
+							  foreach ($defaultFacility as $value):
+								$defaultFacilityarray[]=$value;
+							  endforeach;
+						  endif;
+						  $defaultFacilityStr = "";
+						  if(count($defaultFacilityarray)>0):
+							 $defaultFacilityStr = implode(',', $defaultFacilityarray);
+						  endif;
+						  
+						  if($livingFacility):
+							  foreach ($livingFacility as $value):
+								$livingFacilityarray[]=$value;
+							  endforeach;
+						  endif;
+						  $livingFacilityStr = "";
+						  if(count($livingFacilityarray)>0):
+							 $livingFacilityStr = implode("','", $livingFacilityarray);
+						  endif;
+						  
+						  
+						  if($patlistselect):
+							  foreach ($patlistselect as $value):
+								$patlistselectarray[]=$value;
+							  endforeach;
+						  endif;
+						  $patlistselectStr = "";
+						  if(count($patlistselectarray)>0):
+							 $patlistselectStr = implode(',', $patlistselectarray);
+						  endif;
+						  
+							$from=$_POST['form_from_date'];
+							$to=$_POST['form_tol_date'];
+							if (! $_POST['form_from_date']) {
+								// If a specific patient, default to 2 years ago.
+								$tmp = date('Y');
+								$from = date("$tmp-m-d");
+								$to = date("$tmp-m-d");
+							}
+						  
+						  
+						  // Identify the payer to support resumable posting sessions.
+						  echo '<div class="form-group">';
+						  echo '<label class="col-sm-1 control-label" for="form_payer_id">'.xl('Payer').': </label>';
+						  echo '<div class="col-sm-3 input-group-sm">';
+						  $insurancei = getInsuranceProviders();
+						  echo  '<select name="form_payer_id[]" multiple id="form_payer_id" class="form-control">';
+						  echo "    <option value='0'>-- " . xl('Patient') . " --</option>\n";
+						  foreach ($insurancei as $iid => $iname) {
+							echo "<option value='$iid'";
+							if (in_array($iid, $payerIDarray)) echo " selected";
+							echo ">" . $iname . "</option>\n";
+						  }
+						  echo "   </select>\n";
+						  ?>
+						  <div class="checkbox">
+								<label>
+								  <input type="checkbox" name="payerck" onchange="fnShowHide(0)">
+								  Show/hide Payer column
+								</label>
+							</div>
+						  </div>
+								
+							<label class="col-sm-1 control-label" for="insuredID">Insured Type: </label>
+							<div class="col-sm-3 input-group-sm">
+								<select name="insuredID[]" multiple id="insuredID" class="form-control">
+									<?php
+									$insuredQuery = sqlStatement("SELECT option_id, title FROM list_options WHERE list_id='userlist1'");
+									while($insuredRow = sqlFetchArray($insuredQuery)){
+										?>
+										<option value="<?php echo $insuredRow['option_id']; ?>" <?php if(in_array($insuredRow['option_id'],$insuredID)): ?> selected <?php endif; ?>><?php echo $insuredRow['title']; ?></option>
+										<?php
+									}
+									?>
+								 </select>
+								 <div class="checkbox">
+									<label>
+									  <input type="checkbox" name="insuredck" onchange="fnShowHide(1)">
+									  Show/hide Insured Type column
+									</label>
+								</div>
+							</div>
+							<label class="col-sm-1 control-label" for="defaultFacility">Default Facility: </label>
+							<div class="col-sm-3 input-group-sm">
+								<select name="defaultFacility[]" multiple id="defaultFacility" class="form-control">
+									<?php
+									$facilityQuery = sqlStatement("SELECT id, name FROM facility");
+									while($facilityRow = sqlFetchArray($facilityQuery)){
+										?>
+										<option value="<?php echo $facilityRow['id']; ?>" <?php if(in_array($facilityRow['id'],$defaultFacility)): ?> selected <?php endif; ?>><?php echo $facilityRow['name']; ?></option>
+										<?php
+									}
+									?>
+								</select>
+								<div class="checkbox">
+									<label>
+									  <input type="checkbox" name="facilityck" onchange="fnShowHide(2)" >
+									  Show/hide Default Facility column
+									</label>
+								</div>
+							</div>
+						</div> 
+						  <?php 
+						}
+						?>
+						<div class="form-group">							
+							<label class="col-sm-1 control-label" for="livingFacility">Living Facility: </label>
+							<div class="col-sm-3 input-group-sm">
+								<select name="livingFacility[]" multiple id="livingFacility" class="form-control">
+									<?php
+									$livingfacilityQuery = sqlStatement("SELECT option_id, title FROM list_options WHERE list_id='Living_Facility'");
+									while($livingfacilityRow = sqlFetchArray($livingfacilityQuery)){
+										?>
+										<option value="<?php echo $livingfacilityRow['option_id']; ?>" <?php if(in_array($livingfacilityRow['option_id'],$livingFacility)): ?> selected <?php endif; ?>><?php echo $livingfacilityRow['title']; ?></option>
+										<?php
+									}
+									?>
+								 </select>
+								 <div class="checkbox">
+									<label>
+									  <input type="checkbox" name="livingfacilityck" onchange="fnShowHide(3)" >
+									  Show/hide Living Facility column 
+									</label>
+								 </div>
+							</div>
+							<div class="col-sm-8">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label class="col-sm-2 control-label" for="form_source"><?php xl('Source:','e'); ?></label>
+											<div class="col-sm-4 input-group-sm">
+											  <input type='text' name='form_source' id="form_source" size='10' value='<?php echo $_POST['form_source']; ?>'
+											title='<?php xl("A check number or claim number to identify the payment","e"); ?>' class="form-control">
+											</div>
+											<label class="col-sm-2 control-label" for="form_paydate"><?php xl('Pay Date:','e'); ?></label>
+											<div class="col-sm-4 input-group-sm">
+											  <input type='text' name='form_paydate' id='form_paydate' size='10' value='<?php echo $_POST['form_paydate']; ?>'
+											onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)'
+											title='<?php xl("Date of payment yyyy-mm-dd","e"); ?>' class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label class="col-sm-2 control-label" for="form_amount"><?php xl('Amount:','e'); ?></label>
+											<div class="col-sm-4 input-group-sm">
+												<input type='text' name='form_amount' id='form_amount' size='10' value='<?php echo $_POST['form_amount']; ?>'
+											title='<?php xl("Paid amount that you will allocate","e"); ?>' class="form-control">
+											</div>
+											<?php if ($INTEGRATED_AR) { // include deposit date ?>
+											<label class="col-sm-2 control-label" for="form_deposit_date"><?php xl('Deposit Date:','e'); ?></label>
+											<div class="col-sm-4 input-group-sm">
+												<input type='text' name='form_deposit_date' id='form_deposit_date' size='10' value='<?php echo $_POST['form_deposit_date']; ?>'
+											onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)'
+											title='<?php xl("Date of bank deposit yyyy-mm-dd","e"); ?>' class="form-control">
+											</div>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							
+						
+					<fieldset>
+						<legend><h4>Patients by Appointments</h4></legend>
+						<div class="form-group">
+							<label class="col-sm-1 col-md-2 control-label" for="form_from_date"><?php xl('From','e'); ?> : </label>
+							<div class="col-sm-4 col-md-3 input-group-sm">
+								<div class="input-group input-group-sm">
+									<input type='text' class="form-control" aria-describedby="fromadion" name='form_from_date' id="form_from_date"
+									  size='10' value='<?php echo $from ?>'
+									  onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)'
+									  title='yyyy-mm-dd'><span class="input-group-addon" id="fromadion"><img src='../interface/pic/show_calendar.gif'
+									  align='absbottom' width='24' height='22' id='img_from_date'
+									  border='0' alt='[?]' style='cursor: pointer'
+									  title='<?php xl('Click here to choose a date','e'); ?>'></span>
+								</div>
+							</div>
+
+							<label class="col-sm-1 col-md-2 control-label" for="form_tol_date"><?php xl('To','e'); ?> : </label>
+							<div class="col-sm-4 col-md-3 input-group-sm">
+								<div class="input-group input-group-sm">
+									<input type='text' name='form_tol_date' aria-describedby="toadion" class="form-control" id="form_tol_date"
+									  size='10' value='<?php echo $to ?>'
+									  onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)'
+									  title='yyyy-mm-dd'><span class="input-group-addon" id="toadion"><img src='../interface/pic/show_calendar.gif'
+									  align='absbottom' width='24' height='22' id='img_to_date'
+									  border='0' alt='[?]' style='cursor: pointer'
+									  title='<?php xl('Click here to choose a date','e'); ?>'><span>
+								</div>
+							</div>
+							<div class="col-sm-2 text-center">
+								<input type="button" name="patlist" id="patlist" value="Get Patients" class="btn btn-submit btn-sm">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-sm-4 input-group-sm">
+								<span id="calmsg"></span>
+							   <select name="patlistselect[]" class="form-control" id="patlistselect" multiple></select>
+							</div>
+							<div class="col-sm-4" id="firstset">
+								<div class="checkbox">
+									<label>
+									  <input type="checkbox" name="optionsRadios" onchange="fnShowHide(4)">
+									  Show/hide Appointment Date
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+									  <input type="checkbox" name="optionsRadios" onchange="fnShowHide(5)">
+									  Show/hide Billing Note
+									</label>
+								</div>
+                                                                <div class="checkbox">
+									<label>
+									   <input type="checkbox" onchange="fnShowHide(6)">
+                                                                           Show/hide Claim History
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="checkbox">
+									<label>
+									  <input type="checkbox" name="optionsRadios" onchange="showpracticeaddr()" checked>
+									  Show/hide Practice Details
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+									  <input type="checkbox" name="optionsRadios" onchange="showbillingaddr()" checked>
+									  Show/hide Billing Address
+									</label>
+								</div>
+							</div>
+
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+			<div class="row form-horizontal" role="form">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label class="col-sm-1 control-label" for="form_name"><?php xl('Name:','e'); ?></label>
+						<div class="col-sm-2 col-md-3 input-group-sm">
+						  <input type='text' name='form_name' id="form_name" size='10' value='<?php echo $_POST['form_name']; ?>'
+						title='<?php xl("Any part of the patient name, or \"last,first\", or \"X-Y\"","e"); ?>' class="form-control">
+						</div>
+						<label class="col-sm-1 control-label" for="form_pid"><?php xl('Chart ID:','e'); ?></label>
+						<div class="col-sm-2 col-md-1 input-group-sm">
+						  <input type='text' name='form_pid' id='form_pid' size='10' value='<?php echo $_POST['form_pid']; ?>'
+						title='<?php xl("Patient chart ID","e"); ?>' class="form-control">
+						</div>
+						<label class="col-sm-1 control-label" for="form_encounter"><?php xl('Encounter:','e'); ?></label>
+						<div class="col-sm-2 input-group-sm">
+							<input type='text' name='form_encounter' id='form_encounter' size='10' value='<?php echo $_POST['form_encounter']; ?>'
+						title='<?php xl("Encounter number","e"); ?>' class="form-control">
+						</div>
+						<label class="col-sm-1 control-label" for="form_date"><?php xl('Svc Date:','e'); ?></label>
+						<div class="col-sm-2 input-group-sm">
+						  <input type='text' name='form_date' id="form_date" size='10' value='<?php echo $_POST['form_date']; ?>'
+						title='<?php xl("Date of service mm/dd/yyyy","e"); ?>' class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label" for="form_to_date"><?php xl('To:','e'); ?></label>
+						<div class="col-sm-2 input-group-sm">
+						  <input type='text' name='form_to_date' id='form_to_date' size='10' value='<?php echo $_POST['form_to_date']; ?>'
+						title='<?php xl("Ending DOS mm/dd/yyyy if you wish to enter a range","e"); ?>' class="form-control">
+						</div>
+						<div class="col-sm-2 input-group-sm">
+							<select name='form_category' id="form_category" class="form-control">
+							  <?php
+								  foreach (array(xl('Open'), xl('All'), xl('Due Pt'), xl('Due Ins')) as $value) {
+								   echo "    <option value='$value'";
+								   if ($_POST['form_category'] == $value) echo " selected";
+								   echo ">$value</option>\n";
+								  }
+							 ?>
+						   </select>
+						</div>
+						<label class="col-sm-1 control-label" for="form_ageby"><?php xl('Age By','e') ?>:</label>
+						<div class="col-sm-2 input-group-sm">
+							<select name='form_ageby' class="form-control">
+								<?php
+								 foreach (array('Service Date', 'Last Activity Date') as $value) {
+								  echo "    <option value='$value'";
+								  if ($_POST['form_ageby'] == $value) echo " selected";
+								  echo ">" . xl($value) . "</option>\n";
+								 }
+								?>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label" for="form_age_cols"> <?php xl('Aging Columns:','e') ?></label>
+						<div class="col-sm-1 input-group-sm">
+							<input type='text' name='form_age_cols' id='form_age_cols' size='10' value='<?php echo $_POST['form_age_cols']; ?>'
+							class="form-control">
+						</div>
+						<label class="col-sm-1 control-label" for="form_age_inc"><?php xl('Days/Col:','e') ?></label>
+						<div class="col-sm-1 input-group-sm">
+							<input type='text' name='form_age_inc' id='form_age_inc' size='10' value='<?php echo $_POST['form_age_inc']; ?>'
+							class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-12 text-center input-group-sm">
+						<input type='submit' name='form_search'  value='<?php xl("Search","e"); ?>'
+						class="btn btn-submit btn-sm">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+//if ($_POST['form_search'] || $_POST['form_print']) {
+  $form_name      = trim($_POST['form_name']);
+  $form_pid       = trim($_POST['form_pid']);
+  $form_encounter = trim($_POST['form_encounter']);
+  $form_date      = fixDate($_POST['form_date'], "");
+  $form_to_date   = fixDate($_POST['form_to_date'], "");
+  
+  // New Ageing fields added
+  $is_ageby_lad   = strpos($_POST['form_ageby'], 'Last') !== false;
+  $form_age_cols = (int) $_POST['form_age_cols'];
+  $form_age_inc  = (int) $_POST['form_age_inc'];
+  if ($form_age_cols > 0 && $form_age_cols < 50) {
+    if ($form_age_inc <= 0) $form_age_inc = 30;
+  } else {
+    $form_age_cols = 0;
+    $form_age_inc  = 0;
+  }
+
+  $where = "";
+
+  // Handle X12 835 file upload.
+  //
+  if ($_FILES['form_erafile']['size']) {
+    $tmp_name = $_FILES['form_erafile']['tmp_name'];
+
+    // Handle .zip extension if present.  Probably won't work on Windows.
+    if (strtolower(substr($_FILES['form_erafile']['name'], -4)) == '.zip') {
+      rename($tmp_name, "$tmp_name.zip");
+      exec("unzip -p $tmp_name.zip > $tmp_name");
+      unlink("$tmp_name.zip");
+    }
+
+    echo "<!-- Notes from ERA upload processing:\n";
+    $alertmsg .= parse_era($tmp_name, 'era_callback');
+    echo "-->\n";
+    $erafullname = $GLOBALS['OE_SITE_DIR'] . "/era/$eraname.edi";
+
+    if (is_file($erafullname)) {
+      $alertmsg .= "Warning: Set $eraname was already uploaded ";
+      if (is_file($GLOBALS['OE_SITE_DIR'] . "/era/$eraname.html"))
+        $alertmsg .= "and processed. "; 
+      else
+        $alertmsg .= "but not yet processed. ";
+    }
+    rename($tmp_name, $erafullname);
+  } // End 835 upload
+
+  if ($INTEGRATED_AR) {
+    if ($eracount) {
+      // Note that parse_era() modified $eracount and $where.
+      if (! $where) $where = '1 = 2';
+    }
+    else {
+      if ($form_name) {
+        if ($where) $where .= " AND ";
+        // Allow the last name to be followed by a comma and some part of a first name.
+        if (preg_match('/^(.*\S)\s*,\s*(.*)/', $form_name, $matches)) {
+          $where .= "p.lname LIKE '" . $matches[1] . "%' AND p.fname LIKE '" . $matches[2] . "%'";
+        // Allow a filter like "A-C" on the first character of the last name.
+        } else if (preg_match('/^(\S)\s*-\s*(\S)$/', $form_name, $matches)) {
+          $tmp = '1 = 2';
+          while (ord($matches[1]) <= ord($matches[2])) {
+            $tmp .= " OR p.lname LIKE '" . $matches[1] . "%'";
+            $matches[1] = chr(ord($matches[1]) + 1);
+          }
+          $where .= "( $tmp ) ";
+        } else {
+          $where .= "p.lname LIKE '%$form_name%'";
+        }
+      }
+      if ($form_pid) {
+        if ($where) $where .= " AND ";
+        $where .= "f.pid = '$form_pid'";
+      }
+      if ($form_encounter) {
+        if ($where) $where .= " AND ";
+        $where .= "f.encounter = '$form_encounter'";
+      }
+      if ($form_date) {
+        if ($where) $where .= " AND ";
+        if ($form_to_date) {
+          $where .= "f.date >= '$form_date' AND f.date <= '$form_to_date'";
+        }
+        else {
+          $where .= "f.date = '$form_date'";
+        }
+      }
+      if (! $where) {
+        if ($_POST['form_category'] == 'All') {
+          die(xl("At least one search parameter is required if you select All."));
+        } else {
+          $where = "1 = 1";
+        }
+      }
+    }
+    
+    //Subhan
+    $formPayerId = $payerIdStr;
+    $payerClause = "";
+    if($formPayerId != ''):
+        $payerClause = " AND bb.payer_id IN (".$formPayerId.")";
+    endif;
+    
+    $insuranceClause = $faciltyClause = $patlistselectClause = $livingfaciltyClause =  "";
+    if($insuredIdStr != ''):
+        $insuranceClause = " AND p.insured_Type IN ('". $insuredIdStr ."')";
+    endif;
+    if($defaultFacilityStr != ''):
+        $faciltyClause = " AND p.patient_facility IN (". $defaultFacilityStr.")";
+    endif;
+    
+    if($livingFacilityStr != ''):
+        $livingfaciltyClause = " AND p.living_facility IN ('". $livingFacilityStr."')";
+    endif;
+    
+    if($patlistselectStr != ''):
+        $patlistselectClause = " AND p.pid IN (". $patlistselectStr.")";
+    endif;
+    
+
+    // Notes that as of release 4.1.1 the copays are stored
+    // in the ar_activity table marked with a PCP in the account_code column.
+    $query = "SELECT DISTINCT f.encounter, f.id, f.pid, f.date,f.billing_note, " .
+      "f.last_level_billed, f.last_level_closed, f.last_stmt_date, f.stmt_count, " .
+      "p.fname, p.mname, p.lname,p.street, p.city, p.state, p.postal_code, p.genericname2, p.genericval2, " .
+      "( SELECT SUM(b.fee) FROM billing AS b WHERE " .
+      "b.pid = f.pid AND b.encounter = f.encounter AND " .
+      "b.activity = 1 AND b.code_type != 'COPAY' ) AS charges, " .
+      "( SELECT SUM(a.pay_amount) FROM ar_activity AS a WHERE " .
+      "a.pid = f.pid AND a.encounter = f.encounter AND a.payer_type = 0 AND a.account_code = 'PCP')*-1 AS copays, " .
+      "( SELECT SUM(a.pay_amount) FROM ar_activity AS a WHERE " .
+      "a.pid = f.pid AND a.encounter = f.encounter AND a.account_code != 'PCP') AS payments, " .
+      "( SELECT SUM(a.adj_amount) FROM ar_activity AS a WHERE " .
+      "a.pid = f.pid AND a.encounter = f.encounter ) AS adjustments, " .
+           
+      "(SELECT name FROM insurance_companies ins WHERE ins.id = bb.payer_id) as payername,".      
+            
+      "(SELECT title FROM  list_options liop WHERE  liop.list_id =  'userlist1' AND liop.option_id = p.insured_Type) as insuredType, ".
+            
+      "(SELECT title FROM  list_options lif WHERE  lif.list_id =  'Living_Facility' AND lif.option_id = p.living_facility) as livingFacility, ".
+            
+      "(SELECT name FROM  facility fl WHERE  fl.id = p.patient_facility) as defaultfacility ". 
+            
+      "FROM form_encounter AS f " .
+      "JOIN billing AS bb ON f.encounter = bb.encounter " .      
+      "JOIN patient_data AS p ON p.pid = f.pid " .
+      "WHERE $where $payerClause $insuranceClause $faciltyClause $livingfaciltyClause $patlistselectClause AND bb.provider_id !=0 AND bb.payer_id !='' " .
+      "ORDER BY p.lname, p.fname, p.mname, f.pid, f.encounter";
+    // Note that unlike the SQL-Ledger case, this query does not weed
+    // out encounters that are paid up.  Also the use of sub-selects
+    // will require MySQL 4.1 or greater.
+
+    // echo "<!-- $query -->\n"; // debugging
+    
+    $t_res = sqlStatement($query);
+
+    $num_invoices = mysql_num_rows($t_res);
+    if ($eracount && $num_invoices != $eracount) {
+      $alertmsg .= "Of $eracount remittances, there are $num_invoices " .
+        "matching encounters in OpenEMR. ";
+    }
+  } // end $INTEGRATED_AR
+  else {
+    if ($eracount) {
+      // Note that parse_era() modified $eracount and $where.
+      if (! $where) $where = '1 = 2';
+    }
+    else {
+      if ($form_name) {
+        if ($where) $where .= " AND ";
+        // Allow the last name to be followed by a comma and some part of a first name.
+        if (preg_match('/^(.*\S)\s*,\s*(.*)/', $form_name, $matches)) {
+          $where .= "customer.name ILIKE '" . $matches[2] . '% ' . $matches[1] . "%'";
+        // Allow a filter like "A-C" on the first character of the last name.
+        } else if (preg_match('/^(\S)\s*-\s*(\S)$/', $form_name, $matches)) {
+          $tmp = '1 = 2';
+          while (ord($matches[1]) <= ord($matches[2])) {
+            // $tmp .= " OR customer.name ILIKE '% " . $matches[1] . "%'";
+            // Fixing the above which was also matching on middle names:
+            $tmp .= " OR customer.name ~* ' " . $matches[1] . "[A-Z]*$'";
+            $matches[1] = chr(ord($matches[1]) + 1);
+          }
+          $where .= "( $tmp ) ";
+        } else {
+          $where .= "customer.name ILIKE '%$form_name%'";
+        }
+      }
+      if ($form_pid && $form_encounter) {
+        if ($where) $where .= " AND ";
+        $where .= "ar.invnumber = '$form_pid.$form_encounter'";
+      }
+      else if ($form_pid) {
+        if ($where) $where .= " AND ";
+        $where .= "ar.invnumber LIKE '$form_pid.%'";
+      }
+      else if ($form_encounter) {
+        if ($where) $where .= " AND ";
+        $where .= "ar.invnumber like '%.$form_encounter'";
+      }
+
+      if ($form_date) {
+        if ($where) $where .= " AND ";
+        $date1 = substr($form_date, 0, 4) . substr($form_date, 5, 2) .
+          substr($form_date, 8, 2);
+        if ($form_to_date) {
+          $date2 = substr($form_to_date, 0, 4) . substr($form_to_date, 5, 2) .
+            substr($form_to_date, 8, 2);
+          $where .= "((CAST (substring(ar.invnumber from position('.' in ar.invnumber) + 1 for 8) AS integer) " .
+            "BETWEEN '$date1' AND '$date2')";
+          $tmp = "date >= '$form_date' AND date <= '$form_to_date'";
+        }
+        else {
+          // This catches old converted invoices where we have no encounters:
+          $where .= "(ar.invnumber LIKE '%.$date1'";
+          $tmp = "date = '$form_date'";
+        }
+        // Pick out the encounters from MySQL with the desired DOS:
+        $rez = sqlStatement("SELECT pid, encounter FROM form_encounter WHERE $tmp");
+        while ($row = sqlFetchArray($rez)) {
+          $where .= " OR ar.invnumber = '" . $row['pid'] . "." . $row['encounter'] . "'";
+        }
+        $where .= ")";
+      }
+
+      if (! $where) {
+        if ($_POST['form_category'] == 'All') {
+          die(xl("At least one search parameter is required if you select All."));
+        } else {
+          $where = "1 = 1";
+        }
+      }
+    }
+
+    $query = "SELECT ar.id, ar.invnumber, ar.duedate, ar.amount, ar.paid, " .
+      "ar.intnotes, ar.notes, ar.shipvia, customer.name, customer.id AS custid, ";
+    if ($got_address_table) $query .=
+      "substring(trim(both from customer.name) from '#\"%#\" %' for '#') AS lname, " .
+      "substring(trim(both from customer.name) from '% #\"%#\"' for '#') AS fname, ";
+    else $query .=
+      "substring(trim(both from customer.name) from '% #\"%#\"' for '#') AS lname, " .
+      "substring(trim(both from customer.name) from '#\"%#\" %' for '#') AS fname, ";
+    $query .=
+      "(SELECT SUM(invoice.sellprice * invoice.qty) FROM invoice WHERE " .
+      "invoice.trans_id = ar.id AND invoice.sellprice > 0) AS charges, " .
+      "(SELECT SUM(invoice.sellprice * invoice.qty) FROM invoice WHERE " .
+      "invoice.trans_id = ar.id AND invoice.sellprice < 0) AS adjustments " .
+      "FROM ar, customer WHERE ( $where ) AND customer.id = ar.customer_id ";
+    if ($_POST['form_category'] != 'All' && !$eracount) {
+      $query .= "AND ar.amount != ar.paid ";
+      // if ($_POST['form_category'] == 'Due') {
+      //   $query .= "AND ar.duedate <= CURRENT_DATE ";
+      // }
+    }
+    $query .= "ORDER BY lname, fname, ar.invnumber";
+
+    // echo "<!-- $query -->\n"; // debugging
+    
+    $t_res = SLQuery($query);
+    if ($sl_err) die($sl_err);
+
+    $num_invoices = SLRowCount($t_res);
+    if ($eracount && $num_invoices != $eracount) {
+      $alertmsg .= "Of $eracount remittances, there are $num_invoices " .
+        "matching claims in OpenEMR. ";
+    }
+
+  } // end not $INTEGRATED_AR
+?>
+<div class="aligndiv">
+        <input class="bootrapbtn" type='button' value='<?php xl('Select All','e')?>' onclick='checkAll(true)' /> &nbsp;
+        <input class="bootrapbtn" type='button' value='<?php xl('Clear All','e')?>' onclick='checkAll(false)' /> &nbsp;
+        <input class="bootrapbtn" type='submit' name='form_pdf' value='<?php xl('PDF Download Selected Statements','e'); ?>' />
+    </div>
+<table cellspacing='0' width='100%' id="patientstatement" class="table table-striped table-bordered nowrap" style="display:block;">
+    <thead>
+ <tr>
+  <th>
+   <?php xl('Payer','e'); ?>
+  </th>
+  <th>
+   <?php xl('Insured Type','e'); ?>
+  </th>
+  <th>
+   <?php xl('Default Facility','e'); ?>
+  </th>
+  <th>
+   <?php xl('Living Facility','e'); ?>
+  </th>
+  <th>
+   <?php xl('Appointment Date','e'); ?>
+  </th>
+  <th>
+   <?php xl('Billing Note','e'); ?>
+  </th>
+  <th>
+   <?php xl('Claim History','e'); ?>
+  </th>
+  <th>
+   <?php xl('Zirmed Id','e'); ?>
+  </th>
+  <th>
+   <?php xl('Practice Name','e'); ?>
+  </th>
+  <th>
+   <?php xl('Practice Address','e'); ?>
+  </th>
+  <th>
+   <?php xl('Practice City','e'); ?>
+  </th>
+  <th>
+   <?php xl('Practice State','e'); ?>
+  </th>
+  <th>
+   <?php xl('Practice Zip','e'); ?>
+  </th>
+  <th>
+   <?php xl('Statement Date','e'); ?>
+  </th>
+  <th>
+   <?php xl('Invoice','e'); ?>
+  </th>
+  <th>
+   <?php xl('Account Number','e'); ?>
+  </th>
+  <th>
+   <?php xl('Bill To','e'); ?>
+  </th>
+  <th>
+   <?php xl('Bill To Address','e'); ?>
+  </th>
+  <th>
+   <?php xl('Bill To City','e'); ?>
+  </th>
+  <th>
+   <?php xl('Bill To State','e'); ?>
+  </th>
+  <th>
+   <?php xl('Bill To Zip','e'); ?>
+  </th>
+  <th>
+   <?php xl('DOS','e'); ?>
+  </th>
+  <th>
+   <?php xl('Procedure','e'); ?>
+  </th>
+  <th>
+   <?php xl('Description','e'); ?>
+  </th>
+  <th>
+   <?php xl('DX Code','e'); ?>
+  </th>
+  <!--<th>
+   <?php xl($INTEGRATED_AR ? 'Last Stmt' : 'Due Date','e'); ?>
+  </th>-->
+  <th align="right">
+   <?php xl('Charge','e'); ?>
+  </th>
+  <th align="right">
+   <?php xl('Paid','e'); ?>
+  </th>
+  <th align="right">
+   <?php xl('Adjust','e'); ?>
+  </th> 
+  <th align="right">
+   <?php xl('Balance','e'); ?>
+  </th>
+    <?php
+    // Generate aging headers if appropriate, else balance header.
+    if ($form_age_cols) {
+      for ($c = 0; $c < $form_age_cols;) {
+        echo "  <th class='dehead' align='right'>";
+        echo $form_age_inc * $c;
+        if (++$c < $form_age_cols) {
+          echo "-" . ($form_age_inc * $c - 1);
+        } else {
+          echo "+";
+        }
+        echo "</th>\n";
+      }
+    }
+    ?>
+  <?php if (!$eracount) { ?>
+  <th class="dehead" align="left">
+   <?php xl('Sel','e'); ?>
+  </th>
+<?php } ?>
+</tr>
+ </thead>
+<?php
+  $orow = -1;
+  $a = 0;
+  if ($INTEGRATED_AR) {
+    while ($row = sqlFetchArray($t_res)) {
+      $balance = sprintf("%.2f", $row['charges'] + $row['copays'] - $row['payments'] - $row['adjustments']);
+
+      if ($_POST['form_category'] != 'All' && $eracount == 0 && $balance == 0) continue;
+
+      // $duncount was originally supposed to be the number of times that
+      // the patient was sent a statement for this invoice.
+      //
+      $duncount = $row['stmt_count'];
+
+      // But if we have not yet billed the patient, then compute $duncount as a
+      // negative count of the number of insurance plans for which we have not
+      // yet closed out insurance.
+      //
+      if (! $duncount) {
+        for ($i = 1; $i <= 3 && arGetPayerID($row['pid'], $row['date'], $i); ++$i) ;
+        $duncount = $row['last_level_closed'] + 1 - $i;
+      }
+       $a++;
+      $isdueany = ($balance > 0);
+      $pids = $row['pid'];
+      // An invoice is now due from the patient if money is owed and we are
+      // not waiting for insurance to pay.
+      //
+      $isduept = ($duncount >= 0 && $isdueany) ? " checked" : "";
+
+      // Skip invoices not in the desired "Due..." category.
+      //
+      if (substr($_POST['form_category'], 0, 3) == 'Due' && !$isdueany) continue;
+      if ($_POST['form_category'] == 'Due Ins' && ($duncount >= 0 || !$isdueany)) continue;
+      if ($_POST['form_category'] == 'Due Pt'  && ($duncount <  0 || !$isdueany)) continue;
+
+      $bgcolor = ((++$orow & 1) ? "#ffdddd" : "#ddddff");
+
+      $svcdate = substr($row['date'], 0, 10);
+      $last_stmt_date = empty($row['last_stmt_date']) ? '' : $row['last_stmt_date'];
+
+      // Determine if customer is in collections.
+      //
+      $billnote = ($row['genericname2'] == 'Billing') ? $row['genericval2'] : '';
+      $in_collections = stristr($billnote, 'IN COLLECTIONS') !== false;
+      
+      if ($INTEGRATED_AR) {
+        // Get invoice charge details.
+        $codes = ar_get_invoice_summary($row['pid'], $row['encounter'], true);
+      }
+      else {
+        // Get invoice charge details.
+        $codes = get_invoice_summary($row['id'], true);
+      }
+      $dispcode = "";
+      $dxCode = $payerId = $payerName = "";
+      $dxCodeArr1 = $dxCodeArr2 = "";
+      foreach ($codes as $code => $cdata) {
+          $dispcode = $code;
+          $dxQuery = sqlStatement("SELECT justify,payer_id FROM billing WHERE code = '".$code."' AND pid = ".$row['pid']." AND encounter =".$row['encounter']);
+          while($rowTemp=sqlFetchArray($dxQuery)):
+              $dxCodeArr1 = explode(":",$rowTemp['justify']);
+              $dxCodeArr2 = explode("|",$dxCodeArr1[0]);
+              $dxCode = $dxCodeArr2[1];
+              $payerId = $rowTemp['payer_id'];
+          endwhile;
+      }
+      
+      if($payerId != ""):
+          $payerQuery = sqlStatement("SELECT name FROM insurance_companies WHERE id = ".$payerId);
+          while($pTemp=sqlFetchArray($payerQuery)):
+            $payerName = $pTemp['name'];
+          endwhile;
+      endif;
+      
+      $payerFilteredName  = empty($row['payername']) ? '' : $row['payername'];
+      $insuredType  = empty($row['insuredType']) ? '' : $row['insuredType'];
+      $facility  = empty($row['defaultfacility']) ? '' : $row['defaultfacility'];
+      $livfacility  = empty($row['livingFacility']) ? '' : $row['livingFacility'];
+      $appdate  = empty($row['date']) ? '' : $row['date'];
+      $formatappdate = date("Y-m-d", strtotime($appdate));
+      $bnote  = empty($row['billing_note']) ? '' : $row['billing_note'];
+     
+?>
+ <?php
+    $mname = "";
+    if($row['mname'] != ""):
+        $mname = " ".$row['mname'];
+    endif;
+    
+    $patient = $row['fname'].$mname.", ".$row['lname'];
+    if(count($codes) > 1):
+        foreach ($codes as $code => $cdata):
+            $eachCharge = "";
+            foreach($cdata['dtl'] as $c):
+                $eachCharge = abs($c['chg']);
+                // Get Actual Charge which comes in top of the loop and break
+                break;
+            endforeach;
+            
+//            foreach($cdata['dtl'] as $c):
+//                echo "<pre>";
+//                print_r ($c);
+//                echo "</pre>";
+//            endforeach;
+            $balance = $cdata['bal'];
+            if ($form_age_cols) {
+              $agedate = $is_ageby_lad ? $last_stmt_date : $svcdate;
+              $agetime = mktime(0, 0, 0, substr($agedate, 5, 2),substr($agedate, 8, 2), substr($agedate, 0, 4));
+              $days = floor((time() - $agetime) / (60 * 60 * 24));
+              $agecolno = min($form_age_cols - 1, max(0, floor($days / $form_age_inc)));
+              $cdata['agedbal'][$agecolno] = $balance;
+            }
+            $bal = oeFormatMoney($balance);
+            if($bal == 0):
+                continue;
+            endif;
+        ?>
+            <tr>
+            <td>
+             <?php echo $payerFilteredName; ?>
+            </td>
+            <td>
+             <?php echo $insuredType; ?>
+            </td>
+            <td>
+             <?php echo $facility; ?>
+            </td>
+             <td>
+             <?php echo $livfacility; ?>   
+            </td>
+            <td>
+             <?php echo $formatappdate; ?>
+            </td>
+            <td>
+             <?php echo $bnote; ?>
+            </td>
+            <td>
+             <?php
+             $dateDos = oeFormatShortDate($svcdate);
+             $dosformat = date('m/d/Y',strtotime($dateDos));
+             ?>
+                <a href="#" onClick="window.open('claims_history.php?claimnum=<?php echo $row['pid'] . '-' . $row['encounter'] ?>&custid=<?php echo $domain_identifier; ?>&dos=<?php echo $dosformat; ?>','claims','width=600,height=600')">Click to View</a>
+            </td>
+            <td>
+             <?php echo $domain_identifier; ?>
+            </td>
+            <!--<td>
+             <?php echo $payerName; ?>
+            </td>-->
+            <td>
+             <?php echo $practiceName; ?>
+            </td>
+            <td>
+             <?php echo $practiceAddr; ?>
+            </td>
+            <td>
+             <?php echo $practiceCity; ?>
+            </td>
+            <td>
+             <?php echo $practiceState; ?>
+            </td>
+            <td>
+             <?php echo $practiceZip ?>
+            </td>
+            <td>
+             <?php echo date('m/d/Y'); ?>
+            </td>
+            <td>
+             <a href="../billing/sl_eob_invoice.php?id=<?php echo $row['id'] ?>"
+              target="_blank"><?php echo $row['pid'] . '.' . $row['encounter']; ?></a>
+            </td>
+            <td>
+             <?php echo $row['pid']; ?>
+            </td>
+            <td>
+             <?php echo $patient; ?>
+            </td>
+            <td>
+             <?php echo $row['street']; ?>
+            </td>
+            <td>
+             <?php echo $row['city']; ?>
+            </td>
+            <td>
+             <?php echo $row['state']; ?>
+            </td>
+            <td>
+             <?php echo $row['postal_code']; ?>
+            </td>
+            <td>
+             <?php echo oeFormatShortDate($svcdate) ?>
+            </td>
+            <td>
+             <?php echo $code; ?>
+            </td>
+            <td>
+             <?php echo $cdata['code_text']; ?>
+            </td>
+            <td>
+             <?php echo $dxCode; ?>
+            </td>
+            <!--<td>
+             <?php echo oeFormatShortDate($last_stmt_date) ?>
+            </td>-->
+            <?php
+            // Compute invoice balance and aging column number, and accumulate aging.
+            //echo "Last: ".$last_stmt_date." --- DOS: ". $svcdate."<br />";
+            $balance = $cdata['bal'];
+            if ($form_age_cols) {
+              $agedate = $is_ageby_lad ? $last_stmt_date : $svcdate;
+              $agetime = mktime(0, 0, 0, substr($agedate, 5, 2),substr($agedate, 8, 2), substr($agedate, 0, 4));
+              $days = floor((time() - $agetime) / (60 * 60 * 24));
+              $agecolno = min($form_age_cols - 1, max(0, floor($days / $form_age_inc)));
+              $cdata['agedbal'][$agecolno] = $balance;
+            }
+//            echo substr($agedate, 5, 2) .",".substr($agedate, 8, 2).",".substr($agedate, 0, 4)."<br />";
+//            echo "AgeDate: ". $agedate. "<br />";
+//            echo "Days: ". $days."<br />";
+//            echo "If Agecolno: ".$agecolno."<br />";
+            ?>
+            <td align="right">
+             <?php echo $eachCharge; ?>
+            </td>
+            <td align="right">
+             <?php echo $eachCharge - $cdata['adj'] - $cdata['bal']; ?>
+            </td>
+            <td align="right">
+             <?php echo $cdata['adj']; ?>
+            </td>
+            <td class="detail" align="right"><?php bucks($balance) ?></td>
+            <?php
+            if ($form_age_cols) {
+            for ($c = 0; $c < $form_age_cols; ++$c) {
+            echo "<td class='detail' align='right'>";
+            if ($c == $agecolno) {
+            bucks($cdata['agedbal'][$agecolno]);
+            }
+            echo "</td>";
+            }
+            }
+            ?>
+            <?php if (!$eracount) { ?>
+                <td align="left">
+                 <input type='checkbox' name='form_cb[<?php echo($row['id']) ?>]'<?php echo $isduept ?> />
+                 <?php if ($in_collections) echo "<b><font color='red'>IC</font></b>"; ?>
+                </td>
+              <?php } ?>
+           </tr>
+        <?php
+        endforeach;
+    else:    
+        //echo "Last: ".$last_stmt_date." --- DOS: ". $svcdate."<br />";
+        $balance = $cdata['bal'];
+            if ($form_age_cols) {
+              $agedate = $is_ageby_lad ? $last_stmt_date : $svcdate;
+              $agetime = mktime(0, 0, 0, substr($agedate, 5, 2),substr($agedate, 8, 2), substr($agedate, 0, 4));
+              $days = floor((time() - $agetime) / (60 * 60 * 24));
+              $agecolno = min($form_age_cols - 1, max(0, floor($days / $form_age_inc)));
+              $cdata['agedbal'][$agecolno] = $balance;
+            }
+            $bal = oeFormatMoney($balance);
+            if($bal == 0):
+                continue;
+            endif;
+        ?>
+            <tr>
+            <td>
+             <?php echo $payerFilteredName; ?>
+            </td>
+            <td>
+             <?php echo $insuredType; ?>
+            </td>
+            <td>
+             <?php echo $facility; ?>
+            </td>
+            <td>
+             <?php echo $livfacility; ?>   
+            </td>
+            <td>
+             <?php echo $formatappdate; ?>
+            </td>
+            <td>
+             <?php echo $bnote; ?>
+            </td>
+            <td>
+             <?php
+             $dateDos = oeFormatShortDate($svcdate);
+             $dosformat = date('m/d/Y',strtotime($dateDos));
+             ?>
+                <a href="#" onClick="window.open('claims_history.php?claimnum=<?php echo $row['pid'] . '-' . $row['encounter'] ?>&custid=<?php echo $domain_identifier; ?>&dos=<?php echo $dosformat; ?>','claims','width=600,height=600')">Click to View</a>
+            </td>
+            <td>
+             <?php echo $domain_identifier; ?>
+            </td>
+            <!--<td>
+             <?php echo $payerName; ?>
+            </td>-->
+            <td>
+             <?php echo $practiceName; ?>
+            </td>
+            <td>
+             <?php echo $practiceAddr; ?>
+            </td>
+            <td>
+             <?php echo $practiceCity; ?>
+            </td>
+            <td>
+             <?php echo $practiceState; ?>
+            </td>
+            <td>
+             <?php echo $practiceZip ?>
+            </td>
+            <td>
+             <?php echo date('m/d/Y'); ?>
+            </td>
+            <td>
+             <a href="../billing/sl_eob_invoice.php?id=<?php echo $row['id'] ?>"
+              target="_blank"><?php echo $row['pid'] . '.' . $row['encounter']; ?></a>
+            </td>
+            <td>
+             <?php echo $row['pid']; ?>
+            </td>
+            <td>
+             <?php echo $patient; ?>
+            </td>
+            <td>
+             <?php echo $row['street']; ?>
+            </td>
+            <td>
+             <?php echo $row['city']; ?>
+            </td>
+            <td>
+             <?php echo $row['state']; ?>
+            </td>
+            <td>
+             <?php echo $row['postal_code']; ?>
+            </td>
+            <td>
+             <?php echo oeFormatShortDate($svcdate) ?>
+            </td>
+            <td>
+             <?php echo $dispcode; ?>
+            </td>
+            <td>
+             <?php echo $cdata['code_text']; ?>
+            </td>
+            <td>
+             <?php echo $dxCode; ?>
+            </td>
+            <!--<td>
+             <a href="../billing/sl_eob_invoice.php?id=<?php echo $row['id'] ?>"
+              target="_blank"><?php echo $row['pid'] . '.' . $row['encounter']; ?></a>
+            </td>
+            <td>
+             <?php echo oeFormatShortDate($last_stmt_date) ?>
+            </td>-->
+            <?php
+            // Compute invoice balance and aging column number, and accumulate aging.
+            //$balance = bucks($balance);
+            if ($form_age_cols) {
+              $agedate = $is_ageby_lad ? $last_stmt_date : $svcdate;
+              $agetime = mktime(0, 0, 0, substr($agedate, 5, 2),substr($agedate, 8, 2), substr($agedate, 0, 4));
+              $days = floor((time() - $agetime) / (60 * 60 * 24));
+              $agecolno = min($form_age_cols - 1, max(0, floor($days / $form_age_inc)));
+              $row['agedbal'][$agecolno] = $balance;
+            }
+//            echo "AgeDate: ". $agedate. "<br />";
+//            echo substr($agedate, 5, 2) .",".substr($agedate, 8, 2).",".substr($agedate, 0, 4)."<br />";
+//            echo "Days: ". $days."<br />";
+//            echo "Else Agecolno: ".$agecolno."<br />";
+            ?>
+            <td align="right">
+             <?php bucks($row['charges']) ?>
+            </td>
+            <td align="right">
+             <?php bucks($row['payments'] - $row['copays']); ?>
+            </td>
+            <td align="right">
+             <?php bucks($row['adjustments']) ?>
+            </td>
+            <td class="detail" align="right"><?php bucks($balance) ?></td>
+            <?php
+            if ($form_age_cols) {
+            for ($c = 0; $c < $form_age_cols; ++$c) {
+            echo "<td class='detail' align='right'>";
+            if ($c == $agecolno) {
+            bucks($row['agedbal'][$agecolno]);
+            }
+            echo "</td>";
+            }
+            }
+            ?>
+             <?php if (!$eracount) { ?>
+                <td align="left">
+                 <input type='checkbox' name='form_cb[<?php echo($row['id']) ?>]'<?php echo $isduept ?> />
+                 <?php if ($in_collections) echo "<b><font color='red'>IC</font></b>"; ?>
+                </td>
+              <?php } ?>
+           </tr>
+        <?php
+    endif;
+ ?>
+<?php
+    } // end while
+  } // end $INTEGRATED_AR
+
+  else { // not $INTEGRATED_AR
+    for ($irow = 0; $irow < $num_invoices; ++$irow) {
+      $row = SLGetRow($t_res, $irow);
+
+      // $duncount was originally supposed to be the number of times that
+      // the patient was sent a statement for this invoice.
+      //
+      $duncount = substr_count(strtolower($row['intnotes']), "statement sent");
+
+      // But if we have not yet billed the patient, then compute $duncount as a
+      // negative count of the number of insurance plans for which we have not
+      // yet closed out insurance.
+      //
+      if (! $duncount) {
+        $insgot = strtolower($row['notes']);
+        $inseobs = strtolower($row['shipvia']);
+        foreach (array('ins1', 'ins2', 'ins3') as $value) {
+          if (strpos($insgot, $value) !== false &&
+              strpos($inseobs, $value) === false)
+            --$duncount;
+        }
+      }
+
+//    $isdue = ($row['duedate'] <= $today && $row['amount'] > $row['paid']) ? " checked" : "";
+
+      $isdueany = sprintf("%.2f",$row['amount']) > sprintf("%.2f",$row['paid']);
+
+      // An invoice is now due from the patient if money is owed and we are
+      // not waiting for insurance to pay.  We no longer look at the due date
+      // for this.
+      //
+      $isduept = ($duncount >= 0 && $isdueany) ? " checked" : "";
+
+      // Skip invoices not in the desired "Due..." category.
+      //
+      if (substr($_POST['form_category'], 0, 3) == 'Due' && !$isdueany) continue;
+      if ($_POST['form_category'] == 'Due Ins' && ($duncount >= 0 || !$isdueany)) continue;
+      if ($_POST['form_category'] == 'Due Pt'  && ($duncount <  0 || !$isdueany)) continue;
+
+      $bgcolor = ((++$orow & 1) ? "#ffdddd" : "#ddddff");
+
+      // Determine the date of service.  If this was a search parameter
+      // then we already know it.  Or an 8-digit encounter number is
+      // presumed to be a date of service imported during conversion.
+      // Otherwise look it up in the form_encounter table.
+      //
+      $svcdate = "";
+      list($pid, $encounter) = explode(".", $row['invnumber']);
+      // if ($form_date) {
+      //   $svcdate = $form_date;
+      // } else
+      if (strlen($encounter) == 8) {
+        $svcdate = substr($encounter, 0, 4) . "-" . substr($encounter, 4, 2) .
+          "-" . substr($encounter, 6, 2);
+      }
+      else if ($encounter) {
+        $tmp = sqlQuery("SELECT date FROM form_encounter WHERE " .
+          "encounter = $encounter");
+        $svcdate = substr($tmp['date'], 0, 10);
+      }
+
+      // Get billing note to determine if customer is in collections.
+      //
+      $pdrow = sqlQuery("SELECT pd.genericname2, pd.genericval2 FROM " .
+        "integration_mapping AS im, patient_data AS pd WHERE " .
+        "im.foreign_id = " . $row['custid'] . " AND " .
+        "im.foreign_table = 'customer' AND " .
+        "pd.id = im.local_id");
+      $row['billnote'] = ($pdrow['genericname2'] == 'Billing') ? $pdrow['genericval2'] : '';
+      $in_collections = stristr($row['billnote'], 'IN COLLECTIONS') !== false;
+?>
+ <tr bgcolor='<?php echo $bgcolor ?>'>
+  <td>
+   <a href="" onclick="return npopup(<?php echo $pid ?>)"
+   ><?php echo $row['lname'] . ', ' . $row['fname']; ?></a>
+  </td>
+  <td>
+   <a href="sl_eob_invoice.php?id=<?php echo $row['id'] ?>"
+    target="_blank"><?php echo $row['invnumber'] ?></a>
+  </td>
+  <td>
+   <?php echo oeFormatShortDate($svcdate) ?>
+  </td>
+  <td>
+   <?php echo oeFormatShortDate($row['duedate']) ?>
+  </td>
+  <td align="right">
+   <?php bucks($row['charges']) ?>
+  </td>
+  <td align="right">
+   <?php bucks($row['adjustments']) ?>
+  </td>
+  <td align="right">
+   <?php bucks($row['paid']) ?>
+  </td>
+  <td align="right">
+   <?php bucks($row['charges'] + $row['adjustments'] - $row['paid']) ?>
+  </td>
+  <td align="center">
+   <?php echo $duncount ? $duncount : "" ?>
+  </td>
+<?php if (!$eracount) { ?>
+  <td align="left">
+   <input type='checkbox' name='form_cb[<?php echo($row['id']) ?>]'<?php echo $isduept ?> />
+   <?php if ($in_collections) echo "<b><font color='red'>IC</font></b>"; ?>
+  </td>
+<?php } ?>
+ </tr>
+<?php
+
+    } // end for
+  } // end not $INTEGRATED_AR
+//} // end search/print logic
+
+if (!$INTEGRATED_AR) SLClose();
+?>
+
+</table>
+
+    <input type='hidden' id='openemrTitle' value='<?php echo text($openemr_name); ?>' />
+    <input type='hidden' id='currTime' value='<?php echo time(); ?>' />
+    <input type="hidden" id="provider" name="provider" value="<?php echo $provider; ?>"/>
+</form>
+</div></div></div></div>  </section> 
+ <?php include 'footer.php'; ?>        
+<script language="JavaScript">
+ function processERA() {
+  var f = document.forms[0];
+  var debug = f.form_without.checked ? '1' : '0';
+  var paydate = f.form_paydate.value;
+  window.open('sl_eob_process.php?eraname=<?php echo $eraname ?>&debug=' + debug + '&paydate=' + paydate + '&original=original', '_blank');
+  return false;
+ }
+<?php
+if ($alertmsg) {
+  echo "alert('" . htmlentities($alertmsg) . "');\n";
+}
+
+?>
+document.addEventListener('DOMContentLoaded', function() {
+	//$('#mySpinner').removeClass('spinner');
+	//$('#mySpinner').remove();
+    fnShowHide(6);    
+    fnShowHide(5);
+    fnShowHide(4);
+    fnShowHide(3);
+    fnShowHide(1);
+    fnShowHide(2);
+    fnShowHide(0);
+ }, false);
+</script>
+</body>
+<style type="text/css">
+    @import url(../../library/dynarch_calendar.css);
+</style>
+<script type="text/javascript" src="../../library/dynarch_calendar.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
+<script type="text/javascript"
+	src="../../library/dynarch_calendar_setup.js"></script>
+<script type="text/javascript">
+ Calendar.setup({inputField:"form_from_date", ifFormat:"%Y-%m-%d", button:"img_from_date"});
+ Calendar.setup({inputField:"form_tol_date", ifFormat:"%Y-%m-%d", button:"img_to_date"});
+</script>
+</html>

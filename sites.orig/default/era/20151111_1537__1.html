@@ -1,0 +1,750 @@
+<html>
+<head>
+<link rel=stylesheet href="/interface/themes/style_purple.css" type="text/css">
+<style type="text/css">
+ body       { font-family:sans-serif; font-size:8pt; font-weight:normal }
+ .dehead    { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:bold }
+ .olddetail { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .newdetail { color:#00dd00; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .errdetail { color:#dd0000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .infdetail { color:#0000ff; font-family:sans-serif; font-size:9pt; font-weight:normal }
+</style>
+<title>EOB Posting - Electronic Remittances</title>
+<script language="JavaScript">
+</script>
+</head>
+<body leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
+<form action="sl_eob_process.php" method="get" >
+<center>
+        <table border='0' cellpadding='2' cellspacing='0' width='100%'>
+        
+         <tr bgcolor="#cccccc">
+          <td class="dehead">
+           Patient          </td>
+          <td class="dehead">
+           Invoice          </td>
+          <td class="dehead">
+           Code          </td>
+          <td class="dehead">
+           Date          </td>
+          <td class="dehead">
+           Description          </td>
+          <td class="dehead" align="right">
+           Amount&nbsp;
+          </td>
+          <td class="dehead" align="right">
+           Balance&nbsp;
+          </td>
+         </tr>
+        
+         <tr bgcolor='#ffffff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Payer: ADVANTAGE BY SUPERIOR</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Santory Harrington</td>
+  <td class='olddetail'>6123.3967</td>
+  <td class='olddetail'>99214</td>
+  <td class='olddetail'>2015-10-13</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 114.96</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-90.13</td>
+  <td class='newdetail' align='right'>39.87</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-15.04</td>
+  <td class='newdetail' align='right'>24.83</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-1.84</td>
+  <td class='newdetail' align='right'>22.99</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 22.99</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Cordelia Berry</td>
+  <td class='olddetail'>6140.4027</td>
+  <td class='olddetail'>99205:25</td>
+  <td class='olddetail'>2015-10-16</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>149.00</td>
+  <td class='olddetail' align='right'>149.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 149.00</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-116.82</td>
+  <td class='newdetail' align='right'>32.18</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-2.38</td>
+  <td class='newdetail' align='right'>29.80</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 29.80</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95923</td>
+  <td class='olddetail'>2015-10-16</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>252.00</td>
+  <td class='olddetail' align='right'>281.80</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 205.53</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-161.13</td>
+  <td class='newdetail' align='right'>120.67</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-46.47</td>
+  <td class='newdetail' align='right'>74.20</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-3.29</td>
+  <td class='newdetail' align='right'>70.91</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 41.11</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>93306</td>
+  <td class='olddetail'>2015-10-16</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>264.00</td>
+  <td class='olddetail' align='right'>334.91</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 243.55</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-190.94</td>
+  <td class='newdetail' align='right'>143.97</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-20.45</td>
+  <td class='newdetail' align='right'>123.52</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-3.90</td>
+  <td class='newdetail' align='right'>119.62</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 48.71</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>99406</td>
+  <td class='olddetail'>2015-10-16</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>18.00</td>
+  <td class='olddetail' align='right'>137.62</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 15.13</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-11.86</td>
+  <td class='newdetail' align='right'>125.76</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-2.87</td>
+  <td class='newdetail' align='right'>122.89</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-0.24</td>
+  <td class='newdetail' align='right'>122.65</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 3.03</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is now re-queued for secondary paper billing</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Santory Harrington</td>
+  <td class='olddetail'>6123.4216</td>
+  <td class='olddetail'>99205:25</td>
+  <td class='olddetail'>2015-09-14</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>149.00</td>
+  <td class='olddetail' align='right'>149.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 149.00</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-116.82</td>
+  <td class='newdetail' align='right'>32.18</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-2.38</td>
+  <td class='newdetail' align='right'>29.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 29.80</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>94760</td>
+  <td class='olddetail'>2015-09-14</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>4.00</td>
+  <td class='olddetail' align='right'>33.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 3.34</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>M15: Separately billed services/tests have been bundled as they are considered components of the same procedure. Separate payment is not allowed.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>97: Payment is included in the allowance for another service/procedure</td>
+  <td class='newdetail' align='right'>-4.00</td>
+  <td class='newdetail' align='right'>29.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90654</td>
+  <td class='olddetail'>2015-09-14</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>23.00</td>
+  <td class='olddetail' align='right'>52.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 19.87</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-19.47</td>
+  <td class='newdetail' align='right'>33.33</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-3.13</td>
+  <td class='newdetail' align='right'>30.20</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-0.40</td>
+  <td class='newdetail' align='right'>29.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90471</td>
+  <td class='olddetail'>2015-09-14</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>33.00</td>
+  <td class='olddetail' align='right'>62.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 27.00</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-26.46</td>
+  <td class='newdetail' align='right'>36.34</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-6.00</td>
+  <td class='newdetail' align='right'>30.34</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-0.54</td>
+  <td class='newdetail' align='right'>29.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96372</td>
+  <td class='olddetail'>2015-09-14</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>29.00</td>
+  <td class='olddetail' align='right'>58.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 27.00</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-21.17</td>
+  <td class='newdetail' align='right'>37.63</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-2.00</td>
+  <td class='newdetail' align='right'>35.63</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-0.43</td>
+  <td class='newdetail' align='right'>35.20</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 5.40</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>PROVIDER LEVEL ADJUSTMENT (not claim-specific): $-0.14 with reason code L6^20151111</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>Vickie Love</td>
+  <td class='olddetail'>245.3927</td>
+  <td class='olddetail'>99214:25</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 114.96</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-90.13</td>
+  <td class='newdetail' align='right'>39.87</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-15.04</td>
+  <td class='newdetail' align='right'>24.83</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-1.84</td>
+  <td class='newdetail' align='right'>22.99</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 22.99</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90654</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>23.00</td>
+  <td class='olddetail' align='right'>45.99</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>N643: </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>96: Non-covered charge(s)</td>
+  <td class='newdetail' align='right'>-23.00</td>
+  <td class='newdetail' align='right'>22.99</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96372</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>29.00</td>
+  <td class='olddetail' align='right'>51.99</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 27.00</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-21.17</td>
+  <td class='newdetail' align='right'>30.82</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-2.00</td>
+  <td class='newdetail' align='right'>28.82</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-0.43</td>
+  <td class='newdetail' align='right'>28.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 5.40</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>94760</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>4.00</td>
+  <td class='olddetail' align='right'>32.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 3.34</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>N640: </td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>150: Payment adjusted because the payer deems the information submitted does not support this level of service</td>
+  <td class='newdetail' align='right'>-4.00</td>
+  <td class='newdetail' align='right'>28.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>G0008</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>CPT4:G0008 Added by Ins1 2015-11-11</td>
+  <td class='newdetail' align='right'>0.00</td>
+  <td class='newdetail' align='right'>28.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95923</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>252.00</td>
+  <td class='olddetail' align='right'>280.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 205.53</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-161.13</td>
+  <td class='newdetail' align='right'>119.26</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-46.47</td>
+  <td class='newdetail' align='right'>72.79</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-3.29</td>
+  <td class='newdetail' align='right'>69.50</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 41.11</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95921</td>
+  <td class='olddetail'>2015-10-01</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>110.00</td>
+  <td class='olddetail' align='right'>179.50</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 93.98</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>Ins1/0900014052 payment</td>
+  <td class='newdetail' align='right'>-73.68</td>
+  <td class='newdetail' align='right'>105.82</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-16.02</td>
+  <td class='newdetail' align='right'>89.80</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-11-11</td>
+  <td class='newdetail'>44: Prompt-pay discount</td>
+  <td class='newdetail' align='right'>-1.50</td>
+  <td class='newdetail' align='right'>88.30</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 18.80</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>This claim is now re-queued for secondary paper billing</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+<script>alert('Total Distribution for following check number is not full: 0900014052 ')</script>        </table>
+</center>
+<script language="JavaScript">
+</script>
+<input type="hidden" name="paydate" value="2015-11-11" />
+<input type="hidden" name="post_to_date" value="2015-11-13" />
+<input type="hidden" name="deposit_date" value="" />
+<input type="hidden" name="debug" value="0" />
+<input type="hidden" name="InsId" value="3841" />
+<input type="hidden" name="eraname" value="20151111_1537_" />
+</form>
+</body>
+</html>

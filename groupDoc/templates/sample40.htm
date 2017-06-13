@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Powered by {{ @VERSION }}</title>
+        <style type="text/css">
+            {{ Web::minify('templates/',array('style.css'),FALSE) }}
+        </style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    </head>
+    <body>
+        <h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample40</h3>
+
+        <div class='samplecontent' style="padding:10px;">
+            <span class="description"><i>This sample will show how to set callback for signature form and re-direct when it was signed using PHP SDK</i></span> <br/>
+            <br />
+            <span class="documentation"><a href="/docs/sample40.html">Docs for this sample</a></span>
+            <br />
+            <br />
+            <span class="documentation"><a href="/docs/sample40_callback.html">Docs for callback handler</a></span>
+            <br />
+            <br/><p>The data you provided:
+            <p>ClientID = {{@userId}}
+            <p>PrivateKey = {{@privateKey}}
+            <p>Form = {{@formGuid}}
+            <p>Callback Url = {{@callbackUrl}}
+            <p><font color="red">{{@error}}</font>
+            <div id="requestForm" style="padding:20px; border:1px solid black;">
+                <p> Enter data for request and press "Make request" button </p>
+                <form action="sample40" method = "post" enctype = 'multipart/form-data'>
+                    <br />
+                    <label for='clientId'>GroupDocs Client ID</label>
+                    <br />
+                    <input type='text' name='clientId' value="{{@userId}}" />
+                    <br />
+                    <br />
+                    <label for='privateKey'>GroupDocs PrivateKey</label>
+                    <br />
+                    <input type='text' name='privateKey'  value="{{@privateKey}}" />
+                    <br />
+                    <label for="formGuid" id="formLabel" >GroupDoc Form Guid</label>
+                    <br />
+                    <input type='text' id="form" name='formGuid' value="{{@formGuid}}" />
+                    <br />
+                    <label for='callbackUrl'>callbackUrl<span class="optional"> (Optional)<br /> For test Callback you can use this URL: http://groupdocs-php-samples.herokuapp.com/callbacks/sample40_callback</span></label>
+                    <br />
+                    <input type='text' name='callbackUrl' id="callbackUrl" value="{{@callbackUrl}}" />
+                    <br />
+                    <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+                    <br />
+                    <input type ="text" name="basePath" id="basePath" />
+                    <br />
+                    <input type='submit' value='Publish form'/>
+                    <span id="resultsStatus" style="color:red;display:none;"> (Please wait for ajax response) </span>
+                </form>
+            </div>
+            <div id = 'result' style="padding:20px; border:1px solid black;" >
+                <p> Results: </p>
+                <font color="green">{{@message}}</font>
+                <iframe id='downloadframe' src="{{@url}}" width = '1000' height = '1000'></iframe>
+
+            </div>
+            <br/>
+        </div>
+
+    <include href="links.htm" />
+    <script>
+        $(document).ready(setTimeout(check, 15000));
+        function check() {
+
+            if (($("input[name=callbackUrl]").val() != "") && (document.getElementById("result") != null)) {
+                $('#resultsStatus').fadeIn("slow");
+                $.ajax({
+                    type: 'POST',
+                    url: '/callbacks/check_guid',
+                    success: function(data) {
+                        $('#resultsStatus').fadeOut("slow");
+                        var result = null;
+                        result = data;
+                        if (result) {
+                            $("#result").css("display", "none");
+                            var guid = result;
+                            var leftvar = (screen.width - 800) / 2;
+                            var topvar = (screen.height - 600) / 2;
+                            window.open('/popup?guid=' + guid, 'Redirect window', 'width=850,height=500,left=' + leftvar + ',top=' + topvar + ',resizable=no,scrollbars=no,location=no');
+                        }
+                    },
+                    dataType: "text"
+                });
+            }
+        }
+    </script>
+</body>
+</html>

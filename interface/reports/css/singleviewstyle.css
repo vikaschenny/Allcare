@@ -1,0 +1,31 @@
+.body_top{
+    background-color: #fff;
+    margin: 0px;
+}
+div.tabContainer div.tab{
+    width: 100%;
+    padding:0px;
+}
+div.tabContainer div.tab > table{
+    margin-left:15px;
+}
+textarea{
+    width: 98%;
+}
+.section-header{
+    text-align: center;
+}
+.section-header h4 {
+   font-size: 18px;
+   margin: 7px;
+}
+#info {
+    font-size: 16px;
+    margin: 13px;
+}
+#single_view {
+    margin: 13px;
+}
+ul.tabNav li.current {
+    font-size: 17px;
+}

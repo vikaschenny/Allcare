@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Powered by {{ @VERSION }}</title>
+        <style type="text/css">
+            {{ Web::minify('templates/',array('style.css'),FALSE) }}
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+        <script>
+            // Read a page's GET URL variables and return them as an associative array.
+            $(document).ready(function() {
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++)
+                {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                if (vars['guid']) {
+                   $("#result").append('<span class="description"><i>Document was signed successfully</i></span>')
+                   $("#resultIframe").attr('src', "https://apps.groupdocs.com/document-viewer/embed/" + vars['guid']);
+                } else {
+                    $("#result").append('<span style="color:red"><i>Document was not signed successfully</i></span>')
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div style="padding:20px; text-align:center;"><h2><a href="">GroupDocs Redirect Sample</a></h2></div>
+        <div id="result">
+            
+        </div>
+        <iframe id="resultIframe" src="" width = '800' height = '1000'></iframe>
+    </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Powered by {{ @VERSION }}</title>
+        <style type="text/css">
+            {{ Web::minify('templates/',array('style.css'),FALSE) }}
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://dev-apps-groupdocs.dynabic.com/content/signaturewidgets/groupdocs.sign.js"></script>
+        <script>
+                                
+            $(document).ready(setTimeout(check, 5000));
+            function check() {
+
+                if (($("input[name=callbackUrl]").val() != "") && (document.getElementById("result") != null)) {
+                    $('#resultsStatus').fadeIn("slow");
+                    $.ajax({
+                        type: 'POST',
+                        url: '/callbacks/check_guid',
+                        success: function (data) {
+                            var result = null;
+                            result = data
+                            if (result!= null) {
+                                $("#result").css("display", "none");
+                                var guid = result;
+                                var leftvar = (screen.width-800)/2;
+                                var topvar = (screen.height-600)/2;       
+                                window.open('/popup?guid=' + guid, 'Redirect window', 'width=850,height=500,left=' + leftvar + ',top=' + topvar + ',resizable=no,scrollbars=no,location=no');
+                            } else {
+                                var leftvar = (screen.width-800)/2;
+                                var topvar = (screen.height-600)/2;       
+                                window.open('/popup', 'Redirect window', 'width=850,height=500,left=' + leftvar + ',top=' + topvar + ',resizable=no,scrollbars=no,location=no');
+                            }
+                        },
+                        dataType: "text"
+                    });
+                }
+            }
+            function setLogic() {
+                if ($("#useWidget").is(':checked')) {
+                     $("#btnLoad").prop('type', 'button');
+                     $("#btnLoad").attr('onClick', 'load();');
+                     $("#form").removeAttr("type");
+                     $("#form").removeAttr("method");
+                     $("#form").attr('action', '#');
+                     $("#signature").css("display", "block");
+                     $("#fiSignatureLabel").css("display", "block");
+                     $("#callBackLabel").css("display", "none");
+                     $("#callbackUrl").css("display", "none");
+                     $("#emailLabel").css("display", "none");
+                     $("#email").css("display", "none");
+                     $("#nameLabel").css("display", "none");
+                     $("#name").css("display", "none");
+                     $("#lastNameLabel").css("display", "none");
+                     $("#lastName").css("display", "none");
+                     $("#result").css("display", "none");
+                } else {
+                    $("#form").attr('action', 'sample39');
+                    $("#form").attr('method', 'post');
+                    $("#btnLoad").prop('type', 'multipart/form-data');
+                    $("#signature").css("display", "none");
+                    $("#fiSignatureLabel").css("display", "none");
+                    $("#callBackLabel").css("display", "block");
+                    $("#callbackUrl").css("display", "block");
+                    $("#btnLoad").prop('type', 'submit');
+                    $("#btnLoad").removeAttr('onClick');
+                    $("#emailLabel").css("display", "block");
+                    $("#email").css("display", "block");
+                    $("#nameLabel").css("display", "block");
+                    $("#name").css("display", "block");
+                    $("#lastNameLabel").css("display", "block");
+                    $("#lastName").css("display", "block");
+                    $("#result").css("display", "block");
+                }
+            }
+            
+            function load() {
+                    $('#resultsStatus').fadeIn("slow");
+                    var inputDocument, inputSignature, fileDocument, fileSignature, frDocument, frSignature;
+                    if (typeof window.FileReader !== 'function') {
+                        $("enteredData").append("p", "The file API isn't supported on this browser yet.");
+                        return;
+                    }
+                    inputDocument = document.getElementById('document');
+                    if (!inputDocument) {
+                        $("enteredData").append("p", "Um, couldn't find the fileinput element.");
+                    }
+                    else if (!inputDocument.files) {
+                        $("enteredData").append("p", "This browser doesn't seem to support the `files` property of file inputs.");
+                    }
+                    else if (!inputDocument.files[0]) {
+                        $("#files_form").append("<p class='error'>Please select a file before clicking 'Load'</p>");
+                    }
+                    else {
+                        fileDocument = inputDocument.files[0];
+                        frDocument = new FileReader();
+                        frDocument.onload = receivedDocument;
+                        frDocument.readAsDataURL(fileDocument);
+                    }
+                
+                
+                function receivedDocument() {
+
+                    inputSignature = document.getElementById('signature');
+                    if (!inputSignature) {
+                        $("enteredData").append("Um, couldn't find the fileinput element.");
+                    }
+                    else if (!inputSignature.files) {
+                        $("enteredData").append("p", "This browser doesn't seem to support the `files` property of file inputs.");
+                    }
+                    else if (!inputSignature.files[0]) {
+                        $("enteredData").append("<p>Please select a file before clicking 'Load'</p>");
+                    }
+                    else {
+                        fileSignature = inputSignature.files[0];
+                        frSignature = new FileReader();
+                        frSignature.onload = receivedSignature;
+                        frSignature.readAsDataURL(fileSignature);
+                    }
+                }
+
+                function receivedSignature() {
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" width="100" src="', frSignature.result, '"/>'].join('');
+                    signDocument();
+                }
+
+                function signDocument() {
+                    $("body").sign({
+                        userId: $('#clientId').val(),
+                        privateKey: $('#privateKey').val(),
+                        signMethod: "/sample39",
+                        onError: function(e, data) {
+                            alert(data);
+                        },
+                        onSigned: function(e, data) {
+                            $('#resultsStatus').fadeOut("slow");
+                            var result = $.parseJSON(data);
+                            if (result.error == null) {
+                                var guid = result.guid;
+                                $("#clientId").val(result.clientId);
+                                $("#privateKey").val(result.privateKey);
+                                var leftvar = (screen.width-800)/2;
+                                var topvar = (screen.height-600)/2;       
+                                window.open('/popup?guid=' + guid, 'Redirect window', 'width=850,height=500,left=' + leftvar + ',top=' + topvar + ',resizable=no,scrollbars=no,location=no');
+                            }
+                        }
+                    });
+                    $("body").sign("addDocument", {
+                        name: fileDocument.name,
+                        data: frDocument.result
+                    });
+                    $("body").sign("addSigner", {
+                        name: 'Marketplace Team',
+                        top: 0.03319,
+                        left: 0.52171,
+                        width: 100,
+                        height: 40,
+                        data: frSignature.result
+                    });
+                    $("body").sign("sign");
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample39</h3>
+
+        <div class='samplecontent' style="padding:10px;">
+            <span class="description"><i>This sample will show how to add a Signature to a document and redirect after signing with GroupDocs widget</i></span> <br/>
+            <br />
+            <span class="documentation"><a href="/docs/sample39.html">Docs for this sample</a></span>
+            <br />
+            <br/><p>You entered:
+            <p>ClientID = {{@clientId}}
+            <p>PrivateKey = {{@privateKey}}
+            <p>Email = {{@email}}
+            <p>Name = {{@name}}
+            <p>Last Name = {{@lastName}}
+            <p><span style="color: red">{{@error}}</span>
+            <div id="files_form" style="padding:20px; border:1px solid black;">
+                <form id="form" action="sample39" method = "post" enctype = 'multipart/form-data'>
+                    <br />
+                    <label for='clientId'>GroupDocs ClientID</label>
+                    <br />
+                    <input type='text' name='clientId' id="clientId" value="{{@clientId}}" />
+                    <br />
+                    <label for='privateKey'>GroupDocs PrivateKey</label>
+                    <br />
+                    <input type='text' name='privateKey' id="privateKey" value="{{@privateKey}}" />
+                    <br />
+                    <input type="checkbox" name="useWidget" value="use" id="useWidget" onclick="setLogic();"/>Sign document with Widget
+                    <br />
+                    <br />
+                    <label for='email' id="emailLabel">Email</label>
+                    <br />
+                    <input type='text' name='email' id="email" value="{{@email}}"/>
+                    <br />
+                    <label for='name' id="nameLabel">First name</label>
+                    <br />
+                    <input type='text' name='name' id="name" value="{{@name}}"/>
+                    <br />
+                    <label for='lastName' id="lastNameLabel">Last Name</label>
+                    <br />
+                    <input type='text' name='lastName' id="lastName" value="{{@lastName}}" />
+                    <br />
+                    <br />
+                    <label for='document'>Document to sign</label>
+                    <br />
+                    <input type='file' id='document' name='file'/>
+                    <br />
+                    <label for='signature' id="fiSignatureLabel" style="display:none;">Signature</label>
+                    <br />
+                    <input type='file' id='signature' style="display:none;"/>
+                    <br />
+                    <label for='callbackUrl' id="callBackLabel" >callbackUrl<span class="optional">(Optional)<br />For test Callback you can use this URL: http://groupdocs-php-samples.herokuapp.com/callbacks/sample39_callback</span></label>
+                    <br />
+                    <input type='text' name='callbackUrl' id="callbackUrl" value="{{@callbackUrl}}" size="50"/>
+                    <br />
+                    <input type='submit' id='btnLoad' value='Upload and sign the document'/>
+                    <span id="resultsStatus" style="color:red;display:none;"> (Please wait for ajax response) </span>
+                </form>
+            </div>
+            <div id="result" style="padding:20px; border:1px solid black;">
+                <p>Results:</p>
+                {{ @message }}
+                <iframe id='downloadframe' src="{{@iframe}}" width = '800' height = '1000'></iframe>
+            </div>
+        </div>
+    <include href="links.htm" />
+</body>
+</html>

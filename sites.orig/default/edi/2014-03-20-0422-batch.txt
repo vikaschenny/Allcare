@@ -1,0 +1,62 @@
+ISA******               **               *030911*1630*U*00401*00000000140320*0422*U*00401*023255122***:~GS*HC***20140320*0422*1*X*~ST*837*0001~BHT*0019*00*0123*20140320*0422*CH~REF*87~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2******46~HL*1**20*1~NM1*85*2*TESTFACILITY*****24~N3~N4***751089~NM1*87*2*TESTFACILITY*****24~N3~N4***751089~HL*2*1*22*1~SBR~NM1*IL*1******MI~N3~N4~DMG*D8~NM1*PR*2******PI~N3~N4~HL*3*2*23*0~PAT~NM1*QC*1*ADAMS*BETTY~N3*272 W. LAWSON RD 28~N4*DALLAS*TX*752536278~DMG*D8*19391030*F~CLM*1511-39*0.00***12::1*Y*A*Y*Y*C~HI*BK:7011*BF:70400*BF:7039~NM1*82*1*TEST*PROVIDER4****34~PRV*PE*ZZ*207Q00000X~LX*1~SV1*HC:99202*0.00*UN*1***1~DTP*472*D8*20140320~LX*2~SV1*HC:99211*0.00*UN*1***2~DTP*472*D8*20140320~LX*3~SV1*HC:99213*0.00*UN*1***3~DTP*472*D8*20140320~SE*42*0001~GE*1*1~IEA*1*023255122~
+                                        
+                                        
+                                        
+                                         
+
+
+                                            X    
+
+ADAMS, BETTY                  10 30 1939      X  , 
+
+272 W LAWSON RD 28                            X  
+
+DALLAS                   TX       X                                      
+
+752536278     214 7726005         X                                 
+
+                                                 
+
+                                        X
+
+                                        X        
+
+                                        X        
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+
+
+                                                        X
+
+  701 1                      703 9                           
+
+  704 00                                         
+
+
+                        
+03 20 14 03 20 14 12    99202               1        0 00 1        
+                        
+03 20 14 03 20 14 12    99211               2        0 00 1        
+                        
+03 20 14 03 20 14 12    99213               3        0 00 1        
+
+
+
+
+
+
+
+                  X   1511-39        X                 0 00      0 00     0 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140611*0138*^*00501*023374479*0*T*:~GS*HC**zz*20140611*0138*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140611*0138*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P~NM1*IL*1******MI*4~NM1*PR*2*MEDICARE OF TEXAS - J4*****PI~N3*PO BOX 61010~N4*VIRGINIA BEACH*VA*23466~HL*3*2*23*0~PAT*s~NM1*QC*1*ACEVEDO*BEATRIZ~N3*3225 CRESTVIEW ST 115~N4*DALLAS*TX*752358545~DMG*D8*19230401*F~CLM*1406-222*1000.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:1009~NM1*DN*1*TEST*PROVIDER6****XX~SBR*S*s~OI***Y***Y~NM1*IL*1******MI*78~N3~N4~NM1*PR*2*SUPERIOR HEALTH PLAN TEXAS*****PI~N3*P.O.BOX 3003~N4*FARMINGTON*MO*636403803~LX*1~SV1*HC:99205*500.00*UN*1***1~DTP*472*D8*20140611~LX*2~SV1*HC:99213*500.00*UN*1***1~DTP*472*D8*20140611~SE*41*0001~GE*1*1~IEA*1*023374479~
+                                        MEDICARE OF TEXAS - J4
+                                        
+                                        PO BOX 61010
+                                        VIRGINIA BEACH, VA 23466
+
+
+                                            X    4
+
+ACEVEDO, BEATRIZ              04 01 1923      X  , 
+
+3225 CRESTVIEW ST 115                         X  
+
+DALLAS                   TX       X                                      
+
+752358545     214 7807151         X                                 
+
+,                                                
+
+78                                      X           00 00 0000
+
+ 00 00 0000            X                X        
+
+                                        X        MEDICARE OF TEXAS - J4
+
+SUPERIOR HEALTH PLAN TEXAS                         X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+TEST, PROVIDER6
+
+                                                        X
+
+  100 9                                                      
+
+                                                 
+
+
+                        
+06 11 14 06 11 14 12    99205               1      500 00 1        
+                        
+06 11 14 06 11 14 12    99213               1      500 00 1        
+
+
+
+
+
+
+
+
+
+                  X   1406-222       X              1000 00      0 00  1000 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

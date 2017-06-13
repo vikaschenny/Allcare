@@ -1,0 +1,88 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6 Oct, 2015, 1:23:18 PM
+    Author     : Srinu
+*/
+html{
+    height: auto;
+}
+body, html{
+    background-color: #fff !important;
+}
+.logout{
+    float: right !important;
+    height: 43px;
+    margin-top: -3px !important;
+    z-index: 1;
+}
+.menuontop ul#proxyTabs{
+    margin: 6px 16px 0 -20px !important;
+}
+.menuontop #wrap > #main{
+    width:757px !important;
+}
+.menuontop #blftwrapper{
+    height: 45px !important;
+}
+.menuontop ul#proxyTabs li.config img{
+    -moz-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.menuontop ul#proxyTabs li.config img:hover{
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+    z-index: 1000;
+}
+.menuontop ul#proxyTabs li.color1 a{
+    background-color: #656578;
+}
+.gradientbutton{
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 6.5px 13px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.gradientbutton:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.gradientbutton:active {
+    border-top-color: #1b435e;
+    background: #1b435e;
+   }
+   #banner a[class="gradientbutton"]{
+       left: -60px;
+       margin-top: 63px;
+       position: absolute;
+   }
+   .menuontop ul#proxyTabs li.curr a span{
+       text-align: center;
+   }
+   #blftwrapper > div{
+        padding-top: 14px;
+   }

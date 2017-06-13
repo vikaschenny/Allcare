@@ -1,0 +1,100 @@
+#cpt_dropdown{
+    margin-left: 39px;
+    max-width: 75%;
+}
+#icd_dropdown{
+    /*margin-left: 25px;
+    max-width: 75%;*/
+}
+#cptdiv #cpt_table, #icddiv #justify{
+  width: 100%;
+  border-collapse: collapse;
+}
+#cpt_table td {
+    /*display: block;*/
+    margin: 1px;
+    padding: 5px;
+    font-size: 14px;
+}
+#cpt_table th {
+    text-align: left;
+}
+#cpt_table td input[type='checkbox']{
+    margin: 3px;
+}
+
+#cptdiv #cpt_table tr:nth-child(even), #icddiv #justify tr:nth-child(even){background: #fff;}
+#cptdiv #cpt_table tr:nth-child(odd),  #icddiv #justify tr:nth-child(odd){background: #e6e6e6;}
+#deletecpt, #deleteicd{
+    margin: 7px !important;
+}
+#save_btndown, #save_btnup{
+    margin: 7px;
+    margin-left:46%;
+}
+#cpt_search_button, #icd_search_button, #cptbtnclear, #icdbtnclear{
+   /* margin-bottom: -24px !important;
+    margin-left: 17px !important;*/
+}
+.fa-fw{
+    width: auto !important;
+}
+.button{
+    padding: 0.3em 0.5em !important;
+}
+#my_form > #cptdiv {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin-left: 39px;
+}
+#my_form > #icddiv {
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin-left: 39px;
+}
+#provider{
+    margin-left: 39px;
+}
+@media only screen and (max-width: 768px){
+    #cptdivcheck .input-group{
+        padding-left: 15px !important;
+    } 
+   /*#cpt_dropdown,#icd_dropdown{
+        max-width: 60%;
+    }
+    .btnspace{
+        margin-top: 8px;
+    }*/
+}
+@media only screen and (max-width: 479px){
+    /*#cpt_dropdown,#icd_dropdown{
+        max-width: 38%;
+    }*/
+}
+@media only screen and (max-width: 340px){  
+    /*#cpt_search, #icd_search{
+        max-width: 37%;
+    }*/
+}
+
+.spanfrom-control{
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%; 
+}
+.page-header {
+    margin:0px;
+    border-bottom: 1px solid #000;
+}
+.multiselect-clear-filter{
+    padding: 9px 12px;
+}
+
+.multiselect-container > li > a { white-space: normal; }

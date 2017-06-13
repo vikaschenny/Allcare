@@ -1,0 +1,48 @@
+CREATE TABLE IF NOT EXISTS `tbl_form_lab_requisition` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `pid` int(10) NOT NULL,
+  `encounter` int(10) NOT NULL,
+  `created_by` int(10) NOT NULL,
+  `date_of_request` date DEFAULT NULL,
+  `specimen_week` varchar(20) DEFAULT NULL,
+  `fasting` enum('Y','N') DEFAULT 'N',
+  `frail_health` enum('Y','N') DEFAULT 'N',
+  `is_home_bound` enum('Y','N') DEFAULT 'N',
+  `is_preference_home_health` enum('Y','N') DEFAULT 'N',
+  `diagnosis_codes` varchar(50) DEFAULT NULL,
+  `tests` varchar(500) DEFAULT NULL,
+  `is_colonoscopy_required` enum('Y','N') DEFAULT 'N',
+  `patient_has` varchar(10) DEFAULT NULL,
+  `nurse_practitioner_signature` varchar(20) DEFAULT 'N',
+  `nurse_practitioner_signature_date` date DEFAULT NULL,
+  `physician_signature` varchar(20) DEFAULT NULL,
+  `printed_name` varchar(50) DEFAULT NULL,
+  `date_of_signature` date DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+/*
+CREATE TABLE IF NOT EXISTS `tbl_form_lab_requisition_tests` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `pid` int(10) NOT NULL,
+  `encounter` int(10) NOT NULL,
+  `form_id` int(10) NOT NULL,
+  `CXR` enum('Y','N') DEFAULT 'N',
+  `CBC` enum('Y','N') DEFAULT 'N',
+  `UA` enum('Y','N') DEFAULT 'N',
+  `KUB` enum('Y','N') DEFAULT 'N',
+  `CMP` enum('Y','N') DEFAULT 'N',
+  `urine_culture` enum('Y','N') DEFAULT 'N',
+  `TSH` enum('Y','N') DEFAULT 'N',
+  `lipid_panel` enum('Y','N') DEFAULT 'N',
+  `PSA` enum('Y','N') DEFAULT 'N',
+  `HbAC` enum('Y','N') DEFAULT 'N',
+  `mammogram` enum('Y','N') DEFAULT 'N',
+  `is_colonoscopy_required` enum('Y','N') DEFAULT 'N',
+  `did_patient_ARC` enum('A','R','C') DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+*/

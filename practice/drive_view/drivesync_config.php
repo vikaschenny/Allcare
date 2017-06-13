@@ -1,0 +1,203 @@
+<?php
+
+//STOP FAKE REGISTER GLOBALS
+$fake_register_globals=false;
+
+//continue session
+session_start();
+
+//landing page definition -- where to go if something goes wrong
+$landingpage = "../index.php?site=".$_SESSION['site_id'];	
+
+
+if ( isset($_SESSION['portal_username']) ) {    
+    $portal_user = $_SESSION['portal_username']; 
+}else {
+    session_destroy();
+    header('Location: '.$landingpage.'&w');
+    exit;
+} 
+
+$ignoreAuth=true; // ignore the standard authentication for a regular OpenEMR user
+include_once('../../interface/globals.php');
+
+?>
+<script language='JavaScript' src="../../library/js/jquery-1.4.3.min.js"></script>
+<?php
+$base_url="//".$_SERVER['SERVER_NAME'].dirname($_SERVER["REQUEST_URI"].'?').'/';
+if($_REQUEST['error']=='access_denied'){
+    echo "<script>window.close();</script>";
+}
+elseif($_REQUEST['status'] !=1){
+         
+        $sql_scrt = sqlStatement("SELECT title FROM `list_options` where list_id='AllcareDriveSync' and option_id='client_secret'");
+	$scrt_query = sqlFetchArray($sql_scrt);
+	$client_secret = $scrt_query[title];
+
+	$sql2 = sqlStatement("SELECT title FROM `list_options` where list_id='AllcareDriveSync' and option_id = 'client_redirect_providerportal'");
+	$sql2_exc = sqlFetchArray($sql2);
+	$redirect = $sql2_exc[title];
+        
+	$sql3 = sqlStatement("SELECT title FROM `list_options` where list_id='AllcareDriveSync' and option_id = 'client_id'");
+	$sql3_exc = sqlFetchArray($sql3);
+	$client_id = $sql3_exc[title];
+
+
+        $text = 'Login With Google';
+	
+	if(!empty($redirect) && !empty($client_id) && !empty($client_secret)){
+		/*
+		 * Copyright 2011 Google Inc.
+		 *
+		 * Licensed under the Apache License, Version 2.0 (the "License");
+		 * you may not use this file except in compliance with the License.
+		 * You may obtain a copy of the License at
+		 *
+		 *     https://www.apache.org/licenses/LICENSE-2.0
+		 *
+		 * Unless required by applicable law or agreed to in writing, software
+		 * distributed under the License is distributed on an "AS IS" BASIS,
+		 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		 * See the License for the specific language governing permissions and
+		 * limitations under the License.
+		 */
+		require_once '../../interface/login/src/Google_Client.php'; // include the required calss files for google login
+		require_once '../../interface/login/src/contrib/Google_PlusService.php';
+		require_once '../../interface/login/src/contrib/Google_Oauth2Service.php';
+		session_start();
+		$client = new Google_Client();
+		$client->setApplicationName("Open Emr"); // Set your applicatio name
+		$client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/plus.me')); // set scope during user login
+		$client->setClientId($client_id); // paste the client id which you get from google API Console
+		$client->setClientSecret($client_secret); // set the client secret
+		$client->setRedirectUri($redirect); // paste the redirect URI where you given in APi Console. You will get the Access Token here during login success
+
+		$plus 		= new Google_PlusService($client);
+		$oauth2 	= new Google_Oauth2Service($client); // Call the OAuth2 class for get email address
+		if(isset($_GET['code'])) {
+			$client->authenticate(); // Authenticate
+			$_SESSION['access_token'] = $client->getAccessToken(); // get the access token here
+			header('Location: //' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+		}
+
+		if(isset($_SESSION['access_token'])) {
+			$client->setAccessToken($_SESSION['access_token']);
+		}
+
+		if ($client->getAccessToken()) {
+		  $user 		= $oauth2->userinfo->get();
+		  $me 			= $plus->people->get('me');
+		  $optParams 	= array('maxResults' => 100);
+		  $activities 	= $plus->activities->listActivities('me', 'public',$optParams);
+		  // The access token may have been updated lazily.
+		  $_SESSION['access_token'] 		= $client->getAccessToken();
+		  $email= filter_var($user['email'], FILTER_SANITIZE_EMAIL); // get the USER EMAIL ADDRESS using OAuth2
+		} else {
+			$authUrl = $client->createAuthUrl();
+		}
+
+		if(isset($me)){ 
+			$_SESSION['gplusuer'] = $me; // start the session
+		}
+
+		if(isset($_GET['logout'])) {
+		  unset($_SESSION['access_token']);
+		  unset($_SESSION['gplusuer']);
+		  session_destroy();
+		  header('Location://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']); // it will simply destroy the current seesion which you started before
+		  #header('Location: https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+		  
+		  /*NOTE: for logout and clear all the session direct goole jus un comment the above line an comment the first header function */
+		}
+		
+		if(isset($authUrl)) {
+                       $sql=sqlStatement("select * from list_options where list_id='AllcareDriveSync' and option_id='email'");
+                       $row=sqlFetchArray($sql);
+                       if($row['notes']!=''){ 
+                            $user_custom=sqlStatement("select * from tbl_user_custom_attr_1to1 where email='".$row['notes']."'");
+                               $cus=sqlFetchArray($user_custom);
+                               if(!empty($cus)){
+                                   $pfolder=sqlStatement("select * from tbl_drivesync_authentication where email='".$row['notes']."' order by id desc");
+                                   $prow=sqlFetchArray($pfolder);
+
+                                    $sql_post12=sqlStatement("select email from drive_users where email='".$row['notes']."' and domain='web' order by id desc");
+                                    $post_id1 = sqlFetchArray($sql_post12);
+
+                                    if(empty($post_id1)){
+                                        $url=base64_encode($authUrl);
+                                       echo "<a href='javascript:;' id='auth' data-href='$authUrl' class='login btn btn-info btn-lg'>Authenticate</a>";
+                                        //echo "<script>window.open('$authUrl' ,'width=200,height=100')</script>";
+                                    }
+                                    else {
+                                       $email_id=$row['notes'];
+                                       echo "sucess";
+                                    }
+                               }else {
+                                   echo "you are not a EMR User";
+                               }
+                       }else { 
+                           echo "Please enter Email id in configuration list";
+                       }
+                      
+                       
+                }
+		if(isset($_SESSION['gplusuer'])){ 
+                    // print_r($me);   // $me gives the all details about user like name, email 
+                     
+                    $email_id = $user['email'];
+                    $_session['email_id']=$email_id;
+                    $sql=sqlStatement("select * from list_options where list_id='AllcareDriveSync' and option_id='email'");
+                    $row=sqlFetchArray($sql);   
+                    if($row['notes']==$email_id){
+                       $sql=sqlStatement("insert into tbl_drivesync_authentication (date,email,status,user)values(now(),'$email_id','Authenticated','".$_SESSION['authUser']."')");
+                       
+
+                         $sql_post=sqlStatement("select email from drive_users where email='".$email_id."' and domain='web' order by id desc");
+                         $post_id = sqlFetchArray($sql_post);
+                         $auth_id=$post_id['email'];
+                         ?>
+                     <script type="text/javascript">
+                         var auth='<?php echo $auth_id; ?>';
+                         if(auth==''){
+                             console.log("https://"+'<?php echo $_SERVER['HTTP_HOST']; ?>'+"/api/DriveSync/oauth2/"+'<?php echo $email_id; ?>'+'/provider_portal'); 
+//                             $.ajax({
+//                                 type: "POST",
+//                                 url:"https://"+'<?php echo $_SERVER['HTTP_HOST']; ?>'+"/api/DriveSync/oauth2/"+'<?php echo $email_id; ?>',
+//                                 data : {},
+//                                 success: function(data) {
+//                                    
+//                                     $('#drive_content').html(data);
+//                                 },
+//                                error: function(jqXHR, exception){
+//                                    alert("failed" + jqXHR.responseText);
+//                                } 
+//                             });
+                              window.location.href = "https://"+'<?php echo $_SERVER['HTTP_HOST']; ?>'+"/api/DriveSync/oauth2/"+'<?php echo $email_id; ?>'+'/provider_portal';
+                         }else {
+                             alert('sucess');
+
+                         }
+                        
+                     </script>
+                   <?php }else { 
+                        // $sql=sqlStatement("insert into tbl_drivesync_authentication (date,email,status,user)values(now(),'$email_id','Not Authenticated','".$_SESSION['authUser']."')");
+                         unset($_SESSION['access_token']);
+                         unset($_SESSION['gplusuer']);
+                         
+                       ?> <script type="text/javascript">
+                             window.location.href = "//"+'<?php echo $_SERVER['HTTP_HOST']; ?>'+"/practice/drive_view/drivesync_config.php?error=1";
+                    </script><?php
+                        
+                    }
+				
+                                
+		} /// END $_SESSION['gplusuer'])
+	}
+//}
+        if($_REQUEST['error']==1){
+            echo "<br>"."Please Sign in with Configured Email Id";
+        }
+}
+ 
+?>
+<div id="drive_content"></div>                                  

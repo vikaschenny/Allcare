@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Powered by {{ @VERSION }}</title>
+    <style type="text/css">
+        {{ Web::minify('templates/',array('style.css'),FALSE) }}
+    </style>
+</head>
+<body>
+<h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample36</h3>
+
+<div class='samplecontent' style="padding:10px;">
+    <span class="description"><i>This sample will show how to download document after sign envelope using PHP SDK</i></span> <br/>
+    <br />
+    <span class="documentation"><a href="/docs/sample36.html">Docs for this sample</a></span>
+    <br />
+    <br/><p>You entered:
+    <p>ClientID = {{@userId}}
+    <p>PrivateKey = {{@privateKey}}
+    <p>Signed envelopeGuid = {{@envelopeGuid}}
+    <p><span style="color: red">{{@error}}</span>
+    <p>Result:</p>
+    <br/><p>{{@message}}</p>
+    <br/>
+
+    <div id="requestForm" style="padding:20px; border:1px solid black;">
+        <p> Enter data for request and press "Make Request" button </p>
+        <form action="sample36" method = "post" enctype = 'multipart/form-data'>
+            <label for='clientId'>GroupDocs ClientID</label>
+            <br />
+            <input type='text' name='clientId' id="clientId" value="{{@userId}}" />
+            <br />
+            <label for='privateKey'>GroupDocs PrivateKey</label>
+            <br />
+            <input type='text' name='privateKey' id="privateKey" value="{{@privateKey}}" />
+            <br />
+            <label for='envelopeGuid'>Signed envelop guid</label>
+            <br />
+            <input type='text' name='envelopeGuid'  value="{{@envelopeGuid}}" />
+            <br />
+            <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+            <br />
+            <input type ="text" name="basePath" id="basePath" />
+            <br />
+            <input type='submit' value='Make Request'/>
+        </form>
+
+    </div>
+    <br/>
+</div>
+
+<include href="links.htm" />
+</body>
+</html>

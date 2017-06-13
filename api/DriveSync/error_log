@@ -1,0 +1,229 @@
+[15-Mar-2016 03:36:08 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'admin_drivesync'@'localhost' (using password: YES) in /home/schemaxt/public_html/DriveSync/db_config.php on line 2
+[15-Mar-2016 03:36:08 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home/schemaxt/public_html/DriveSync/db_config.php on line 2
+[15-Mar-2016 03:43:11 America/New_York] imap_open(): Couldn't open stream {mail.schemaxtech.com:110/pop3}
+[15-Mar-2016 03:46:13 America/New_York] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 34272576 bytes) in /home/schemaxt/public_html/DriveSync/index.php on line 189
+[15-Mar-2016 03:46:13 America/New_York] Fatal error: Allowed memory size of 33554432 bytes exhausted (tried to allocate 34272576 bytes)
+[15-Mar-2016 03:56:00 America/New_York] imap_open(): Couldn't open stream {imap.gmail.com:993/imap/ssl}INBOX
+[15-Mar-2016 03:58:48 America/New_York] imap_open(): Couldn't open stream {imap.gmail.com:993/ssl}INBOX
+[15-Mar-2016 04:05:51 America/New_York] imap_fetch_overview() expects parameter 1 to be resource, null given
+[15-Mar-2016 06:17:07 America/New_York] HTTP 404 (GET /storeEmailAttachment/3D%22https://lh4.google=)
+[15-Mar-2016 06:17:08 America/New_York] HTTP 404 (GET /storeEmailAttachment/3D%22https://lh4.googleusercontent.com/B8m_NxtZb9=)
+[15-Mar-2016 06:22:58 America/New_York] HTTP 404 (GET /storeEmailAttachment/3D%22https://lh4.google=)
+[15-Mar-2016 06:22:58 America/New_York] HTTP 404 (GET /storeEmailAttachment/3D%22https://lh4.googleusercontent.com/B8m_NxtZb9=)
+[15-Mar-2016 06:56:07 America/New_York] Could not json decode the token
+[15-Mar-2016 06:56:34 America/New_York] Could not json decode the token
+[15-Mar-2016 06:57:18 America/New_York] Could not json decode the token
+[15-Mar-2016 06:57:31 America/New_York] The OAuth 2.0 access token has expired, and a refresh token is not available. Refresh tokens are not returned for responses that were auto-approved.
+[15-Mar-2016 06:57:59 America/New_York] The OAuth 2.0 access token has expired, and a refresh token is not available. Refresh tokens are not returned for responses that were auto-approved.
+[15-Mar-2016 06:58:02 America/New_York] The OAuth 2.0 access token has expired, and a refresh token is not available. Refresh tokens are not returned for responses that were auto-approved.
+[15-Mar-2016 07:11:03 America/New_York] PHP Parse error:  syntax error, unexpected ',' in /home/schemaxt/public_html/DriveSync/index.php on line 504
+[15-Mar-2016 07:11:46 America/New_York] Could not json decode the token
+[15-Mar-2016 07:12:15 America/New_York] Could not json decode the token
+[15-Mar-2016 07:13:41 America/New_York] file_get_contents(): Filename cannot be empty
+[15-Mar-2016 07:15:15 America/New_York] PHP Parse error:  syntax error, unexpected end of file in /home/schemaxt/public_html/DriveSync/index.php on line 484
+[15-Mar-2016 07:20:01 America/New_York] file_get_contents(): Filename cannot be empty
+[15-Mar-2016 07:22:23 America/New_York] explode() expects parameter 2 to be string, resource given
+[21-Mar-2016 03:44:05 America/New_York] mysqli_query() expects parameter 1 to be mysqli, null given
+[21-Mar-2016 03:57:05 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 203
+[21-Mar-2016 03:57:05 America/New_York] Fatal error: Call to a member function get() on a non-object
+[21-Mar-2016 04:27:11 America/New_York] PHP Parse error:  syntax error, unexpected 'finally' (T_STRING), expecting catch (T_CATCH) in /home/schemaxt/public_html/DriveSync/index.php on line 236
+[21-Mar-2016 04:28:07 America/New_York] PHP Parse error:  syntax error, unexpected '{', expecting '(' in /home/schemaxt/public_html/DriveSync/index.php on line 237
+[21-Mar-2016 05:03:05 America/New_York] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/schemaxt/public_html/DriveSync/index.php on line 191
+[21-Mar-2016 05:07:15 America/New_York] PHP Fatal error:  Call to undefined method Google_Service_Drive_DriveFile::getTitle() in /home/schemaxt/public_html/DriveSync/index.php on line 208
+[21-Mar-2016 05:07:15 America/New_York] Fatal error: Call to undefined method Google_Service_Drive_DriveFile::getTitle()
+[21-Mar-2016 05:23:47 America/New_York] array_merge(): Argument #2 is not an array
+[22-Mar-2016 06:28:16 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant"
+}'
+[23-Mar-2016 08:19:41 America/New_York] HTTP 404 (GET /)
+[24-Mar-2016 06:01:38 America/New_York] Error calling PATCH https://www.googleapis.com/drive/v3/files/1558v4E0PXUF3Lf1LZ0R_x_cjGytxXv5H-T6_DdO3iKc?addParents=not+found&removeParents=0B-wMEsp-0f9ibzliSk1qSWhxY1k&fields=id%2C+parents: (404) File not found: not found.
+[24-Mar-2016 06:03:18 America/New_York] Error calling PATCH https://www.googleapis.com/drive/v3/files/1558v4E0PXUF3Lf1LZ0R_x_cjGytxXv5H-T6_DdO3iKc?addParents=not+found&removeParents=0B-wMEsp-0f9ibzliSk1qSWhxY1k&fields=id%2C+parents: (404) File not found: not found.
+[24-Mar-2016 07:19:36 America/New_York] mysqli_query() expects parameter 1 to be mysqli, null given
+[24-Mar-2016 07:26:24 America/New_York] Error calling GET https://www.googleapis.com/drive/v3/files: (401) Invalid Credentials
+[24-Mar-2016 07:26:31 America/New_York] Error calling GET https://www.googleapis.com/drive/v3/files: (401) Invalid Credentials
+[24-Mar-2016 07:27:27 America/New_York] mysqli_query() expects parameter 1 to be mysqli, null given
+[24-Mar-2016 07:54:10 America/New_York] PHP Fatal error:  Call to a member function exec() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 25
+[24-Mar-2016 07:54:10 America/New_York] Fatal error: Call to a member function exec() on a non-object
+[24-Mar-2016 07:58:27 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home/schemaxt/public_html/DriveSync/index.php on line 15
+[24-Mar-2016 07:59:02 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home/schemaxt/public_html/DriveSync/index.php on line 15
+[24-Mar-2016 07:59:54 America/New_York] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /home/schemaxt/public_html/DriveSync/index.php on line 15
+[24-Mar-2016 08:01:07 America/New_York] PHP Fatal error:  Call to a member function exec() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 26
+[24-Mar-2016 08:01:07 America/New_York] Fatal error: Call to a member function exec() on a non-object
+[24-Mar-2016 08:32:56 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:33:12 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:33:30 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:34:03 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:34:34 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:35:14 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:36:38 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:39:57 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:42:20 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:42:47 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_grant",
+  "error_description" : "Token has been revoked."
+}'
+[24-Mar-2016 08:44:32 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+[24-Mar-2016 08:48:08 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+[24-Mar-2016 08:50:36 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[24-Mar-2016 08:50:36 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 08:50:41 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[24-Mar-2016 08:50:41 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 08:53:52 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[24-Mar-2016 08:53:52 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 08:55:02 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[24-Mar-2016 08:55:02 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 08:55:06 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[24-Mar-2016 08:55:06 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:11:34 America/New_York] HTTP 404 (GET /createfolder/santoshvarma4u@gmail.com)
+[24-Mar-2016 09:11:47 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[24-Mar-2016 09:11:47 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:15:08 America/New_York] PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+[24-Mar-2016 09:17:42 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[24-Mar-2016 09:17:42 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:18:27 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[24-Mar-2016 09:18:27 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:18:29 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[24-Mar-2016 09:18:29 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:18:36 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 570
+[24-Mar-2016 09:18:36 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:19:43 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 570
+[24-Mar-2016 09:19:43 America/New_York] Fatal error: Call to a member function get() on a non-object
+[24-Mar-2016 09:20:08 America/New_York] explode() expects parameter 2 to be string, array given
+[25-Mar-2016 00:16:38 America/New_York] PHP Parse error:  syntax error, unexpected ''));' (T_CONSTANT_ENCAPSED_STRING) in /home/schemaxt/public_html/DriveSync/index.php on line 33
+[25-Mar-2016 00:17:48 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:17:48 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:23:14 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:23:14 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:32:41 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:32:41 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:32:43 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:32:43 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:33:01 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:33:01 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:33:06 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:33:06 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:34:16 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:34:16 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:34:54 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:34:54 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:37:28 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 569
+[25-Mar-2016 00:37:28 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 00:38:01 America/New_York] explode() expects parameter 2 to be string, array given
+[25-Mar-2016 00:38:35 America/New_York] explode() expects parameter 2 to be string, array given
+[25-Mar-2016 00:38:45 America/New_York] explode() expects parameter 2 to be string, array given
+[25-Mar-2016 00:43:48 America/New_York] json_decode() expects parameter 1 to be string, array given
+[25-Mar-2016 00:44:53 America/New_York] PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+[25-Mar-2016 00:45:20 America/New_York] PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+[25-Mar-2016 01:06:25 America/New_York] PHP Warning:  Unterminated comment starting line 501 in /home/schemaxt/public_html/DriveSync/index.php on line 501
+[25-Mar-2016 01:06:25 America/New_York] PHP Parse error:  syntax error, unexpected 'it' (T_STRING) in /home/schemaxt/public_html/DriveSync/index.php on line 501
+[25-Mar-2016 01:08:53 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 568
+[25-Mar-2016 01:08:53 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 01:11:31 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/schemaxt/public_html/DriveSync/index.php on line 94
+[25-Mar-2016 01:12:04 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 676
+[25-Mar-2016 01:12:04 America/New_York] Fatal error: Call to a member function get() on a non-object
+[25-Mar-2016 04:17:35 America/New_York] PHP Fatal error:  Call to a member function set() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 555
+[25-Mar-2016 04:17:35 America/New_York] Fatal error: Call to a member function set() on a non-object
+[25-Mar-2016 04:18:50 America/New_York] PHP Fatal error:  Call to a member function set() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 555
+[25-Mar-2016 04:18:50 America/New_York] Fatal error: Call to a member function set() on a non-object
+[25-Mar-2016 04:19:58 America/New_York] PHP Fatal error:  Call to a member function set() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 544
+[25-Mar-2016 04:19:58 America/New_York] Fatal error: Call to a member function set() on a non-object
+[25-Mar-2016 04:20:00 America/New_York] PHP Fatal error:  Call to a member function set() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 544
+[25-Mar-2016 04:20:00 America/New_York] Fatal error: Call to a member function set() on a non-object
+[25-Mar-2016 05:51:15 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 532 and defined
+[25-Mar-2016 05:51:41 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 05:55:40 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 323 and defined
+[25-Mar-2016 06:00:45 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:02:12 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:02:45 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:05:27 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:08:24 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:28:24 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 323 and defined
+[25-Mar-2016 06:30:23 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 323 and defined
+[25-Mar-2016 06:30:43 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 06:31:54 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+[25-Mar-2016 06:32:06 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 323 and defined
+[25-Mar-2016 06:36:31 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 323 and defined
+[25-Mar-2016 06:41:26 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+[25-Mar-2016 06:59:57 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 07:00:36 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 07:05:39 America/New_York] HTTP 404 (GET /uploadHTML/bhavya.enn@gmail.com/testFileHTMLs/6abd5346bdsp787b7jf342dg)
+[25-Mar-2016 07:13:30 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 08:42:43 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[25-Mar-2016 08:45:25 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 532 and defined
+[28-Mar-2016 04:51:22 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 532 and defined
+[28-Mar-2016 04:51:33 America/New_York] HTTP 404 (GET /uploadHTML/santoshvarma4u@gmail.com/testFile%20HTMLs/6abd5346bdsp787b7jf342dg)
+[28-Mar-2016 04:51:51 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 532 and defined
+[28-Mar-2016 04:52:23 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+[28-Mar-2016 06:12:51 America/New_York] Missing argument 7 for updateLog(), called in /home/schemaxt/public_html/DriveSync/index.php on line 532 and defined
+[28-Mar-2016 06:48:41 America/New_York] Error refreshing the OAuth2 token, message: '{
+  "error" : "invalid_request",
+  "error_description" : "Missing required parameter: refresh_token"
+}'
+[28-Mar-2016 13:27:31 America/New_York] PDOStatement: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+[28-Mar-2016 13:29:22 America/New_York] PHP Parse error:  syntax error, unexpected ''schemaxt_drive'' (T_CONSTANT_ENCAPSED_STRING) in /home/schemaxt/public_html/DriveSync/index.php on line 17
+[28-Mar-2016 13:32:39 America/New_York] PHP Parse error:  syntax error, unexpected ''schemaxt_drive'' (T_CONSTANT_ENCAPSED_STRING) in /home/schemaxt/public_html/DriveSync/index.php on line 17
+[28-Mar-2016 13:32:41 America/New_York] PHP Parse error:  syntax error, unexpected ''schemaxt_drive'' (T_CONSTANT_ENCAPSED_STRING) in /home/schemaxt/public_html/DriveSync/index.php on line 17
+[28-Mar-2016 13:53:42 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 725
+[28-Mar-2016 13:53:42 America/New_York] Fatal error: Call to a member function get() on a non-object
+[28-Mar-2016 13:55:40 America/New_York] PHP Fatal error:  Call to a member function get() on a non-object in /home/schemaxt/public_html/DriveSync/index.php on line 725
+[28-Mar-2016 13:55:40 America/New_York] Fatal error: Call to a member function get() on a non-object

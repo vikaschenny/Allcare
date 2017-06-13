@@ -1,0 +1,136 @@
+/*.overlay{
+    position: fixed;
+    width: 100%;
+    left: initial;
+    right: 0px;
+}
+.nav-header {
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.files.layout-grid {
+    height: 0px;
+    min-height: 150px;
+    
+}
+.uyd-grid .ajax-filelist {
+    min-height: 100%;
+    overflow-y: auto;
+}*/
+.fileuploadform {
+    background: #fbfbfb none no-repeat scroll center 65%;
+    border: 1px solid #e4e4e4;
+    border-radius: 0 0 5px 5px;
+    font-size: 90%;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-out 0s;
+}
+div.fileupload-drag-drop {
+    min-height: 110px;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    text-align: center;
+    transition: all 0.2s linear 0s;
+    width: 100%;
+}
+div.fileupload-drag-drop div {
+    color: #bbb;
+    font-size: 110%;
+    position: relative;
+    top: 5%;
+    width: 100%;
+}
+.fileupload-buttonbar {
+    background-color: rgb(228, 228, 228);
+    overflow: hidden;
+    padding: 7px 0;
+    position: relative;
+    text-align: center;
+}
+.fileupload-buttonbar-text {
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    position: relative;
+    top: 3px;
+}
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px !important;
+    direction: ltr;
+    cursor: pointer;
+}
+.list-container{
+    margin: 0px;
+}
+.ajax-upload-dragdrop{
+    padding: 0px;
+    border: 2px dotted transparent;
+    margin-bottom: 10px;
+}
+#mulitplefileuploader{
+    margin: 0px;
+}
+.state-hover{
+    border: 2px dashed #337ab7;
+}
+.template-upload{
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 0 8px 0 #d9d9d3;
+    display: block;
+    margin:10px;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid #ebebeb;
+}
+.upload-progress{
+    box-shadow: 0 0 8px 0 #d9d9d3 inset;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    height: 10px;
+    padding: 0 !important;
+    border-radius: 10px;
+}
+.ui-progressbar-value {
+    background: #337ab7 none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: 0 0 8px 0 #505050 inset;
+    height: 10px;
+    border-radius: 10px;
+}
+.ajax-file-upload-filename{
+    width: auto;
+    min-height: 20px;
+}
+.filename{
+    float: left;
+}
+.filesize,.status{
+    float: right;
+}
+.statussuccess {
+    color: green;
+}
+.statuserror {
+    color: red;
+}
+.filesize{
+    padding-right: 15px;
+}
+.status span {
+    margin-right: 5px;
+}

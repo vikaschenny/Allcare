@@ -1,0 +1,957 @@
+<html>
+<head>
+<link rel=stylesheet href="/interface/themes/style_purple.css" type="text/css">
+<style type="text/css">
+ body       { font-family:sans-serif; font-size:8pt; font-weight:normal }
+ .dehead    { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:bold }
+ .olddetail { color:#000000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .newdetail { color:#00dd00; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .errdetail { color:#dd0000; font-family:sans-serif; font-size:9pt; font-weight:normal }
+ .infdetail { color:#0000ff; font-family:sans-serif; font-size:9pt; font-weight:normal }
+</style>
+<title>EOB Posting - Electronic Remittances</title>
+<script language="JavaScript">
+</script>
+</head>
+<body leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
+<form action="sl_eob_process.php" method="get" >
+<center>
+        <table border='0' cellpadding='2' cellspacing='0' width='100%'>
+        
+         <tr bgcolor="#cccccc">
+          <td class="dehead">
+           Patient          </td>
+          <td class="dehead">
+           Invoice          </td>
+          <td class="dehead">
+           Code          </td>
+          <td class="dehead">
+           Date          </td>
+          <td class="dehead">
+           Description          </td>
+          <td class="dehead" align="right">
+           Amount&nbsp;
+          </td>
+          <td class="dehead" align="right">
+           Balance&nbsp;
+          </td>
+         </tr>
+        
+         <tr bgcolor='#ffffff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Payer: MOLINA HEALTHCARE OF TEXAS, INC</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 1: Processed as Primary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>AMT segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>Vera Arinwine</td>
+  <td class='olddetail'>6085.3864</td>
+  <td class='olddetail'>99214:25</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 109.49</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-85.84</td>
+  <td class='newdetail' align='right'>44.16</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-1.75</td>
+  <td class='newdetail' align='right'>42.41</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-20.51</td>
+  <td class='newdetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 21.90</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90656</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>17.00</td>
+  <td class='olddetail' align='right'>38.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 14.10</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-13.82</td>
+  <td class='newdetail' align='right'>25.08</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-0.28</td>
+  <td class='newdetail' align='right'>24.80</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-2.90</td>
+  <td class='newdetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90471</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>33.00</td>
+  <td class='olddetail' align='right'>54.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 25.71</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-25.20</td>
+  <td class='newdetail' align='right'>29.70</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-0.51</td>
+  <td class='newdetail' align='right'>29.19</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-7.29</td>
+  <td class='newdetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96372</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>29.00</td>
+  <td class='olddetail' align='right'>50.90</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 25.71</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-20.16</td>
+  <td class='newdetail' align='right'>30.74</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-0.41</td>
+  <td class='newdetail' align='right'>30.33</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement</td>
+  <td class='newdetail' align='right'>-3.29</td>
+  <td class='newdetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 5.14</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96120</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>46.18</td>
+  <td class='olddetail' align='right'>73.22</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 46.18</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-45.26</td>
+  <td class='newdetail' align='right'>27.96</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-0.92</td>
+  <td class='newdetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95957</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>305.27</td>
+  <td class='olddetail' align='right'>332.31</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 305.27</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-299.16</td>
+  <td class='newdetail' align='right'>33.15</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-6.11</td>
+  <td class='newdetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95816</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>346.27</td>
+  <td class='olddetail' align='right'>373.31</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 346.27</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-339.34</td>
+  <td class='newdetail' align='right'>33.97</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-6.93</td>
+  <td class='newdetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95930</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>123.94</td>
+  <td class='olddetail' align='right'>150.98</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 123.94</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-97.17</td>
+  <td class='newdetail' align='right'>53.81</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-1.98</td>
+  <td class='newdetail' align='right'>51.83</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 24.79</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>92585</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.57</td>
+  <td class='olddetail' align='right'>182.40</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 130.57</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-102.37</td>
+  <td class='newdetail' align='right'>80.03</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-2.09</td>
+  <td class='newdetail' align='right'>77.94</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>2: Coinsurance Amount 26.11</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>99090</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>CPT4:99090 Added by Ins1 2015-10-03</td>
+  <td class='newdetail' align='right'>0.00</td>
+  <td class='newdetail' align='right'>77.94</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>N130: Consult plan benefit documents for information about restrictions for this service.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>93040</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>12.23</td>
+  <td class='olddetail' align='right'>90.17</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 12.23</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins1/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-11.99</td>
+  <td class='newdetail' align='right'>78.18</td>
+ </tr>
+ <tr bgcolor='#ddddff'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>131: Claim specific negotiated discount</td>
+  <td class='newdetail' align='right'>-0.24</td>
+  <td class='newdetail' align='right'>77.94</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Claim status 2: Processed as Secondary</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>AMT segment at claim level ignored.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>99214:25</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.00</td>
+  <td class='olddetail' align='right'>130.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-1.75</td>
+  <td class='olddetail' align='right'>128.25</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 45</td>
+  <td class='olddetail' align='right'>-20.51</td>
+  <td class='olddetail' align='right'>107.74</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Ins1 coins: 21.90</td>
+  <td class='olddetail' align='right'>0.00</td>
+  <td class='olddetail' align='right'>107.74</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-85.84</td>
+  <td class='olddetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 46.73</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 44.16</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 85.84</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90656</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>17.00</td>
+  <td class='olddetail' align='right'>38.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-0.28</td>
+  <td class='olddetail' align='right'>38.62</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 45</td>
+  <td class='olddetail' align='right'>-2.90</td>
+  <td class='olddetail' align='right'>35.72</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-13.82</td>
+  <td class='olddetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 3.18</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 13.82</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>90471</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>33.00</td>
+  <td class='olddetail' align='right'>54.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-0.51</td>
+  <td class='olddetail' align='right'>54.39</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 45</td>
+  <td class='olddetail' align='right'>-7.29</td>
+  <td class='olddetail' align='right'>47.10</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-25.20</td>
+  <td class='olddetail' align='right'>21.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 7.80</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 25.20</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96372</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>29.00</td>
+  <td class='olddetail' align='right'>50.90</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-0.41</td>
+  <td class='olddetail' align='right'>50.49</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 45</td>
+  <td class='olddetail' align='right'>-3.29</td>
+  <td class='olddetail' align='right'>47.20</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Ins1 coins: 5.14</td>
+  <td class='olddetail' align='right'>0.00</td>
+  <td class='olddetail' align='right'>47.20</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-20.16</td>
+  <td class='olddetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 18.98</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 8.84</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 20.16</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>96120</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>46.18</td>
+  <td class='olddetail' align='right'>73.22</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-0.92</td>
+  <td class='olddetail' align='right'>72.30</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-45.26</td>
+  <td class='olddetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>N130: Consult plan benefit documents for information about restrictions for this service.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>204:  0.92</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 45.26</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95957</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>305.27</td>
+  <td class='olddetail' align='right'>332.31</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-6.11</td>
+  <td class='olddetail' align='right'>326.20</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-299.16</td>
+  <td class='olddetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 6.11</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 299.16</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95816</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>346.27</td>
+  <td class='olddetail' align='right'>373.31</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-6.93</td>
+  <td class='olddetail' align='right'>366.38</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-339.34</td>
+  <td class='olddetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 6.93</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 339.34</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>95930</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>123.94</td>
+  <td class='olddetail' align='right'>150.98</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-1.98</td>
+  <td class='olddetail' align='right'>149.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Ins1 coins: 24.79</td>
+  <td class='olddetail' align='right'>0.00</td>
+  <td class='olddetail' align='right'>149.00</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-97.17</td>
+  <td class='olddetail' align='right'>51.83</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 123.94</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>Ins2/EFT2863469 payment</td>
+  <td class='newdetail' align='right'>-24.79</td>
+  <td class='newdetail' align='right'>27.04</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 1.98</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 97.17</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>92585</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>130.57</td>
+  <td class='olddetail' align='right'>157.61</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-2.09</td>
+  <td class='olddetail' align='right'>155.52</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Ins1 coins: 26.11</td>
+  <td class='olddetail' align='right'>0.00</td>
+  <td class='olddetail' align='right'>155.52</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-102.37</td>
+  <td class='olddetail' align='right'>53.15</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>Allowed amount is 101.84</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 28.20</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 102.37</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>&nbsp;</td>
+  <td class='newdetail'>99090</td>
+  <td class='newdetail'>2015-10-03</td>
+  <td class='newdetail'>CPT4:99090 Added by Ins2 2015-10-03</td>
+  <td class='newdetail' align='right'>0.00</td>
+  <td class='newdetail' align='right'>53.15</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='infdetail' colspan='4'>&nbsp;</td>
+  <td class='infdetail'>N130: Consult plan benefit documents for information about restrictions for this service.</td>
+  <td class='infdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>93040</td>
+  <td class='olddetail'>2015-09-15</td>
+  <td class='olddetail'>Service Item</td>
+  <td class='olddetail' align='right'>12.23</td>
+  <td class='olddetail' align='right'>65.38</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469Adjust code 131</td>
+  <td class='olddetail' align='right'>-0.24</td>
+  <td class='olddetail' align='right'>65.14</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>&nbsp;</td>
+  <td class='olddetail'>2015-10-09</td>
+  <td class='olddetail'>ePay - EFT2863469</td>
+  <td class='olddetail' align='right'>-11.99</td>
+  <td class='olddetail' align='right'>53.15</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>45: Charges exceed your contracted/ legislated fee arrangement 0.24</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+ <tr bgcolor='#ffdddd'>
+  <td class='newdetail' colspan='4'>&nbsp;</td>
+  <td class='newdetail'>23: Payment adjusted due to the impact of prior payer(s) adjudication including payments and/or adjustments 11.99</td>
+  <td class='newdetail' colspan='2'>&nbsp;</td>
+ </tr>
+        </table>
+</center>
+<script language="JavaScript">
+</script>
+<input type="hidden" name="paydate" value="2015-10-03" />
+<input type="hidden" name="post_to_date" value="2015-10-09" />
+<input type="hidden" name="deposit_date" value="" />
+<input type="hidden" name="debug" value="0" />
+<input type="hidden" name="InsId" value="14" />
+<input type="hidden" name="eraname" value="20151008_1431_" />
+</form>
+</body>
+</html>

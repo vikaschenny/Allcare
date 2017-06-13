@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>sample36.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>sample36.php</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="preprocessor">&lt;?php</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h3><i>This sample will show how to download document after sign envelope using PHP SDK</i></h3>
+<p>Set variables and get POST data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="variable">$clientId</span> = F3::get(<span class="string">'POST["clientId"]'</span>);
+<span class="variable">$privateKey</span> = F3::get(<span class="string">'POST["privateKey"]'</span>);
+<span class="variable">$envelopeGuid</span> = F3::get(<span class="string">'POST["envelopeGuid"]'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h3>Check clientId, privateKey and file Id</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$clientId</span>) || !<span class="keyword">isset</span>(<span class="variable">$privateKey</span>) || !<span class="keyword">isset</span>(<span class="variable">$envelopeGuid</span>)) {
+    <span class="variable">$error</span> = <span class="string">'Please enter all required parameters'</span>;
+    F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+} <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Clear entered data from tags and spaces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$clientId</span> = strip_tags(trim(<span class="variable">$clientId</span>));
+    <span class="variable">$privateKey</span> = strip_tags(trim(<span class="variable">$privateKey</span>));
+    <span class="variable">$envelopeGuid</span> = strip_tags(trim(<span class="variable">$envelopeGuid</span>));
+    <span class="variable">$basePath</span> = F3::get(<span class="string">'POST["basePath"]'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h3>Create Signer, ApiClient and Storage Api objects</h3>
+<p>Create signer object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$signer</span> = <span class="keyword">new</span> GroupDocsRequestSigner(<span class="variable">$privateKey</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Create apiClient object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$apiClient</span> = <span class="keyword">new</span> APIClient(<span class="variable">$signer</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Create Storage Api object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$signatureApi</span> = <span class="keyword">new</span> SignatureApi(<span class="variable">$apiClient</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Check if user entered base path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="variable">$basePath</span> == <span class="string">""</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>If base base is empty seting base path to prod server</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$basePath</span> = <span class="string">'https://api.groupdocs.com/v2.0'</span>;
+    }
+    <span class="variable">$basePath</span> = strip_tags(trim(<span class="variable">$basePath</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Set base path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="variable">$signatureApi</span>-&gt;setBasePath(<span class="variable">$basePath</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h3>Make a request to Storage API using clientId and file id</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">try</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Local path to the downloads folder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$downloadFolder</span> = dirname(__FILE__) . <span class="string">'/../downloads'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Check is folder exist</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">if</span> (!file_exists(<span class="variable">$downloadFolder</span>)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>If folder don&#39;t exist create it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            mkdir(<span class="variable">$downloadFolder</span>);
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Get info from envelope</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$envelopeInfo</span> = <span class="variable">$signatureApi</span>-&gt;GetSignatureEnvelopeDocuments(<span class="variable">$clientId</span>, <span class="variable">$envelopeGuid</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Envelope name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$name</span> = <span class="variable">$envelopeInfo</span>-&gt;result-&gt;documents[<span class="number">0</span>]-&gt;name;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Obtaining file stream of downloading file and definition of folder where to download file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="variable">$outFileStream</span> = FileStream::fromHttp(<span class="variable">$downloadFolder</span>, <span class="variable">$name</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Download document from envelope</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>       <span class="variable">$downloadDocument</span> = <span class="variable">$signatureApi</span>-&gt;GetSignedEnvelopeDocuments(<span class="variable">$clientId</span>, <span class="variable">$envelopeGuid</span>, <span class="variable">$outFileStream</span>);
+        F3::set(<span class="string">"message"</span>, <span class="string">"&lt;span style=\"color:green\"&gt;Files from the envelope were downloaded to server's local folder. You can check them &lt;a href=\"/downloads/{$name}\"&gt;here&lt;/a&gt;&lt;/span&gt;"</span>);
+
+    } <span class="keyword">catch</span> (<span class="keyword">Exception</span> <span class="variable">$e</span>) {
+        <span class="variable">$error</span> = <span class="string">'ERROR: '</span> . <span class="variable">$e</span>-&gt;getMessage() . <span class="string">"\n"</span>;
+        F3::set(<span class="string">'error'</span>, <span class="variable">$error</span>);
+    }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Process template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>F3::set(<span class="string">'userId'</span>, <span class="variable">$clientId</span>);
+F3::set(<span class="string">'privateKey'</span>, <span class="variable">$privateKey</span>);
+F3::set(<span class="string">'envelopeGuid'</span>, <span class="variable">$envelopeGuid</span>);
+
+<span class="keyword">echo</span> Template::serve(<span class="string">'sample36.htm'</span>);</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

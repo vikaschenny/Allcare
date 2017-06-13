@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140320*0207*^*00501*023254987*0*T*:~GS*HC**zz*20140320*0207*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140320*0207*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P********16~NM1*IL*1******MI~NM1*PR*2*TESTINSURANCE1*****PI~N3*GANGAPUR LAYOUT~N4~HL*3*2*23*0~PAT~NM1*QC*1*ACEY*DORIS~N3*3211 HICKORY TREE RD 2003~N4*MESQUITE*TX*751804700~DMG*D8*19340519*F~CLM*2679-35*1000.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:4010*BF:40311~NM1*DN*1*ADMIN2*ADMIN2****XX~LX*1~SV1*HC:99201*500.00*UN*1***1~DTP*472*D8*20140320~LX*2~SV1*HC:99212*500.00*UN*1***2~DTP*472*D8*20140320~SE*33*0001~GE*1*1~IEA*1*023254987~
+                                        TESTINSURANCE1
+                                        
+                                        GANGAPUR LAYOUT
+                                         
+
+
+                                      X          
+
+ACEY, DORIS                   05 19 1934      X  , 
+
+3211 HICKORY TREE RD 2003                     X  
+
+MESQUITE                 TX                   X                          
+
+751804700     972 9138160         X                                 
+
+                                                 
+
+                                        X           05 19 1934            X
+
+                                        X        
+
+                                        X        
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+ADMIN2, ADMIN2
+
+                                                        X
+
+  401 0                                                      
+
+  403 11                                         
+
+
+                        
+03 20 14 03 20 14 12    99201               1      500 00 1        
+                        
+03 20 14 03 20 14 12    99212               2      500 00 1        
+
+
+
+
+
+
+
+
+
+                  X   2679-35        X              1000 00      0 00  1000 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

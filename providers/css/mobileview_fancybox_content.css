@@ -1,0 +1,12 @@
+/*! fancyBox content mobile view */
+@media screen and (max-width: 480px) {
+    div.tab table td{
+        display:block;
+        padding-bottom: 10px;
+        padding-left: 0 !important;
+        width: 100%;
+    }
+    td select[name='form_refer_to'], td textarea[name='form_notes']{
+        max-width: 197px;
+    }
+}

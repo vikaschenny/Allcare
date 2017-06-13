@@ -1,0 +1,48 @@
+[
+    {
+        "name": "groupdocs/groupdocs-php",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/groupdocs/groupdocs-php.git",
+            "reference": "3560e671aa0b50e0fe5ef0aa791724881f57a4ac"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/groupdocs/groupdocs-php/zipball/3560e671aa0b50e0fe5ef0aa791724881f57a4ac",
+            "reference": "3560e671aa0b50e0fe5ef0aa791724881f57a4ac",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "hamcrest/hamcrest": "1.1.0",
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2014-06-17 12:10:31",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "GroupDocs",
+                "email": "support@groupdocs.com",
+                "homepage": "http://www.groupdocs.com/"
+            }
+        ],
+        "description": "GroupDocs API library for PHP",
+        "keywords": [
+            "groupdocs"
+        ]
+    }
+]

@@ -1,0 +1,36 @@
+/*! pop windew tables responsive*/
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    form > table:first-child{
+        margin: 0 auto;
+    }
+    table[id] td{
+        display: block;
+    }
+    table[id] td:nth-of-type(odd){
+        text-align: center !important;
+    }
+    table[id] td > input[type="text"]{
+        min-width: 250px;
+        max-width: 272px;
+    }
+
+    form > table:first-child > tbody > tr:last-child > td:first-child{
+        float: left;
+        margin-top: 30px;
+    }
+    form > table:first-child > tbody > tr:last-child > td:last-child{
+        float: right;
+    }
+    .response_prompt{
+        font-size:14px !important;
+    }
+}
+
+@media only screen and (max-width : 320px){
+    body{
+        margin: 5px !important;
+    }
+}
+

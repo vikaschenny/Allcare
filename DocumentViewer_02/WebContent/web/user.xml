@@ -1,0 +1,32 @@
+<contactlist>
+	<contact>
+		<firstname>User1</firstname>
+		<lastname>lastname</lastname>
+		<phoneno>1111111</phoneno>
+		<email>user1@gmail.com</email>
+	</contact>
+	<contact>
+        <firstname>User2</firstname>
+        <lastname>lastname</lastname>
+        <phoneno>2222222</phoneno>
+        <email>user2@gmail.com</email>
+    </contact>
+    <contact>
+        <firstname>User3</firstname>
+        <lastname>lastname</lastname>
+        <phoneno>3333333</phoneno>
+        <email>user3@gmail.com</email>
+    </contact>
+    <contact>
+        <firstname>User4</firstname>
+        <lastname>lastname</lastname>
+        <phoneno>4444444</phoneno>
+        <email>user4@gmail.com</email>
+    </contact>
+    <contact>
+        <firstname>User5</firstname>
+        <lastname>lastname</lastname>
+        <phoneno>5555555</phoneno>
+        <email>user5@gmail.com</email>
+    </contact>
+</contactlist>

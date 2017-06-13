@@ -1,0 +1,62 @@
+ISA*21*1234555667*te*ertreytruy*ZZ*               *ZZ*               *140320*0117*^*00501*023254938*0*T*:~GS*HC**zz*20140320*0117*1*X*005010X222A1~ST*837*0001*005010X222A1~BHT*0019*00*0123*20140320*0117*CH~NM1*41*2*TESTFACILITY*****46~PER*IC**TE~NM1*40*2*TESTX12*****46*12345~HL*1**20*1~NM1*85*2*TESTFACILITY*****XX~N3~N4***751089~REF*EI~HL*2*1*22*1~SBR*P********16~NM1*IL*1***E WILLIAMS***MI~NM1*PR*2*TESTINSURANCE1*****PI~N3*GANGAPUR LAYOUT~N4~HL*3*2*23*0~PAT*G8~NM1*QC*1*"KATE"*KAYE*E WILLIAMS~N3*6202 CASTLE CREEK RD~N4*ARLINGTON*TX*760171904~DMG*D8*19620923*F~CLM*2048-31*0.00***12:B:1*Y*A*Y*Y~REF*X4*123456789~HI*BK:9924*BF:9926*BF:66033~NM1*DN*1*TEST*PROVIDER1****XX~LX*1~SV1*HC:99202*0.00*UN*1***1~DTP*472*D8*20140320~LX*2~SV1*HC:99211*0.00*UN*1***2~DTP*472*D8*20140320~SE*33*0001~GE*1*1~IEA*1*023254938~
+                                        TESTINSURANCE1
+                                        
+                                        GANGAPUR LAYOUT
+                                         
+
+
+                                      X          
+
+"KATE", KAYE, E               09 23 1962      X  , , E
+
+6202 CASTLE CREEK RD                          X  
+
+ARLINGTON                TX       X                                      TX
+
+760171904     682 3677242         X                                 
+
+                                                 
+
+                                        X           09 23 1962            X
+
+                                        X        
+
+                                        X        
+
+                                                        X
+
+
+      SIGNATURE ON FILE                               SIGNATURE ON FILE
+
+
+                                         
+
+TEST, PROVIDER1
+
+                                                        X
+
+  992 4                      660 33                          
+
+  992 6                                          
+
+
+                        
+03 20 14 03 20 14 12    99202               1        0 00 1        
+                        
+03 20 14 03 20 14 12    99211               2        0 00 1        
+
+
+
+
+
+
+
+
+
+                  X   2048-31        X                 0 00      0 00     0 00
+                                                                     
+                      TESTFACILITY               TESTFACILITY
+                                                 
+SIGNATURE ON FILE      751089                     751089
+                                                  
+ 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Powered by <?php echo  (F3::get('ESCAPE')?F3::htmlencode(($_VERSION=F3::get('VERSION'))):($_VERSION=F3::get('VERSION'))) ; ?></title>
+	<style type="text/css">
+		<?php echo  Web::minify('templates/',array('style.css'),FALSE) ; ?>
+	</style>
+</head>
+<body>
+    <div style="padding:20px; text-align:center;"><h2><a href="">GroupDocs PHP SDK Samples</a></h2></div>
+    Choose another one sample:
+<div style="padding:10px;">
+  
+  <ul>
+        <li> <a href="sample01">Sample01 - How to login to GroupDocs using the API</a></li>
+        <li> <a href="sample02">Sample02 - How to list files within GroupDocs Storage using the Storage API</a></li>
+        <li> <a href="sample03">Sample03 - How to upload a file to GroupDocs using the Storage API</a></li>
+        <li> <a href="sample04">Sample04 - How to download a file from GroupDocs Storage using the Storage API</a></li>
+        <li> <a href="sample05">Sample05 - How to copy / move a file using the GroupDocs Storage API</a></li>
+        <li> <a href="sample06">Sample06 - How to add a Signature to a document in GroupDocs Signature</a></li>
+        <li> <a href="sample07">Sample07 - How to create a list of thumbnails for a document</a></li>
+        <li> <a href="sample08">Sample08 - How to return a URL representing a single page of a Document</a></li>
+        <li> <a href="sample09">Sample09 - how to generate an embedded Viewer/Annotation URL for a Document</a></li>
+        <li> <a href="sample10">Sample10 - How to share a document to other users</a></li>
+        <li> <a href="sample11">Sample11 - How programmatically create and post an annotation into document. How to delete the annotation</a></li>
+        <li> <a href="sample12">Sample12 - How to list all annotations from document</a></li>
+        <li> <a href="sample13">Sample13 - How to add collaborator to doc with annotations</a></li>
+        <li> <a href="sample14">Sample14 - How to check the list of shares for a folder</a></li>
+        <li> <a href="sample15">Sample15 - How to check the number of document's views</a></li>
+        <li> <a href="sample16">Sample16 - How to insert Assembly questionary into webpage</a></li>
+        <li> <a href="sample17">Sample17 - How to upload a file into the storage and compress it into zip archive</a></li>
+        <li> <a href="sample18">Sample18 - How to convert Doc to Docx, Docx to Doc, Docx to PDF and PPT to PDF</a></li>
+        <li> <a href="sample19">Sample19 - How to Compare documents using PHP SDK</a></li>
+        <li> <a href="sample20">Sample20 - How to Get Compare Change list for document using PHP SDK</a></li>
+        <li> <a href="sample21">Sample21 - How to Create and Upload Envelop to GroupDocs account using PHP SDK</a></li>
+        <li> <a href="sample22">Sample22 - This sample will show how create or update user and add him to collaborators using PHP SDK</a></li>
+        <li> <a href="sample23">Sample23 - How to View Document pages as images using PHP SDK</a></li>
+        <li> <a href="sample24">Sample24 - How to use StorageApi to upload file from URL to GroupDocs account using PHP SDK</a></li>
+        <li> <a href="sample25">Sample25 - How to  merge/assemble data fields in docx file with data source and get result file as PDF file using PHP SDK</a></li>
+        <li> <a href="sample26">Sample26 - How to use login method in the API</a></li>
+        <li> <a href="sample27">Sample27 - How to create your own questionary using forms and show the result document using PHP SDK</a></li>
+        <li> <a href="sample28">Sample28 - How to delete all annotations from document</a></li>
+        <li> <a href="sample29">Sample29 - How to use Filepicker.io to upload document and get it's URL</a></li>
+        <li> <a href="sample30">Sample30 - How to delete file from GroupDocs Storage using PHP SDK</a></li>
+        <li> <a href="sample31">Sample31 - How to dinamically create Signature Form using data from HTML form</a></li>
+        <li> <a href="sample32">Sample32 - How to create signature form, publish it and configure notification when it was signed</a></li>
+        <li> <a href="sample33">Sample33 - How to convert several HTML documents to PDF and merge them to one document</a></li>
+        <li> <a href="sample34">Sample34 - How to create folder in the GroupDocs account</a></li>
+        <li> <a href="sample35">Sample35 - How to create assembly from document and merge fields</a></li>
+        <li> <a href="sample36">Sample36 - How to download document after sign envelope using PHP SDK</a></li>
+        <li> <a href="sample37">Sample37 - How to Create and Upload Envelop to GroupDocs account and get signed document using PHP SDK</a></li>
+        <li> <a href="sample38">Sample38 - How to create new user and add him as collaborator to doc with annotations</a></li>
+        <li> <a href="sample39">Sample39 - How to add a Signature to a document and redirect after signing with GroupDocs widget</a></li>
+        <li> <a href="sample40">Sample40 - How to set callback for signature form and re-direct when it was signed</a></li>
+        <li> <a href="sample41">Sample41 - How to set callback for Annotation and manage user rights using PHP SDK</a></li>
+        <li> <a href="sample42">Sample42 - How to download document with annotations using PHP SDK</a></li>
+        <li> <a href="sample43">Sample43 - How to add numeration in the doc file using PHP SDK</a></li>
+        <li> <a href="sample44">Sample44 - How to assemble document and add multiple Signatures and Signers to a document</a></li>
+        
+  </ul>
+</div>
+    <center><span><a href="/about_framework.php">About FatFree framework</span></center>
+</body>
+</html>

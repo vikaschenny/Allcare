@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="GroupDocs Unit Tests Suite">
+            <directory>tests/unit/</directory>
+        </testsuite>
+        <testsuite name="GroupDocs Integration Tests Suite">
+            <directory>tests/integration/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Powered by {{ @VERSION }}</title>
+	<style type="text/css">
+		{{ Web::minify('templates/',array('style.css'),FALSE) }}
+	</style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+</head>
+<body>
+<h3 style="text-align:center;"><a href="/index.php">GroupDocs PHP SDK Samples</a> - Sample19</h3>
+
+<div class='samplecontent' style="padding:10px;">
+   <span class="description"><i>This sample will show how to Compare documents using PHP SDK</i></span> <br/>
+    <br />
+    <span class="documentation"><a href="/docs/sample19.html">Docs for this sample</a></span>
+    <br />
+   <br/><p>You entered: 
+   <p>ClientID = {{@userId}}
+   <p>PrivateKey = {{@privateKey}}
+   <p>Source file Id = {{@sourceFileId}}
+   <p>Target file Id = {{@targetFileId}}
+   <p>Call back url = {{@callbackURL}}
+       
+   <p><span style="color: red">{{@error}}</span>
+   <div id="requestForm" style="padding:20px; border:1px solid black;">
+   <p> Enter data for request and press "Make request" button </p>
+        <form action="sample19" method = "post" enctype = 'multipart/form-data'>
+            <label for='clientId'>GroupDocs ClientID</label>
+            <br />
+            <input type='text' name='clientId' id="clientId" value="{{@userId}}" />
+            <br />
+            <label for='privateKey'>GroupDocs PrivateKey</label>
+            <br />
+            <input type='text' name='privateKey' id="privateKey" value="{{@privateKey}}" />
+            <br />
+            <table style="width:400px;">
+                <tr style="background:#7FFFD4;"><td width="200">Source file</td><td>Target file</td></tr>
+                <tr>
+                    <td >
+                        <input type="radio" name="sourse" value="guid" id="id" onClick="display('guid');" checked>File ID (GUID) </input>
+                    </td>
+                    <td>
+                        <input type="radio" name="target" value="guid" id="targetId" onClick="display('targetGuid');" checked>File ID (GUID) </input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="sourse" value="local" id="localField" onClick="display('local');" >Upload local file </input>
+                    </td>
+                    <td>
+                        <input type="radio" name="target" value="local" id="targetLocalField" onClick="display('targetLocal');" >Upload local file </input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="sourse" value="url" id="urlFieldRadio" onClick="display('url');" >Upload file from URL </input>
+                    </td>
+                    <td>
+                        <input type="radio" name="target" value="targetUrl" id="target_urlField" onClick="display('targetUrl');" >Upload file from URL </input>
+                    </td>
+                </tr>
+            </table>
+            <label for='guidField' id="guid">Source File GUID</label>
+            <br />
+            <input type='text' id="guidField" name='sourceFileId'  value="{{@sourceFileId}}" />
+            
+            <label for='file' id="file" style="display:none;">Local file</label>
+            <br />
+            <input type='file' name='file' id="fileField" style="display:none;" />
+
+            <label for='url' style="display:none;" id="url">File URL</label>
+            <br />
+            <input type='text' name='url'  value="" id="urlField" style="display:none;" />
+            <br />
+            
+            <label for='targetFileId' id="targetGuid">Target File GUID</label>
+            <br />
+            <input type='text' id="targetFileId" name='targetFileId'  value="{{@targetFileId}}" />
+           
+            <label for='file' id="targetFile" style="display:none;">Target Local file</label>
+            <br />
+            <input type='file' name='targetFile' id="targetFileField" style="display:none;" />
+
+            <label for='targetUrl' style="display:none;" id="targetUrl">Target File URL</label>
+            <br />
+            <input type='text' name='targetUrl'  value="" id="targetUrlField" style="display:none;" />
+            <br />
+         
+            <label for='callbackUrl'>callbackUrl<span class="optional">(Optional)For test Callback you can use this URL: http://groupdocs-php-samples.herokuapp.com/callbacks/compare_callback</span></label>
+            <br />
+            <input type='text' name='callbackUrl' id="callbackUrl" value="{{@callbackURL}}" />
+            <br />
+            <label for='basePath'>Base path<span class="optional">(Optional)</span></label>
+            <br />
+            <input type ="text" name="basePath" id="basePath" />
+            <br />
+            <input type='submit' value='Make Request'/>
+            <span id="resultsStatus" style="color:red;display:none;"> (Please wait for ajax response) </span>
+            <div id="link"></div>
+        </form>
+        <iframe id="downloadframe" style="display:none"></iframe>
+   </div>
+   <div id="result" style="padding:20px; border:1px solid black;">
+        <p> Results: </p>
+        <iframe src={{@iframe}}></iframe>
+   </div>
+   <br/>
+</div>
+
+ <include href="links.htm" />
+ <script type="text/javascript">
+      $(document).ready(setTimeout(check, 5000));
+            
+         function check() {
+             
+             if (($("input[name=callbackUrl]").val() != "") && (document.getElementById("result") != null)) {
+                 $('#resultsStatus').fadeIn("slow");
+                 form = document.forms.form;
+                 $.ajax({
+                     type: 'POST',
+                     url: '/callbacks/check_file',
+                     success: function (data) {
+                         $('#resultsStatus').fadeOut("slow");
+                         div = document.getElementById("link");
+                         p = document.createElement("p");
+                          if (data == "File was not found. Looks like something went wrong.") {
+                             p.innerHTML = "<br /> " + data ;
+                         } else {
+                             p.innerHTML = "<br /> File " + data + " was downloaded.";
+							 $("#downloadframe").attr("src", "/callbacks/download_file?FileName=" + data);
+                         }
+                         div.appendChild(p);
+                         
+                     },
+                     dataType: "text"
+                 });
+             }
+         }
+         
+        function display(_element_id) {
+
+             if (_element_id == "guid") {
+                 var element1 = document.getElementById("file");
+                 var element2 = document.getElementById("fileField");
+                 var element3 = document.getElementById("url");
+                 var element4 = document.getElementById("urlField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "none";
+                 element2.style.display = "none";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "inline";
+                 element6.style.display = "inline";
+
+             }
+
+             if (_element_id == "local") {
+                 var element1 = document.getElementById("file");
+                 var element2 = document.getElementById("fileField");
+                 var element3 = document.getElementById("url");
+                 var element4 = document.getElementById("urlField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "inline";
+                 element2.style.display = "inline";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+
+             }
+
+             if (_element_id == "url") {
+                 var element1 = document.getElementById("url");
+                 var element2 = document.getElementById("urlField");
+                 var element3 = document.getElementById("file");
+                 var element4 = document.getElementById("fileField");
+                 var element5 = document.getElementById("guid");
+                 var element6 = document.getElementById("guidField");
+                 element1.style.display = "inline";
+                 element2.style.display = "inline";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+             }
+              if (_element_id == "targetGuid") {
+                 var element1 = document.getElementById("targetFile");
+                 var element2 = document.getElementById("targetFileField");
+                 var element3 = document.getElementById("targetUrl");
+                 var element4 = document.getElementById("targetUrlField");
+                 var element5 = document.getElementById("targetGuid");
+                 var element6 = document.getElementById("targetFileId");
+                 element1.style.display = "none";
+                 element2.style.display = "none";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "inline";
+                 element6.style.display = "inline";
+
+             }
+
+             if (_element_id == "targetLocal") {
+                 var element1 = document.getElementById("targetFile");
+                 var element2 = document.getElementById("targetFileField");
+                 var element3 = document.getElementById("targetUrl");
+                 var element4 = document.getElementById("targetUrlField");
+                 var element5 = document.getElementById("targetGuid");
+                 var element6 = document.getElementById("targetFileId");
+                 element1.style.display = "inline";
+                 element2.style.display = "inline";
+                 element3.style.display = "none";
+                 element4.style.display = "none";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+
+             }
+
+             if (_element_id == "targetUrl") {
+                 var element1 = document.getElementById("targetFile");
+                 var element2 = document.getElementById("targetFileField");
+                 var element3 = document.getElementById("targetUrl");
+                 var element4 = document.getElementById("targetUrlField");
+                 var element5 = document.getElementById("targetGuid");
+                 var element6 = document.getElementById("targetFileId");
+                 element1.style.display = "none";
+                 element2.style.display = "none";
+                 element3.style.display = "inline";
+                 element4.style.display = "inline";
+                 element5.style.display = "none";
+                 element6.style.display = "none";
+             }
+
+         }
+</script>
+</body>
+</html>
