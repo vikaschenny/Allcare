@@ -54,12 +54,10 @@ if($count > 0):
         $count2 = sqlNumRows($sqlQ);
         if($count2 > 0):
             // This means there is same planname in Practice for the same insurance name. So, you have to update here
-            $insComUpdateQry = sprintf("UPDATE tbl_patientinsurancecompany SET created_date='%s',updated_date='%s',insuranceid=%d,payertype='%s',networkstatus='%s',
-                                     planname='%s',primarycarevisit='%s',preventitive='%s',specialhealth='%s',annualindiv='%s',annualfam='%s',outofpocketindiv='%s',outofpocketfam='%s',
-                                     pcp='%s',perauth='%s',referrals='%s',insurance_type='%s',plan_summary='%s' WHERE id=%d",
-                             $row4['created_date'],$row4['updated_date'],$existingInsuranceId,$row4['payertype'],$row4['networkstatus'],
-                                     $row4['planname'],$row4['primarycarevisit'],$row4['preventitive'],$row4['specialhealth'],$row4['annualindiv'],$row4['annualfam'],$row4['outofpocketindiv'],$row4['outofpocketfam'],
-                                     $row4['pcp'],$row4['perauth'],$row4['referrals'],$row4['insurance_type'],$row4['plan_summary'],$existingPlanId);
+            $insComUpdateQry = sprintf("UPDATE tbl_patientinsurancecompany SET created_date='%s',updated_date='%s',insuranceid=%d,
+                                     planname='%s',specialhealth='%s',insurance_type='%s',plan_summary='%s' WHERE id=%d",
+                             $row4['created_date'],$row4['updated_date'],$existingInsuranceId,
+                                     $row4['planname'],$row4['specialhealth'],$row4['insurance_type'],$row4['plan_summary'],$existingPlanId);
             sqlStatement($insComUpdateQry);
 
             $planId = $row4['id'];
@@ -68,41 +66,61 @@ if($count > 0):
             while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
             // Since benefits have no unique name like we have to planname, we can consider old benefits to be deleted and add new ones.    
             sqlStatement("DELETE FROM tbl_inscomp_benefits WHERE planid = ?",array($existingPlanId));   
-            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,med_ded_ind,med_ded_fam,
-                                        pre_drug_ind,pre_drug_fam,oop_family,oop_individual,healthcare_family,healthcare_ind,oop_pre_drug_fam,
-                                        oop_pre_drug_ind,primary_doctor,specialist_doctor,inpatient_doctor,inpatient_facility,emerg_room,
-                                        generic_presc,pref_brand_presc,non_pref_brand_presc,period_from,period_to,coverage_for) 
-                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
-                             $existingPlanId,$row5['created_date'],$row5['updated_date'],$row5['med_ded_ind'],$row5['med_ded_fam'],
-                                        $row5['pre_drug_ind'],$row5['pre_drug_fam'],$row5['oop_family'],$row5['oop_individual'],$row5['healthcare_family'],$row5['healthcare_ind'],$row5['oop_pre_drug_fam'],
-                                        $row5['oop_pre_drug_ind'],$row5['primary_doctor'],$row5['specialist_doctor'],$row5['inpatient_doctor'],$row5['inpatient_facility'],$row5['emerg_room'],
-                                        $row5['generic_presc'],$row5['pref_brand_presc'],$row5['non_pref_brand_presc'],$row5['period_from'],$row5['period_to'],$row5['coverage_for']);
+            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,plan_type,sum_benfits_link,
+                                        ded_lim___exce,innet_oop_individual,innet_oop_family,outnet_oop_individua,out_oop_family,out_of_poc_lim_exc,
+                                        innet_primary_visit,innet_spe_visit,out_of_net_pri_visit,out_of_net_spe_visit,other_pract_office,
+                                        innet_preve_care,out_of_net_preve_car,provider_network_sta,need_referral_spe,lim_exce,pre_auth_req,
+                                        innet_hh_care,out_of_net_hh_care,hh__lim_exc,innet_snf,out_of_net_snf,snf_lim_exc,innet_rehab_services,
+                                        out_of_net_rehab_ser,rehab_lim_exc,innet_facility_fee,innet_physician,innet_lim_exc,out_of_net_facility,
+                                        hh_pcp_req,off_pcp_req,hh_pre_auth,out_of_net_physician,out_lim_exc,Inpatient_pcp_req,inpatient_pre_auth,
+                                        innet_ded_individual,innet_ded_family,outnet_ded_individua,outnet_ded_family,out_other_prac,deleted) 
+                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s')",
+                            $existingPlanId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
+                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
+                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
+                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
+                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
+                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
+                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
+                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
+                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
             sqlInsert($insComInsertQry);
             endwhile;
         else:    
             // This means there is no planname in Practice for the same insurance name. So, you have to add here
-            $insComInsertQry = sprintf("INSERT INTO tbl_patientinsurancecompany (created_date,updated_date,insuranceid,payertype,networkstatus,
-                                     planname,primarycarevisit,preventitive,specialhealth,annualindiv,annualfam,outofpocketindiv,outofpocketfam,
-                                     pcp,perauth,referrals,insurance_type,plan_summary) 
-                             VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
-                             $row4['created_date'],$row4['updated_date'],$insuranceId,$row4['payertype'],$row4['networkstatus'],
-                                     $row4['planname'],$row4['primarycarevisit'],$row4['preventitive'],$row4['specialhealth'],$row4['annualindiv'],$row4['annualfam'],$row4['outofpocketindiv'],$row4['outofpocketfam'],
-                                     $row4['pcp'],$row4['perauth'],$row4['referrals'],$row4['insurance_type'],$row4['plan_summary']);
+            $insComInsertQry = sprintf("INSERT INTO tbl_patientinsurancecompany (created_date,updated_date,insuranceid,
+                                     planname,specialhealth,insurance_type,plan_summary) 
+                             VALUES('%s','%s',%d,'%s','%s','%s','%s')",
+                             $row4['created_date'],$row4['updated_date'],$insuranceId,
+                                     $row4['planname'],$row4['specialhealth'],$row4['insurance_type'],$row4['plan_summary']);
             $newPlanId = sqlInsert($insComInsertQry);
 
             $planId = $row4['id'];
             $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
             $sql5->execute();
             while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
-            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,med_ded_ind,med_ded_fam,
-                                        pre_drug_ind,pre_drug_fam,oop_family,oop_individual,healthcare_family,healthcare_ind,oop_pre_drug_fam,
-                                        oop_pre_drug_ind,primary_doctor,specialist_doctor,inpatient_doctor,inpatient_facility,emerg_room,
-                                        generic_presc,pref_brand_presc,non_pref_brand_presc,period_from,period_to,coverage_for) 
-                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
-                             $newPlanId,$row5['created_date'],$row5['updated_date'],$row5['med_ded_ind'],$row5['med_ded_fam'],
-                                        $row5['pre_drug_ind'],$row5['pre_drug_fam'],$row5['oop_family'],$row5['oop_individual'],$row5['healthcare_family'],$row5['healthcare_ind'],$row5['oop_pre_drug_fam'],
-                                        $row5['oop_pre_drug_ind'],$row5['primary_doctor'],$row5['specialist_doctor'],$row5['inpatient_doctor'],$row5['inpatient_facility'],$row5['emerg_room'],
-                                        $row5['generic_presc'],$row5['pref_brand_presc'],$row5['non_pref_brand_presc'],$row5['period_from'],$row5['period_to'],$row5['coverage_for']);
+            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,plan_type,sum_benfits_link,
+                                        ded_lim___exce,innet_oop_individual,innet_oop_family,outnet_oop_individua,out_oop_family,out_of_poc_lim_exc,
+                                        innet_primary_visit,innet_spe_visit,out_of_net_pri_visit,out_of_net_spe_visit,other_pract_office,
+                                        innet_preve_care,out_of_net_preve_car,provider_network_sta,need_referral_spe,lim_exce,pre_auth_req,
+                                        innet_hh_care,out_of_net_hh_care,hh__lim_exc,innet_snf,out_of_net_snf,snf_lim_exc,innet_rehab_services,
+                                        out_of_net_rehab_ser,rehab_lim_exc,innet_facility_fee,innet_physician,innet_lim_exc,out_of_net_facility,
+                                        hh_pcp_req,off_pcp_req,hh_pre_auth,out_of_net_physician,out_lim_exc,Inpatient_pcp_req,inpatient_pre_auth,
+                                        innet_ded_individual,innet_ded_family,outnet_ded_individua,outnet_ded_family,out_other_prac,deleted) 
+                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s')",
+                            $planId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
+                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
+                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
+                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
+                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
+                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
+                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
+                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
+                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
             sqlInsert($insComInsertQry);
             endwhile;
         endif;
@@ -138,28 +156,37 @@ else:
     $sql4   = $sqlconfCentralDB->prepare("SELECT * from `tbl_patientinsurancecompany` WHERE `insuranceid` = '".$insid."'");
     $sql4->execute();
     while($row4  = $sql4->fetch(PDO::FETCH_ASSOC)):
-        $insComInsertQry = sprintf("INSERT INTO tbl_patientinsurancecompany (created_date,updated_date,insuranceid,payertype,networkstatus,
-                                     planname,primarycarevisit,preventitive,specialhealth,annualindiv,annualfam,outofpocketindiv,outofpocketfam,
-                                     pcp,perauth,referrals,insurance_type,plan_summary) 
-                             VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
-                             $row4['created_date'],$row4['updated_date'],$maxId,$row4['payertype'],$row4['networkstatus'],
-                                     $row4['planname'],$row4['primarycarevisit'],$row4['preventitive'],$row4['specialhealth'],$row4['annualindiv'],$row4['annualfam'],$row4['outofpocketindiv'],$row4['outofpocketfam'],
-                                     $row4['pcp'],$row4['perauth'],$row4['referrals'],$row4['insurance_type'],$row4['plan_summary']);
+        $insComInsertQry = sprintf("INSERT INTO tbl_patientinsurancecompany (created_date,updated_date,insuranceid,
+                                     planname,specialhealth,insurance_type,plan_summary) 
+                             VALUES('%s','%s',%d,'%s','%s','%s','%s')",
+                             $row4['created_date'],$row4['updated_date'],$maxId,
+                                     $row4['planname'],$row4['specialhealth'],$row4['insurance_type'],$row4['plan_summary']);
         $newPlanId = sqlInsert($insComInsertQry);
         
         $planId = $row4['id'];
         $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
         $sql5->execute();
         while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
-            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,med_ded_ind,med_ded_fam,
-                                        pre_drug_ind,pre_drug_fam,oop_family,oop_individual,healthcare_family,healthcare_ind,oop_pre_drug_fam,
-                                        oop_pre_drug_ind,primary_doctor,specialist_doctor,inpatient_doctor,inpatient_facility,emerg_room,
-                                        generic_presc,pref_brand_presc,non_pref_brand_presc,period_from,period_to,coverage_for) 
-                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
-                             $newPlanId,$row5['created_date'],$row5['updated_date'],$row5['med_ded_ind'],$row5['med_ded_fam'],
-                                        $row5['pre_drug_ind'],$row5['pre_drug_fam'],$row5['oop_family'],$row5['oop_individual'],$row5['healthcare_family'],$row5['healthcare_ind'],$row5['oop_pre_drug_fam'],
-                                        $row5['oop_pre_drug_ind'],$row5['primary_doctor'],$row5['specialist_doctor'],$row5['inpatient_doctor'],$row5['inpatient_facility'],$row5['emerg_room'],
-                                        $row5['generic_presc'],$row5['pref_brand_presc'],$row5['non_pref_brand_presc'],$row5['period_from'],$row5['period_to'],$row5['coverage_for']);
+            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,plan_type,sum_benfits_link,
+                                        ded_lim___exce,innet_oop_individual,innet_oop_family,outnet_oop_individua,out_oop_family,out_of_poc_lim_exc,
+                                        innet_primary_visit,innet_spe_visit,out_of_net_pri_visit,out_of_net_spe_visit,other_pract_office,
+                                        innet_preve_care,out_of_net_preve_car,provider_network_sta,need_referral_spe,lim_exce,pre_auth_req,
+                                        innet_hh_care,out_of_net_hh_care,hh__lim_exc,innet_snf,out_of_net_snf,snf_lim_exc,innet_rehab_services,
+                                        out_of_net_rehab_ser,rehab_lim_exc,innet_facility_fee,innet_physician,innet_lim_exc,out_of_net_facility,
+                                        hh_pcp_req,off_pcp_req,hh_pre_auth,out_of_net_physician,out_lim_exc,Inpatient_pcp_req,inpatient_pre_auth,
+                                        innet_ded_individual,innet_ded_family,outnet_ded_individua,outnet_ded_family,out_other_prac,deleted) 
+                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
+                             '%s','%s','%s')",
+                            $planId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
+                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
+                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
+                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
+                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
+                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
+                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
+                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
+                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
             sqlInsert($insComInsertQry);
         endwhile;
         
