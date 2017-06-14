@@ -198,7 +198,7 @@ if (is_numeric($pid)) {
                     foreach ($ccm_data[$i-1] as $key => $value) {
                         ${$key."_val"} = $value;
                         if($key == 'timeinterval' && $value != ''):
-                            $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$value' and list_id = 'Time_Interval'");
+                            $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$value' and list_id = 'Time_Interval' order by seq");
                             while ($urow = sqlFetchArray($ures)) {
                                 $title = $urow['title'];
                             }
@@ -231,7 +231,7 @@ if (is_numeric($pid)) {
                 <td><select class='select' name="<?php echo $timeinterval; ?>" id="<?php echo $timeinterval; ?>" onchange="addTimeCCM();" >
                         <option value="">Select Duration</option>
                         <?php 
-                        $sql = sqlStatement ("SELECT * FROM list_options WHERE list_id = 'Time_Interval'");
+                        $sql = sqlStatement ("SELECT * FROM list_options WHERE list_id = 'Time_Interval' order by seq");
                         while ($row = mysql_fetch_array($sql)) {
                             echo "<option value = '".$row['option_id']."'";
                             if($timeinterval_val == $row['option_id'] ) echo "selected";
@@ -278,7 +278,7 @@ if (is_numeric($pid)) {
                 <td><select class='select' name="timeinterval" id="timeinterval" onchange="addTimeCCM();">
                         <option value="">Select Duration</option>
                         <?php 
-                        $sql = sqlStatement ("SELECT * FROM list_options WHERE list_id = 'Time_Interval'");
+                        $sql = sqlStatement ("SELECT * FROM list_options WHERE list_id = 'Time_Interval' order by seq");
                         while ($row = mysql_fetch_array($sql)) {
                             echo "<option value = '".$row['option_id']."'>".$row['title']."</option>";
                         }

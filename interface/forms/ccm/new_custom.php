@@ -761,7 +761,7 @@ $_SESSION['pid']    = $pid;
         if(!empty($cpo_data[$i-1])){
             foreach ($cpo_data[$i-1] as $cpokey => $cpovalue) {
                 if($cpokey == 'timeinterval' && $cpovalue != ''):
-                    $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$cpovalue' and list_id = 'Time_Interval'");
+                    $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$cpovalue' and list_id = 'Time_Interval' order by seq");
                     while ($urow = sqlFetchArray($ures)) {
                         $cpotitle = $urow['title'];
                     }
@@ -834,7 +834,7 @@ $_SESSION['pid']    = $pid;
         if(!empty($ccm_data[$i-1])){
             foreach ($ccm_data[$i-1] as $ccmkey => $ccmvalue) {
                 if($ccmkey == 'timeinterval' && $ccmvalue != ''):
-                    $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$ccmvalue' and list_id = 'Time_Interval'");
+                    $ures = sqlStatement("SELECT title FROM list_options WHERE option_id= '$ccmvalue' and list_id = 'Time_Interval' order by seq");
                     while ($urow = sqlFetchArray($ures)) {
                         $ccmtitle = $urow['title'];
                     }

@@ -26,7 +26,7 @@ $row1 = $insQuery->fetch(PDO::FETCH_ASSOC);
 // check if same name insurance company is already there or not
 $query = sqlStatement("SELECT * FROM insurance_companies WHERE name = '".$row1['name']."' LIMIT 1");
 $insRow = sqlFetchArray($query);
-$insuranceId = $insRow['id'];
+$insuranceId = $insRow['id']; // Insurance id for this Insurance in practice
 $count = sqlNumRows($query);
 
 if($count > 0):
@@ -36,6 +36,77 @@ if($count > 0):
     $sql4->execute();
     while($row4 = $sql4->fetch(PDO::FETCH_ASSOC)):
         sqlStatement("UPDATE tbl_patientinsurancecompany SET contractRates = '".$row4['contractRates']."' WHERE planname='".$row4['planname']."' AND insuranceid='".$insRow['id']."'");
+    endwhile;
+    
+    // Central Insurance Id = $insid
+    // Practice Insurance Id = $insRow['id']
+    $sql4   = $sqlconfCentralDB->prepare("SELECT * from `tbl_patientinsurancecompany` WHERE `insuranceid` = '".$insid."'");
+    $sql4->execute();
+    while($row4  = $sql4->fetch(PDO::FETCH_ASSOC)):
+        $centralPlan = $row4['planname']; // Insurance Company plan name from central
+        $centralInsurance = $row1['name'];
+        $sqlQ = sqlStatement("SELECT pl.id as plId,ins.id as insId FROM tbl_patientinsurancecompany pl INNER JOIN  
+                              insurance_companies ins ON pl.insuranceid = ins.id 
+                              WHERE pl.planname = ? AND ins.name=?",array($centralPlan,$centralInsurance));
+        $rows = sqlFetchArray($sqlQ);
+        $existingInsuranceId = $rows['insId'];
+        $existingPlanId = $rows['plId'];
+        $count2 = sqlNumRows($sqlQ);
+        if($count2 > 0):
+            // This means there is same planname in Practice for the same insurance name. So, you have to update here
+            $insComUpdateQry = sprintf("UPDATE tbl_patientinsurancecompany SET created_date='%s',updated_date='%s',insuranceid=%d,payertype='%s',networkstatus='%s',
+                                     planname='%s',primarycarevisit='%s',preventitive='%s',specialhealth='%s',annualindiv='%s',annualfam='%s',outofpocketindiv='%s',outofpocketfam='%s',
+                                     pcp='%s',perauth='%s',referrals='%s',insurance_type='%s',plan_summary='%s' WHERE id=%d",
+                             $row4['created_date'],$row4['updated_date'],$existingInsuranceId,$row4['payertype'],$row4['networkstatus'],
+                                     $row4['planname'],$row4['primarycarevisit'],$row4['preventitive'],$row4['specialhealth'],$row4['annualindiv'],$row4['annualfam'],$row4['outofpocketindiv'],$row4['outofpocketfam'],
+                                     $row4['pcp'],$row4['perauth'],$row4['referrals'],$row4['insurance_type'],$row4['plan_summary'],$existingPlanId);
+            sqlStatement($insComUpdateQry);
+
+            $planId = $row4['id'];
+            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
+            $sql5->execute();
+            while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
+            // Since benefits have no unique name like we have to planname, we can consider old benefits to be deleted and add new ones.    
+            sqlStatement("DELETE FROM tbl_inscomp_benefits WHERE planid = ?",array($existingPlanId));   
+            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,med_ded_ind,med_ded_fam,
+                                        pre_drug_ind,pre_drug_fam,oop_family,oop_individual,healthcare_family,healthcare_ind,oop_pre_drug_fam,
+                                        oop_pre_drug_ind,primary_doctor,specialist_doctor,inpatient_doctor,inpatient_facility,emerg_room,
+                                        generic_presc,pref_brand_presc,non_pref_brand_presc,period_from,period_to,coverage_for) 
+                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+                             $existingPlanId,$row5['created_date'],$row5['updated_date'],$row5['med_ded_ind'],$row5['med_ded_fam'],
+                                        $row5['pre_drug_ind'],$row5['pre_drug_fam'],$row5['oop_family'],$row5['oop_individual'],$row5['healthcare_family'],$row5['healthcare_ind'],$row5['oop_pre_drug_fam'],
+                                        $row5['oop_pre_drug_ind'],$row5['primary_doctor'],$row5['specialist_doctor'],$row5['inpatient_doctor'],$row5['inpatient_facility'],$row5['emerg_room'],
+                                        $row5['generic_presc'],$row5['pref_brand_presc'],$row5['non_pref_brand_presc'],$row5['period_from'],$row5['period_to'],$row5['coverage_for']);
+            sqlInsert($insComInsertQry);
+            endwhile;
+        else:    
+            // This means there is no planname in Practice for the same insurance name. So, you have to add here
+            $insComInsertQry = sprintf("INSERT INTO tbl_patientinsurancecompany (created_date,updated_date,insuranceid,payertype,networkstatus,
+                                     planname,primarycarevisit,preventitive,specialhealth,annualindiv,annualfam,outofpocketindiv,outofpocketfam,
+                                     pcp,perauth,referrals,insurance_type,plan_summary) 
+                             VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+                             $row4['created_date'],$row4['updated_date'],$insuranceId,$row4['payertype'],$row4['networkstatus'],
+                                     $row4['planname'],$row4['primarycarevisit'],$row4['preventitive'],$row4['specialhealth'],$row4['annualindiv'],$row4['annualfam'],$row4['outofpocketindiv'],$row4['outofpocketfam'],
+                                     $row4['pcp'],$row4['perauth'],$row4['referrals'],$row4['insurance_type'],$row4['plan_summary']);
+            $newPlanId = sqlInsert($insComInsertQry);
+
+            $planId = $row4['id'];
+            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
+            $sql5->execute();
+            while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
+            $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,med_ded_ind,med_ded_fam,
+                                        pre_drug_ind,pre_drug_fam,oop_family,oop_individual,healthcare_family,healthcare_ind,oop_pre_drug_fam,
+                                        oop_pre_drug_ind,primary_doctor,specialist_doctor,inpatient_doctor,inpatient_facility,emerg_room,
+                                        generic_presc,pref_brand_presc,non_pref_brand_presc,period_from,period_to,coverage_for) 
+                             VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+                             $newPlanId,$row5['created_date'],$row5['updated_date'],$row5['med_ded_ind'],$row5['med_ded_fam'],
+                                        $row5['pre_drug_ind'],$row5['pre_drug_fam'],$row5['oop_family'],$row5['oop_individual'],$row5['healthcare_family'],$row5['healthcare_ind'],$row5['oop_pre_drug_fam'],
+                                        $row5['oop_pre_drug_ind'],$row5['primary_doctor'],$row5['specialist_doctor'],$row5['inpatient_doctor'],$row5['inpatient_facility'],$row5['emerg_room'],
+                                        $row5['generic_presc'],$row5['pref_brand_presc'],$row5['non_pref_brand_presc'],$row5['period_from'],$row5['period_to'],$row5['coverage_for']);
+            sqlInsert($insComInsertQry);
+            endwhile;
+        endif;
+        
     endwhile;
 else:    
     $message = 1;
