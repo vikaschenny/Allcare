@@ -16,7 +16,7 @@ function getPlans($id , $given="*") {
 }
 
 function getBenefits($id , $given="*") {
-    $sql = "select $given from tbl_inscomp_benefits where id=?  limit 0,1";
+    $sql = "select $given from tbl_inscomp_benefits where id=?  and deleted=0 limit 0,1";
     return sqlQuery($sql, array($id) );
 }
 

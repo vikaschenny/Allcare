@@ -74,7 +74,7 @@ if($toEmails!=''){
     }
     else
     {
-        $mail->addAddress($toEmails);
+        $mail->addAddress($toEmails[0]);
     }
 
     $mail->Subject =  'Eligibiliy Response On '.date("m/d/Y");

@@ -22,7 +22,7 @@ while($layoutRes = sqlFetchArray($layoutQry)){
      foreach($fields as $key=>$value){
          $eligValue = $eligRes[$key];
          if($eligValue != ''){
-            $patElig["p".$eligRes['pid']].= "\t".$value." : ".$eligValue."\n";
+            $patElig["p".$eligRes['pid']].= "&nbsp;&nbsp;&nbsp;&nbsp;".$value." : ".$eligValue."<br /><br />";
          }
      }
      

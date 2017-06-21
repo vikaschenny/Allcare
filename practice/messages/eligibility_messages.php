@@ -30,9 +30,15 @@ require_once("$srcdir/formatting.inc.php");
 
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href="css/editor.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript" src="../../library/dialog.js"></script>
 <script type="text/javascript" src=".././library/textformat.js"></script>
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/library/js/jquery.js"></script>
+<script type="text/javascript">
+	
+</script>
 </head>
 
 <body class="body_top">
@@ -323,31 +329,38 @@ if ($noteid) {
 }
 
 ?>
-   <textarea name='note' id='note' rows='8' style="width: 660px; "><?php echo htmlspecialchars( $note, ENT_NOQUOTES) ?></textarea>
+   <textarea name='note' id='note' style="width: 100%;"><?php echo htmlspecialchars( $note, ENT_NOQUOTES) ?></textarea>
   </td>
  </tr>
 </table>
 
 <?php if ($noteid) { ?>
+<br/>
 <!-- This is for displaying an existing note. -->
-<input type="button" id="newnote" value="<?php echo htmlspecialchars( xl('Send message'), ENT_QUOTES); ?>">
-<input type="button" id="printnote" value="<?php echo htmlspecialchars( xl('Print message'), ENT_QUOTES); ?>">
-<input type="button" id="cancel" value="<?php echo htmlspecialchars( xl('Cancel'), ENT_QUOTES); ?>">
+<input type="button" id="newnote" class="btn btn-primary" value="<?php echo htmlspecialchars( xl('Send message'), ENT_QUOTES); ?>">
+<input type="button" id="printnote" class="btn btn-primary" value="<?php echo htmlspecialchars( xl('Print message'), ENT_QUOTES); ?>">
+<input type="button" id="cancel" class="btn btn-primary" value="<?php echo htmlspecialchars( xl('Cancel'), ENT_QUOTES); ?>">
 <?php } else { ?>
+<br/>
 <!-- This is for displaying a new note. -->
-<input type="button" id="newnote" value="<?php echo htmlspecialchars( xl('Send message'), ENT_QUOTES); ?>">
-<input type="button" id="cancel" value="<?php echo htmlspecialchars( xl('Cancel'), ENT_QUOTES); ?>">
+<input type="button" id="newnote" class="btn btn-primary" value="<?php echo htmlspecialchars( xl('Send message'), ENT_QUOTES); ?>">
+<input type="button" id="cancel" class="btn btn-primary" value="<?php echo htmlspecialchars( xl('Cancel'), ENT_QUOTES); ?>">
 <?php }
 ?>
 
 <br>
 </form></center></div>
+    
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="editor.js"></script>
 <script language="javascript">
 
 // jQuery stuff to make the page a little easier to use
 
 $(document).ready(function(){
+    var editpad = $("#note").Editor();
     $("#newnote").click(function() { NewNote(); });
     $("#printnote").click(function() { PrintNote(); });
     obj = document.getElementById("form_message_status");
@@ -377,6 +390,7 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data) {
             //alert(data.p6021);
+            console.log(data)
             $.each(data, function (i,v)
             {
               var i = v;
@@ -384,7 +398,7 @@ $(document).ready(function(){
             var j = 1;
             pat_ids.forEach(function(item){
                var pat_name = window.opener.$("[data-pid="+item+"]").text();
-               msg_note+=j+". "+pat_name+"\n";
+               msg_note+=j+". "+pat_name+"<br /><br />";
                var itemName = "p"+item;
                $.each(data, function (i,v)
                 {
@@ -395,7 +409,9 @@ $(document).ready(function(){
                
                j++;
             });
-            $("#note").val(msg_note);
+            $("#note").Editor("setText", msg_note);
+            //console.log("msg_note : "+msg_note)
+            
         },
         error: function(jqXHR, exception){
             alert("failed" + jqXHR.responseText);
@@ -421,18 +437,22 @@ $(document).ready(function(){
       { 
         if(confirm("Click OK to send email")){
             //var note = $("#note").val();
-            var note = $("#note").val();
+            var note = $("#note").Editor("getText");
             var note_type = $("#form_note_type").val();
             var message_status = $("#form_message_status").val();
             var assigned_to = $("#assigned_to").val();
-            note = note.replace(/\r?\n/g, '<br />');
-            note = note.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+            //note = note.replace(/\r?\n/g, '<br />');
+            //note = note.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
             $.ajax({
                 type: "POST",
                 url: "../../modules/sms_email_reminder/eligibility_email_notification.php",
                 data: {form_id:0,note: note,note_type:note_type,message_status:message_status,assigned_to:assigned_to},
                 success: function(result) { //alert(result);
-                    console.log(result);
+                    console.log(result + 'email'+ assigned_to);
+                    var regex = /<br\s*[\/]?>/gi; // regular expression to replace br to new line
+                    note = note.replace(regex, "\n");
+                    note = note.replace(/&nbsp;/g, '\t'); // regular expression to replace nbsp to Tab space
+                    $("#note").val(note).text(); // remove html tags
                     alert("Email Sent Successfully..!");
                     $("#new_note").submit();
                 },

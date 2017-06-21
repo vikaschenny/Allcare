@@ -32,12 +32,12 @@ include_once("$srcdir/edi.inc");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HealthCare</title>
-<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Dosis:300,400,500,600' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Dosis:300,400,500,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <title><?php echo htmlspecialchars( xl('Eligibility 270 Inquiry Batch'), ENT_NOQUOTES); ?></title>
 <style>
@@ -225,6 +225,19 @@ include_once("$srcdir/edi.inc");
     //echo "remainingDeductible = ". $remainingDeductible." <br />";
     //echo "allowedrate = ". $allowedrate." <br />";
     
+    //echo "Allowed Rate = ". $allowedrate. "<br />";
+    //echo "Charged Amount = ".$chargedAmount;
+    
+    if($allowedrate == ''):
+        $query = sqlStatement("SELECT * FROM tbl_allcare_contractrates 
+                               WHERE Insurance = 'Medicare B Texas (SMTX0)' AND Insurance_Plan='Medicare Part B' AND CPT_Code='".$cpt."'");
+        $medirow = sqlFetchArray($query);
+
+        $allowedrate = $medirow['Allowed_Rate'];
+        $chargedAmount = $medirow['Standard_Rate'];
+        echo "<script>alert('Since this plan has no allowed rate, we are getting it from Medicare Part B');</script>";
+    endif;
+    
     $contrDisc = $chargedAmount - $allowedrate; // Contractual Discount
     
     // Get user type role based on the user id so that we decide allowed rate percentage
@@ -256,9 +269,11 @@ include_once("$srcdir/edi.inc");
         $calculatedAllowedRate = $remainingDeductible;
     endif;
     
-    $insRespon = $calculatedAllowedRate - $remainingDeductible;
+    //$insRespon = $calculatedAllowedRate - $remainingDeductible;
     
     $estimation = $copay + $coinsurance + $calculatedAllowedRate;
+    
+    $insRespon = $allowedrate - $estimation; // modified on 20170616 Subhan
     
     $catQuery = sqlStatement("SELECT pc_catname FROM openemr_postcalendar_categories WHERE pc_catid = ?",array($catid));
     $catArr = sqlFetchArray($catQuery);

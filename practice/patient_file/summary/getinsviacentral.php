@@ -31,7 +31,7 @@ while($row2  = $sql2->fetch()){
     endif;
     
     $resultantArr = array();
-    $sql3 = $sqlconfCentralDB->prepare("SELECT * FROM tbl_inscomp_benefits WHERE planid=".$row2['id']);
+    $sql3 = $sqlconfCentralDB->prepare("SELECT * FROM tbl_inscomp_benefits WHERE planid=".$row2['id']." and deleted=0");
     $sql3->execute();
     $i = 0;
     while($row3 = $sql3->fetch()):

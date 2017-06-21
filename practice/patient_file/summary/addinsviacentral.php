@@ -61,7 +61,7 @@ if($count > 0):
             sqlStatement($insComUpdateQry);
 
             $planId = $row4['id'];
-            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
+            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."' and deleted=0");
             $sql5->execute();
             while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
             // Since benefits have no unique name like we have to planname, we can consider old benefits to be deleted and add new ones.    
@@ -77,15 +77,21 @@ if($count > 0):
                              VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s')",
-                            $existingPlanId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
-                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
-                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
-                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
-                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
-                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
-                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
-                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
-                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
+                            $existingPlanId,$row5['created_date'],$row5['updated_date'],mysql_escape_string($row5['plan_type']),mysql_escape_string($row5['sum_benfits_link']),
+                            mysql_escape_string($row5['ded_lim___exce']), mysql_escape_string($row5['innet_oop_individual']),mysql_escape_string($row5['innet_oop_family']),
+                            mysql_escape_string($row5['outnet_oop_individua']),mysql_escape_string($row5['out_oop_family']),mysql_escape_string($row5['out_of_poc_lim_exc']),
+                            mysql_escape_string($row5['innet_primary_visit']),mysql_escape_string($row5['innet_spe_visit']),mysql_escape_string($row5['out_of_net_pri_visit']),
+                            mysql_escape_string($row5['out_of_net_spe_visit']),mysql_escape_string($row5['other_pract_office']),mysql_escape_string($row5['innet_preve_care']),
+                            mysql_escape_string($row5['out_of_net_preve_car']),mysql_escape_string($row5['provider_network_sta']),mysql_escape_string($row5['need_referral_spe']),
+                            mysql_escape_string($row5['lim_exce']),mysql_escape_string($row5['pre_auth_req']),mysql_escape_string($row5['innet_hh_care']),
+                            mysql_escape_string($row5['out_of_net_hh_care']),mysql_escape_string($row5['hh__lim_exc']),mysql_escape_string($row5['innet_snf']),
+                            mysql_escape_string($row5['out_of_net_snf']),mysql_escape_string($row5['snf_lim_exc']),mysql_escape_string($row5['innet_rehab_services']),
+                            mysql_escape_string($row5['out_of_net_rehab_ser']),mysql_escape_string($row5['rehab_lim_exc']),mysql_escape_string($row5['innet_facility_fee']),
+                            mysql_escape_string($row5['innet_physician']),mysql_escape_string($row5['innet_lim_exc']),mysql_escape_string($row5['out_of_net_facility']),
+                            mysql_escape_string($row5['hh_pcp_req']),mysql_escape_string($row5['off_pcp_req']),mysql_escape_string($row5['hh_pre_auth']),
+                            mysql_escape_string($row5['out_of_net_physician']),mysql_escape_string($row5['out_lim_exc']),mysql_escape_string($row5['Inpatient_pcp_req']),
+                            mysql_escape_string($row5['inpatient_pre_auth']),mysql_escape_string($row5['innet_ded_individual']),mysql_escape_string($row5['innet_ded_family']),
+                            mysql_escape_string($row5['outnet_ded_individua']),mysql_escape_string($row5['outnet_ded_family']),mysql_escape_string($row5['out_other_prac']),$row5['deleted']);
             sqlInsert($insComInsertQry);
             endwhile;
         else:    
@@ -98,7 +104,7 @@ if($count > 0):
             $newPlanId = sqlInsert($insComInsertQry);
 
             $planId = $row4['id'];
-            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
+            $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."' and deleted=0");
             $sql5->execute();
             while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
             $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,plan_type,sum_benfits_link,
@@ -112,15 +118,18 @@ if($count > 0):
                              VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s')",
-                            $planId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
-                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
-                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
-                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
-                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
-                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
-                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
-                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
-                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
+                            $planId,$row5['created_date'],$row5['updated_date'],mysql_escape_string($row5['plan_type']),mysql_escape_string($row5['sum_benfits_link']),mysql_escape_string($row5['ded_lim___exce']),
+                            mysql_escape_string($row5['innet_oop_individual']),mysql_escape_string($row5['innet_oop_family']),mysql_escape_string($row5['outnet_oop_individua']),mysql_escape_string($row5['out_oop_family']),
+                            mysql_escape_string($row5['out_of_poc_lim_exc']), mysql_escape_string($row5['innet_primary_visit']),mysql_escape_string($row5['innet_spe_visit']),mysql_escape_string($row5['out_of_net_pri_visit']),
+                            mysql_escape_string($row5['out_of_net_spe_visit']),mysql_escape_string($row5['other_pract_office']),mysql_escape_string($row5['innet_preve_care']),mysql_escape_string($row5['out_of_net_preve_car']),
+                            mysql_escape_string($row5['provider_network_sta']),mysql_escape_string($row5['need_referral_spe']),mysql_escape_string($row5['lim_exce']), mysql_escape_string($row5['pre_auth_req']),
+                            mysql_escape_string($row5['innet_hh_care']),mysql_escape_string($row5['out_of_net_hh_care']),mysql_escape_string($row5['hh__lim_exc']),mysql_escape_string($row5['innet_snf']),
+                            mysql_escape_string($row5['out_of_net_snf']),mysql_escape_string($row5['snf_lim_exc']),mysql_escape_string($row5['innet_rehab_services']),mysql_escape_string($row5['out_of_net_rehab_ser']),
+                            mysql_escape_string($row5['rehab_lim_exc']),mysql_escape_string($row5['innet_facility_fee']),mysql_escape_string($row5['innet_physician']),mysql_escape_string($row5['innet_lim_exc']),
+                            mysql_escape_string($row5['out_of_net_facility']),mysql_escape_string($row5['hh_pcp_req']),mysql_escape_string($row5['off_pcp_req']),mysql_escape_string($row5['hh_pre_auth']),
+                            mysql_escape_string($row5['out_of_net_physician']),mysql_escape_string($row5['out_lim_exc']),mysql_escape_string($row5['Inpatient_pcp_req']),mysql_escape_string($row5['inpatient_pre_auth']),
+                            mysql_escape_string($row5['innet_ded_individual']),mysql_escape_string($row5['innet_ded_family']),mysql_escape_string($row5['outnet_ded_individua']),mysql_escape_string($row5['outnet_ded_family']),
+                            mysql_escape_string($row5['out_other_prac']),$row5['deleted']);
             sqlInsert($insComInsertQry);
             endwhile;
         endif;
@@ -164,7 +173,7 @@ else:
         $newPlanId = sqlInsert($insComInsertQry);
         
         $planId = $row4['id'];
-        $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'");
+        $sql5   = $sqlconfCentralDB->prepare("SELECT * from `tbl_inscomp_benefits` WHERE `planid` = '".$planId."'  and deleted=0");
         $sql5->execute();
         while($row5  = $sql5->fetch(PDO::FETCH_ASSOC)):
             $insComInsertQry = sprintf("INSERT INTO tbl_inscomp_benefits (planid,created_date,updated_date,plan_type,sum_benfits_link,
@@ -178,15 +187,15 @@ else:
                              VALUES(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
                              '%s','%s','%s')",
-                            $planId,$row5['created_date'],$row5['updated_date'],$row5['plan_type'],$row5['sum_benfits_link'],$row5['ded_lim___exce'],
-                            $row5['innet_oop_individual'],$row5['innet_oop_family'],$row5['outnet_oop_individua'],$row5['out_oop_family'],$row5['out_of_poc_lim_exc'],
-                            $row5['innet_primary_visit'],$row5['innet_spe_visit'],$row5['out_of_net_pri_visit'],$row5['out_of_net_spe_visit'],$row5['other_pract_office'],
-                            $row5['innet_preve_care'],$row5['out_of_net_preve_car'],$row5['provider_network_sta'],$row5['need_referral_spe'],$row5['lim_exce'],
-                            $row5['pre_auth_req'],$row5['innet_hh_care'],$row5['out_of_net_hh_care'],$row5['hh__lim_exc'],$row5['innet_snf'],$row5['out_of_net_snf'],
-                            $row5['snf_lim_exc'],$row5['innet_rehab_services'],$row5['out_of_net_rehab_ser'],$row5['rehab_lim_exc'],$row5['innet_facility_fee'],
-                            $row5['innet_physician'],$row5['innet_lim_exc'],$row5['out_of_net_facility'],$row5['hh_pcp_req'],$row5['off_pcp_req'],$row5['hh_pre_auth'],
-                            $row5['out_of_net_physician'],$row5['out_lim_exc'],$row5['Inpatient_pcp_req'],$row5['inpatient_pre_auth'],$row5['innet_ded_individual'],
-                            $row5['innet_ded_family'],$row5['outnet_ded_individua'],$row5['outnet_ded_family'],$row5['out_other_prac'],$row5['deleted']);
+                            $planId,$row5['created_date'],$row5['updated_date'],mysql_escape_string($row5['plan_type']),mysql_escape_string($row5['sum_benfits_link']),mysql_escape_string($row5['ded_lim___exce']),
+                            mysql_escape_string($row5['innet_oop_individual']),mysql_escape_string($row5['innet_oop_family']),mysql_escape_string($row5['outnet_oop_individua']),mysql_escape_string($row5['out_oop_family']),mysql_escape_string($row5['out_of_poc_lim_exc']),
+                            mysql_escape_string($row5['innet_primary_visit']),mysql_escape_string($row5['innet_spe_visit']),mysql_escape_string($row5['out_of_net_pri_visit']),mysql_escape_string($row5['out_of_net_spe_visit']),mysql_escape_string($row5['other_pract_office']),
+                            mysql_escape_string($row5['innet_preve_care']),mysql_escape_string($row5['out_of_net_preve_car']),mysql_escape_string($row5['provider_network_sta']),mysql_escape_string($row5['need_referral_spe']),mysql_escape_string($row5['lim_exce']),
+                            mysql_escape_string($row5['pre_auth_req']),mysql_escape_string($row5['innet_hh_care']),mysql_escape_string($row5['out_of_net_hh_care']),mysql_escape_string($row5['hh__lim_exc']),mysql_escape_string($row5['innet_snf']),mysql_escape_string($row5['out_of_net_snf']),
+                            mysql_escape_string($row5['snf_lim_exc']),mysql_escape_string($row5['innet_rehab_services']),mysql_escape_string($row5['out_of_net_rehab_ser']),mysql_escape_string($row5['rehab_lim_exc']),mysql_escape_string($row5['innet_facility_fee']),
+                            mysql_escape_string($row5['innet_physician']),mysql_escape_string($row5['innet_lim_exc']),mysql_escape_string($row5['out_of_net_facility']),mysql_escape_string($row5['hh_pcp_req']),mysql_escape_string($row5['off_pcp_req']),mysql_escape_string($row5['hh_pre_auth']),
+                            mysql_escape_string($row5['out_of_net_physician']),mysql_escape_string($row5['out_lim_exc']),mysql_escape_string($row5['Inpatient_pcp_req']),mysql_escape_string($row5['inpatient_pre_auth']),mysql_escape_string($row5['innet_ded_individual']),
+                            mysql_escape_string($row5['innet_ded_family']),mysql_escape_string($row5['outnet_ded_individua']),mysql_escape_string($row5['outnet_ded_family']),mysql_escape_string($row5['out_other_prac']),$row5['deleted']);
             sqlInsert($insComInsertQry);
         endwhile;
         

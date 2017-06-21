@@ -14,8 +14,8 @@ require_once("verify_session.php");
 
 session_start(); 
 
-$pagename = "insurance";
-$subpage = "Verify Eligibility";
+$pagename = "eligibility";
+$subpage = "Eligibility-Appointments";
 
 require_once("$srcdir/api.inc");
 require_once("$srcdir/forms.inc");
@@ -123,27 +123,6 @@ if(empty($id['id'])){
                     $(div).show();
                 }
             }
-            function DoPost(page_name, provider,refer) {
-                method = "post"; // Set method to post by default if not specified.
-                var form = document.createElement("form");
-                form.setAttribute("method", method);
-                form.setAttribute("action", page_name);
-                var key='provider';
-                var hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", provider);
-                form.appendChild(hiddenField);
-                var key1='refer';
-                var hiddenField1 = document.createElement("input");
-                hiddenField1.setAttribute("type", "hidden");
-                hiddenField1.setAttribute("name", key1);
-                hiddenField1.setAttribute("value", refer);
-                form.appendChild(hiddenField1);
-                document.body.appendChild(form);
-                form.submit();
-            }
-            
         </script>
         <?php //html_header_show();?>
 
@@ -647,6 +626,7 @@ if(empty($id['id'])){
                                                p.sex,
                                                p.pid,
                                                p.pubpid,
+                                               p.practice_status,
                                                i.policy_number,
                                                i.provider as payer_id,
                                                i.subscriber_relationship,

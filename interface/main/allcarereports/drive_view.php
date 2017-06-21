@@ -894,7 +894,7 @@ $childunlink_url = $protocol.$_SERVER['HTTP_HOST']."/interface/patient_file/summ
                     clearajaxcalls(allajaxcalls);
                     $('.overlay').show("fast");
                     $('#delete').modal('hide');
-                    var deletedlink = '<?php echo $delete_url ?>'+category+"/"+targetfid;
+                    var deletedlink = '<?php echo $delete_url ?>'+category+"/"+targetfid+'/'+progressid;
                     ajaxcall(deletedlink,null,"get",function(data){
                          loaddrive(rootfoulder,progressid);
                     },ajaxdefaulterrorcallback);

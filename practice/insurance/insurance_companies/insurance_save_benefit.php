@@ -65,7 +65,7 @@ else
 //      echo "<pre>"; print_r($newdata['tbl_inscomp_benefits']); exit;
     updateBenefits($id, $newdata['tbl_inscomp_benefits'],$create=false);
     
-    $sql2   = sqlStatement("SELECT * from `tbl_inscomp_benefits` WHERE `id` = '".$id."'");
+    $sql2   = sqlStatement("SELECT * from `tbl_inscomp_benefits` WHERE `id` = '".$id."' and deleted=0");
     $benefitRes = sqlFetchArray($sql2);
     $benfits = "benefits";
 }

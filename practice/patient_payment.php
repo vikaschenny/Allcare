@@ -37,7 +37,7 @@ $encId         = $_REQUEST['encId'];
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-      #loader1,#loader2,#loader3,#loader4{
+      #loader1,#loader2,#loader3,#loader4,#loader5{
             background: rgba(0,0,0,0.56);
             border-radius: 4px;
             display:table;
@@ -60,7 +60,7 @@ $encId         = $_REQUEST['encId'];
             width: 35px;
             display: table-cell;
          }
-         #loadertitle1,#loadertitle2,#loadertitle3,#loadertitle4 {
+         #loadertitle1,#loadertitle2,#loadertitle3,#loadertitle4,#loadertitle5 {
             display: table-cell;
             font-size: 17px;
             padding-left: 14px;
@@ -201,8 +201,9 @@ $encId         = $_REQUEST['encId'];
     <div style="margin: 10px 0 0px 20px;">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Patient Statement</a></li>
-            <li><a data-toggle="tab" href="#menu1">Patient Payment</a></li>
+            <li><a data-toggle="tab" href="#menu4">Credit Card Authorization</a></li>
             <li><a data-toggle="tab" href="#menu2">InstaMed</a></li>
+            <li><a data-toggle="tab" href="#menu1">Patient Payment</a></li>
             <li><a data-toggle="tab" href="#menu3">Visit Note</a></li>
         </ul>
 
@@ -256,7 +257,30 @@ $encId         = $_REQUEST['encId'];
                 </div>
                 <iframe id="iframecontenar2" style="display:none; border:0px" class="help-contentFrame" src="patient_file/patient_front_payment.php?pid=<?php echo $pid;?>&encId=<?php echo $encId; ?>" onload="showloader(this,$('#loader2'))" height="100%" width="100%"></iframe>
             </div>
-            
+            <div id="menu4" class="tab-pane fade">
+              <div id="loader5">
+                    <div class="ajax-spinner-bars">
+                        <div class="bar-1"></div>
+                        <div class="bar-2"></div>
+                        <div class="bar-3"></div>
+                        <div class="bar-4"></div>
+                        <div class="bar-5"></div>
+                        <div class="bar-6"></div>
+                        <div class="bar-7"></div>
+                        <div class="bar-8"></div>
+                        <div class="bar-9"></div>
+                        <div class="bar-10"></div>
+                        <div class="bar-11"></div>
+                        <div class="bar-12"></div>
+                        <div class="bar-13"></div>
+                        <div class="bar-14"></div>
+                        <div class="bar-15"></div>
+                        <div class="bar-16"></div>
+                    </div>
+                    <div id="loadertitle5">Credit Card Authorization Loading...</div>
+                </div>
+                <iframe id="iframecontenar5" style="display:none; border:0px" class="help-contentFrame" src="cardauth/index.php?pid=<?php echo $pid;?>&encId=<?php echo $encId; ?>" onload="showloader(this,$('#loader5'))" height="100%" width="100%"></iframe>
+            </div>
             <div id="menu2" class="tab-pane fade">
               <div id="loader3">
                     <div class="ajax-spinner-bars">
